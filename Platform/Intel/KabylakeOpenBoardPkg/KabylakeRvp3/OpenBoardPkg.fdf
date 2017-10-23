@@ -511,6 +511,13 @@ FvNameGuid         = 4199E560-54AE-45E5-91A4-F7BC3804E14A
 INF $(PLATFORM_PACKAGE)/Tcg/Tcg2PlatformPei/Tcg2PlatformPei.inf
 !endif
 
+INF  KabylakeSiliconPkg/Pch/Usb/Pei/PchUsb.inf
+INF  SignedCapsulePkg/Universal/RecoveryModuleLoadPei/RecoveryModuleLoadPei.inf
+INF  MdeModulePkg/Bus/Pci/XhciPei/XhciPei.inf
+INF  MdeModulePkg/Bus/Usb/UsbBusPei/UsbBusPei.inf
+INF  MdeModulePkg/Bus/Usb/UsbBotPei/UsbBotPei.inf
+INF  FatPkg/FatPei/FatPei.inf
+
 [FV.FvSecurityLate]
 BlockSize          = $(FLASH_BLOCK_SIZE)
 FvAlignment        = 16

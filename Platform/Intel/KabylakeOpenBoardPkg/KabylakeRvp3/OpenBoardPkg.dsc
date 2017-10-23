@@ -107,6 +107,10 @@
   BoardInitLib|$(PLATFORM_PACKAGE)/PlatformInit/Library/BoardInitLibNull/BoardInitLibNull.inf
   TestPointCheckLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointCheckLibNull/TestPointCheckLibNull.inf
 
+  EdkiiSystemCapsuleLib|SignedCapsulePkg/Library/EdkiiSystemCapsuleLib/EdkiiSystemCapsuleLib.inf
+  IniParsingLib|SignedCapsulePkg/Library/IniParsingLib/IniParsingLib.inf
+  FmpAuthenticationLib|SecurityPkg/Library/FmpAuthenticationLibRsa2048Sha256/FmpAuthenticationLibRsa2048Sha256.inf
+
 #
 # Silicon Init Package
 #
@@ -215,6 +219,13 @@
 
   IntelSiliconPkg/Feature/VTd/IntelVTdPmrPei/IntelVTdPmrPei.inf
   IntelSiliconPkg/Feature/VTd/PlatformVTdInfoSamplePei/PlatformVTdInfoSamplePei.inf
+
+  KabylakeSiliconPkg/Pch/Usb/Pei/PchUsb.inf
+  SignedCapsulePkg/Universal/RecoveryModuleLoadPei/RecoveryModuleLoadPei.inf
+  MdeModulePkg/Bus/Pci/XhciPei/XhciPei.inf
+  MdeModulePkg/Bus/Usb/UsbBusPei/UsbBusPei.inf
+  MdeModulePkg/Bus/Usb/UsbBotPei/UsbBotPei.inf
+  FatPkg/FatPei/FatPei.inf
 
 [Components.X64]
 
