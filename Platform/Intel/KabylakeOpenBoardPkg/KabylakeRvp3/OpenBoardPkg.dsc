@@ -286,6 +286,14 @@
 
   IntelSiliconPkg/Feature/VTd/IntelVTdDxe/IntelVTdDxe.inf
 
+!if gMinPlatformModuleTokenSpaceGuid.PcdCapsuleUpdateEnable == TRUE
+  IntelFsp2WrapperPkg/Feature/FspUpdate/FspUpdate.inf {
+    <LibraryClasses>
+      FspFlashAccessLib|IntelFsp2WrapperPkg/Feature/Library/FspFlashAccessLibNull/FspFlashAccessLibNull.inf
+      FmpAuthenticationLib|SecurityPkg/Library/FmpAuthenticationLibPkcs7/FmpAuthenticationLibPkcs7.inf
+  }
+!endif
+
 #
 # Other
 #

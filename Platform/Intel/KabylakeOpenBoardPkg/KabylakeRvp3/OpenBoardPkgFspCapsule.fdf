@@ -1,0 +1,32 @@
+## @file
+#  FDF file of Platform.
+#
+# Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+#
+# This program and the accompanying materials are licensed and made available under
+# the terms and conditions of the BSD License which accompanies this distribution.
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+[FmpPayload.FmpPayloadFsp]
+IMAGE_HEADER_INIT_VERSION = 0x02
+IMAGE_TYPE_ID             = 497B6364-A4A6-4F37-A7FA-5ECD97DCC6ED # gFspFmpImageTypeIdGuid
+IMAGE_INDEX               = 0x1
+HARDWARE_INSTANCE         = 0x0
+MONOTONIC_COUNT           = 0x1
+CERTIFICATE_GUID          = 4AAFD29D-68DF-49EE-8AA9-347D375665A7 # PKCS7
+
+FILE DATA = $(PLATFORM_FSP_BIN_PACKAGE)/Fsp_Rebased.fd
+
+[Capsule.KblFspCapsule]
+CAPSULE_GUID                = 6dcbd5ed-e82d-4c44-bda1-7194199ad92a # gEfiFmpCapsuleGuid
+CAPSULE_FLAGS               = PersistAcrossReset,InitiateReset
+CAPSULE_HEADER_SIZE         = 0x20
+CAPSULE_HEADER_INIT_VERSION = 0x1
+
+FMP_PAYLOAD = FmpPayloadFsp
