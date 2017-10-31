@@ -56,3 +56,7 @@
       NULL|SecurityPkg/Library/HashInstanceLibSha256/HashInstanceLibSha256.inf
   }
 !endif
+
+!if gMinPlatformModuleTokenSpaceGuid.PcdCapsuleUpdateEnable == TRUE
+  MdeModulePkg/Universal/CapsulePei/CapsulePei.inf
+!endif
