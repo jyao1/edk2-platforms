@@ -89,6 +89,7 @@
   gEfiFirmwareVolume2ProtocolGuid               ## CONSUMES
   gEfiFormBrowser2ProtocolGuid                  ## CONSUMES
   gEfiGenericMemTestProtocolGuid                ## CONSUMES
+  gEsrtManagementProtocolGuid                   ## CONSUMES
 
 [Guids]
   gEfiGlobalVariableGuid                        ## PRODUCES

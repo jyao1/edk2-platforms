@@ -28,6 +28,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 
 #include <Library/HobLib.h>
 #include <Protocol/UsbIo.h>
+#include <Protocol/EsrtManagement.h>
 
 
 extern EFI_STATUS EfiBootManagerDispatchDeferredImages(VOID);
@@ -1096,8 +1097,14 @@ PlatformBootManagerBeforeConsole (
   EFI_DEVICE_PATH_PROTOCOL            *VarConOut;
   EFI_DEVICE_PATH_PROTOCOL            *VarConIn;
   EFI_EVENT                           Event;
+  ESRT_MANAGEMENT_PROTOCOL           *EsrtManagement;
 
   DEBUG ((EFI_D_INFO, "PlatformBootManagerBeforeConsole\n"));
+
+  Status = gBS->LocateProtocol(&gEsrtManagementProtocolGuid, NULL, (VOID **)&EsrtManagement);
+  if (EFI_ERROR(Status)) {
+    EsrtManagement = NULL;
+  }
 
   Status = EFI_SUCCESS;
 
@@ -1169,6 +1176,14 @@ PlatformBootManagerBeforeConsole (
     ProcessTcgMor ();
   }
   PERF_END_EX(NULL,"EventRec", NULL, AsmReadTsc(), 0x7011);
+
+  if (EsrtManagement != NULL) {
+    EsrtManagement->SyncEsrtFmp();
+  }
+
+  if (EsrtManagement != NULL) {
+    EsrtManagement->LockEsrtRepository();
+  }
 
   //
   // We should make all UEFI memory and GCD information populated before ExitPmAuth.

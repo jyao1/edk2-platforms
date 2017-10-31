@@ -145,3 +145,17 @@
   PerformancePkg/Dp_App/Dp.inf
 !endif
 
+!if gMinPlatformModuleTokenSpaceGuid.PcdCapsuleUpdateEnable == TRUE
+  MdeModulePkg/Universal/EsrtDxe/EsrtDxe.inf
+  MdeModulePkg/Application/CapsuleApp/CapsuleApp.inf
+!endif
+
+!if gMinPlatformModuleTokenSpaceGuid.PcdCapsuleUpdateEnable == TRUE
+  MdeModulePkg/Universal/CapsulePei/CapsuleX64.inf {
+    <LibraryClasses>
+      PcdLib|MdePkg/Library/PeiPcdLib/PeiPcdLib.inf
+      MemoryAllocationLib|MdePkg/Library/PeiMemoryAllocationLib/PeiMemoryAllocationLib.inf
+      HobLib|MdePkg/Library/PeiHobLib/PeiHobLib.inf
+  }
+!endif
+

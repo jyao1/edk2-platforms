@@ -272,4 +272,5 @@ gMinPlatformModuleTokenSpaceGuid.PcdTestPointIbvPlatformFeature|{0x03, 0x0F, 0x0
   gMinPlatformModuleTokenSpaceGuid.PcdTpm2Enable             |FALSE|BOOLEAN|0xF00000A5
   gMinPlatformModuleTokenSpaceGuid.PcdSmiHandlerProfileEnable|FALSE|BOOLEAN|0xF00000A6
   gMinPlatformModuleTokenSpaceGuid.PcdPerformanceEnable      |FALSE|BOOLEAN|0xF00000A7
+  gMinPlatformModuleTokenSpaceGuid.PcdCapsuleUpdateEnable    |FALSE|BOOLEAN|0xF00000A8
 
