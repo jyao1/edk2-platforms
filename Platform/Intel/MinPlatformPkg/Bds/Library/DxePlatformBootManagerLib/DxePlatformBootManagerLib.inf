@@ -46,6 +46,7 @@
   PerformanceLib
   TimerLib
   Tcg2PhysicalPresenceLib
+  CapsuleLib
 
 [Packages]
   MdePkg/MdePkg.dec
@@ -70,6 +71,7 @@
   gMinPlatformModuleTokenSpaceGuid.PcdTrustedConsoleInputDevicePath  ## CONSUMES
   gMinPlatformModuleTokenSpaceGuid.PcdTrustedConsoleOutputDevicePath ## CONSUMES
   gMinPlatformModuleTokenSpaceGuid.PcdTrustedStorageDevicePath       ## CONSUMES
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSystemRebootAfterCapsuleProcessFlag      ## CONSUMES
 
 [Sources]
   BdsPlatform.c
@@ -95,6 +97,7 @@
   gEfiGlobalVariableGuid                        ## PRODUCES
   gEfiMemoryOverwriteControlDataGuid            ## PRODUCES
   gEfiEndOfDxeEventGroupGuid                    ## CONSUMES
+  gWindowsUxCapsuleGuid                         ## CONSUMES
 
 [Depex.common.DXE_DRIVER]
   gEfiVariableArchProtocolGuid
