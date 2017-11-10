@@ -223,6 +223,14 @@
   IntelSiliconPkg/Feature/VTd/IntelVTdPmrPei/IntelVTdPmrPei.inf
   IntelSiliconPkg/Feature/VTd/PlatformVTdInfoSamplePei/PlatformVTdInfoSamplePei.inf
 
+!if gMinPlatformModuleTokenSpaceGuid.PcdCapsuleUpdateEnable == TRUE
+  # FMP image decriptor
+  $(PLATFORM_BOARD_PACKAGE)/Feature/Capsule/SystemFirmwareDescriptor/SystemFirmwareDescriptor.inf {
+    <LibraryClasses>
+      PcdLib|MdePkg/Library/PeiPcdLib/PeiPcdLib.inf
+  }
+!endif
+
 [Components.X64]
 
 #
@@ -292,6 +300,17 @@
 !endif
 
   IntelSiliconPkg/Feature/VTd/IntelVTdDxe/IntelVTdDxe.inf
+
+!if gMinPlatformModuleTokenSpaceGuid.PcdCapsuleUpdateEnable == TRUE
+  SignedCapsulePkg/Universal/SystemFirmwareUpdate/SystemFirmwareUpdateDxe.inf {
+    <LibraryClasses>
+      EdkiiSystemCapsuleLib|SignedCapsulePkg/Library/EdkiiSystemCapsuleLib/EdkiiSystemCapsuleLib.inf
+      IniParsingLib|SignedCapsulePkg/Library/IniParsingLib/IniParsingLib.inf
+      PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
+      FmpAuthenticationLib|SecurityPkg/Library/FmpAuthenticationLibPkcs7/FmpAuthenticationLibPkcs7.inf
+      PlatformFlashAccessLib|$(PLATFORM_BOARD_PACKAGE)/Feature/Capsule/Library/PlatformFlashAccessLib/PlatformFlashAccessLib.inf
+  }
+!endif
 
 #
 # Other
