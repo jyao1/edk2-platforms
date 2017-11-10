@@ -37,6 +37,8 @@
 
 @cd %WORKSPACE%
 
+build -p %PROJECT%\OpenBoardPkgSystemCapsule.dsc fds
+
 @if %FSP_WRAPPER_BUILD% EQU TRUE (
   del /f %WORKSPACE_FSP_BIN%\KabylakeFspBinPkg\Fsp_Rebased*.fd
 )
