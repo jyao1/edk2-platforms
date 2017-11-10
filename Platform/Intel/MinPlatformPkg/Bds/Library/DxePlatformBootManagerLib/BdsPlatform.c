@@ -30,6 +30,9 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #include <Protocol/UsbIo.h>
 #include <Protocol/EsrtManagement.h>
 
+#include <Protocol/SimpleFileSystem.h>
+#include <Guid/FileInfo.h>
+#include <IndustryStandard/WindowsUxCapsule.h>
 
 extern EFI_STATUS EfiBootManagerDispatchDeferredImages(VOID);
 
@@ -55,6 +58,21 @@ GLOBAL_REMOVE_IF_UNREFERENCED USB_CLASS_FORMAT_DEVICE_PATH gUsbClassKeyboardDevi
   },
   gEndEntire
 };
+
+typedef struct {
+  EFI_CAPSULE_HEADER *CapsuleHeader;
+  UINTN              CapsuleSize;
+  EFI_STATUS         Status;
+} CAPSULE_INFO;
+
+CAPSULE_INFO       *mCapsuleInfo;
+UINTN              mCapsuleInfoCount;
+BOOLEAN            mBdsNeedReset;
+
+BOOLEAN
+IsFmpCapsule (
+  IN EFI_CAPSULE_HEADER         *CapsuleHeader
+  );
 
 //
 // Internal shell mode
@@ -95,6 +113,67 @@ IsMorBitSet (
   }
 
   return (BOOLEAN) (MorControl & 0x01);
+}
+
+BOOLEAN
+IsCapsuleOnDiskDelivered (
+  VOID
+  )
+{
+  UINT8                     OsIndications;
+  EFI_STATUS                Status;
+  UINTN                     DataSize;
+
+  DataSize = sizeof (OsIndications);
+  Status = gRT->GetVariable (
+                  EFI_OS_INDICATIONS_VARIABLE_NAME,
+                  &gEfiGlobalVariableGuid,
+                  NULL,
+                  &DataSize,
+                  &OsIndications
+                  );
+  if (EFI_ERROR (Status)) {
+    DEBUG ((DEBUG_INFO, " PlatformBootMangerLib: OsIndications doesn't exist!!***\n"));
+    OsIndications = 0;
+  } else {
+    DEBUG ((DEBUG_INFO, " PlatformBootMangerLib: Get the OsIndications = %x!!***\n", OsIndications));
+  }
+  return (BOOLEAN) ((OsIndications & EFI_OS_INDICATIONS_FILE_CAPSULE_DELIVERY_SUPPORTED) != 0);
+}
+
+VOID
+ClearCapsuleOnDiskDelivered (
+  VOID
+  )
+{
+  UINT8                     OsIndications;
+  EFI_STATUS                Status;
+  UINTN                     DataSize;
+  UINT32                    Attributes;
+
+  DataSize = sizeof (OsIndications);
+  Status = gRT->GetVariable (
+                  EFI_OS_INDICATIONS_VARIABLE_NAME,
+                  &gEfiGlobalVariableGuid,
+                  &Attributes,
+                  &DataSize,
+                  &OsIndications
+                  );
+  if (EFI_ERROR (Status)) {
+    return ;
+  }
+
+  OsIndications &= (~EFI_OS_INDICATIONS_FILE_CAPSULE_DELIVERY_SUPPORTED);
+  Status = gRT->SetVariable (
+                  EFI_OS_INDICATIONS_VARIABLE_NAME,
+                  &gEfiGlobalVariableGuid,
+                  Attributes,
+                  DataSize,
+                  &OsIndications
+                  );
+  if (EFI_ERROR (Status)) {
+    DEBUG ((DEBUG_INFO, " PlatformBootMangerLib: Fail to clear OsIndications EFI_OS_INDICATIONS_FILE_CAPSULE_DELIVERY_SUPPORTED!!***\n"));
+  }
 }
 
 VOID
@@ -733,7 +812,7 @@ ConnectTrustedConsole (
 **/
 VOID
 ConnectTrustedStorage (
-  VOID
+  IN BOOLEAN Recursive
   )
 {
   VOID                      *TrustedStorageDevicepath;
@@ -764,7 +843,7 @@ ConnectTrustedStorage (
                     &DeviceHandle
                     );
     if (!EFI_ERROR (Status)) {
-      gBS->ConnectController (DeviceHandle, NULL, NULL, FALSE);
+      gBS->ConnectController (DeviceHandle, NULL, NULL, Recursive);
     }
 
     FreePool (Instance);
@@ -798,7 +877,413 @@ ProcessTcgMor (
 {
   if (IsMorBitSet ()) {
     ConnectTrustedConsole();
-    ConnectTrustedStorage();
+    ConnectTrustedStorage(FALSE);
+  }
+}
+
+/**
+  Read a file from this volume.
+
+  @param[in]  Vol             File System Volume
+  @param[in]  FileName        The file to be read.
+  @param[out] BufferSize      The file buffer size
+  @param[out] Buffer          The file buffer
+
+  @retval EFI_SUCCESS    Read file successfully
+  @retval EFI_NOT_FOUND  File not found
+**/
+EFI_STATUS
+ReadFileFromVol (
+  IN  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL   *Vol,
+  IN  CHAR16                            *FileName,
+  OUT UINTN                             *BufferSize,
+  OUT VOID                              **Buffer,
+  IN  BOOLEAN                           IsDir
+  )
+{
+  EFI_STATUS                        Status;
+  EFI_FILE_HANDLE                   RootDir;
+  EFI_FILE_HANDLE                   Handle;
+  UINTN                             FileInfoSize;
+  EFI_FILE_INFO                     *FileInfo;
+  UINTN                             TempBufferSize;
+  VOID                              *TempBuffer;
+
+  //
+  // Open the root directory
+  //
+  Status = Vol->OpenVolume (Vol, &RootDir);
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  //
+  // Open the file
+  //
+  Status = RootDir->Open (
+                      RootDir,
+                      &Handle,
+                      FileName,
+                      EFI_FILE_MODE_READ,
+                      0
+                      );
+  if (EFI_ERROR (Status)) {
+    RootDir->Close (RootDir);
+    return Status;
+  }
+
+  RootDir->Close (RootDir);
+
+  //
+  // Get the file information
+  //
+  FileInfoSize = sizeof(EFI_FILE_INFO) + 1024;
+
+  FileInfo = AllocateZeroPool (FileInfoSize);
+  if (FileInfo == NULL) {
+    Handle->Close (Handle);
+    return Status;
+  }
+
+  Status = Handle->GetInfo (
+                     Handle,
+                     &gEfiFileInfoGuid,
+                     &FileInfoSize,
+                     FileInfo
+                     );
+  if (EFI_ERROR (Status)) {
+    Handle->Close (Handle);
+    gBS->FreePool (FileInfo);
+    return Status;
+  }
+
+  if ((IsDir && ((FileInfo->Attribute & EFI_FILE_DIRECTORY) == 0)) ||
+      (!IsDir && ((FileInfo->Attribute & EFI_FILE_DIRECTORY) != 0))) {
+    Handle->Close (Handle);
+    gBS->FreePool (FileInfo);
+    return EFI_UNSUPPORTED;
+  }
+
+  //
+  // Allocate buffer for the file data. The last CHAR16 is for L'\0'
+  //
+  TempBufferSize = (UINTN) FileInfo->FileSize + sizeof(CHAR16);
+  TempBuffer = AllocateZeroPool (TempBufferSize);
+  if (TempBuffer == NULL) {
+    Handle->Close (Handle);
+    gBS->FreePool (FileInfo);
+    return Status;
+  }
+
+  gBS->FreePool (FileInfo);
+
+  //
+  // Read the file data to the buffer
+  //
+  Status = Handle->Read (
+                     Handle,
+                     &TempBufferSize,
+                     TempBuffer
+                     );
+  if (EFI_ERROR (Status)) {
+    Handle->Close (Handle);
+    gBS->FreePool (TempBuffer);
+    return Status;
+  }
+
+  Handle->Close (Handle);
+
+  *BufferSize = TempBufferSize;
+  *Buffer     = TempBuffer;
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+GetCapsuleOnDisk (
+  IN OUT CAPSULE_INFO  *CapsuleInfo,
+  IN OUT UINTN         *CapsuleInfoCount
+  )
+{
+  EFI_STATUS                        Status;
+  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL   *Vol;
+  UINTN                             BufferSize;
+  VOID                              *Buffer;
+  UINTN                             NoHandles;
+  EFI_HANDLE                        *HandleBuffer;
+  UINTN                             Index;
+  EFI_FILE_INFO                     *FileInfo;
+  UINTN                             FileInfoSize;
+  EFI_FILE_HANDLE                   RootDir;
+  EFI_FILE_HANDLE                   Handle;
+  UINTN                             TotalCount;
+  UINTN                             FileIndex;
+  UINTN                             FileNameSize;
+  CHAR16                            *FileName;
+
+  TotalCount = 0;
+  FileIndex = 0;
+
+  //
+  // Get all Vol handle
+  //
+  Status = gBS->LocateHandleBuffer (
+                   ByProtocol,
+                   &gEfiSimpleFileSystemProtocolGuid,
+                   NULL,
+                   &NoHandles,
+                   &HandleBuffer
+                   );
+  if (EFI_ERROR (Status) && (NoHandles == 0)) {
+    DEBUG ((DEBUG_INFO, "SimpleFileSystem - %r\n", Status));
+    return EFI_NOT_FOUND;
+  }
+
+  //
+  // Walk through each Vol
+  //
+  for (Index = 0; Index < NoHandles; Index++) {
+    Status = gBS->HandleProtocol (
+                    HandleBuffer[Index],
+                    &gEfiSimpleFileSystemProtocolGuid,
+                    (VOID **)&Vol
+                    );
+    if (EFI_ERROR(Status)) {
+      continue;
+    }
+
+    //
+    // Open the root directory
+    //
+    Status = Vol->OpenVolume (Vol, &RootDir);
+    if (EFI_ERROR (Status)) {
+      continue;
+    }
+
+    //
+    // Open the file
+    //
+    Status = RootDir->Open (
+                        RootDir,
+                        &Handle,
+                        L"\\EFI\\UpdateCapsule",
+                        EFI_FILE_MODE_READ,
+                        0
+                        );
+    DEBUG ((DEBUG_INFO, "open UpdateCapsule dir - %r\n", Status));
+    if (EFI_ERROR (Status)) {
+      RootDir->Close (RootDir);
+      continue;
+    }
+
+    RootDir->Close (RootDir);
+
+    FileInfoSize = sizeof(EFI_FILE_INFO) + 1024;
+    FileInfo = AllocateZeroPool (FileInfoSize);
+    if (FileInfo == NULL) {
+      Handle->Close (Handle);
+      continue;
+    }
+
+    //
+    // Get file info under this dir
+    //
+    while (TRUE) {
+      FileInfoSize = sizeof(EFI_FILE_INFO) + 1024;
+      ZeroMem (FileInfo, FileInfoSize);
+      //
+      // Read the dir data to the buffer
+      //
+      Status = Handle->Read (
+                         Handle,
+                         &FileInfoSize,
+                         FileInfo
+                         );
+      DEBUG ((DEBUG_INFO, "read UpdateCapsule dir - %r\n", Status));
+      if (EFI_ERROR (Status) || FileInfoSize == 0) {
+        //
+        // Done for this dir
+        //
+        break;
+      }
+      DEBUG ((DEBUG_INFO, "FileInfo - 0x%x\n", FileInfo));
+      DEBUG ((DEBUG_INFO, "FileInfo->Size - 0x%x\n", FileInfo->Size));
+      DEBUG ((DEBUG_INFO, "FileName - %S\n", FileInfo->FileName));
+      DEBUG ((DEBUG_INFO, "FileIndex - 0x%x\n", TotalCount));
+      if ((FileInfo->Attribute & EFI_FILE_DIRECTORY) != 0) {
+        continue;
+      }
+
+      TotalCount ++;
+
+      if (*CapsuleInfoCount > FileIndex) {
+        FileNameSize = sizeof(L"\\EFI\\UpdateCapsule\\") + StrSize(FileInfo->FileName);
+        FileName = AllocatePool (FileNameSize);
+        if (FileName != NULL) {
+          StrCpyS (FileName, FileNameSize/sizeof(CHAR16), L"\\EFI\\UpdateCapsule\\");
+          StrCatS (FileName, FileNameSize/sizeof(CHAR16), FileInfo->FileName);
+          DEBUG ((DEBUG_INFO, "FileName - %S\n", FileName));
+          Status = ReadFileFromVol (Vol, FileName, &BufferSize, &Buffer, FALSE);
+          DEBUG ((DEBUG_INFO, "read FileName (%S) - %r\n", FileName, Status));
+          if (!EFI_ERROR (Status)) {
+            CapsuleInfo[FileIndex].CapsuleHeader = Buffer;
+            CapsuleInfo[FileIndex].CapsuleSize   = BufferSize;
+            CapsuleInfo[FileIndex].Status        = EFI_NOT_READY;
+            FileIndex ++;
+          }
+          FreePool (FileName);
+        }
+      }
+    }
+
+    FreePool (FileInfo);
+    Handle->Close (Handle);
+
+    //
+    // Done for this volume
+    //
+  }
+
+  if (CapsuleInfo == NULL) {
+    *CapsuleInfoCount = TotalCount;
+  } else {
+    *CapsuleInfoCount = FileIndex;
+  }
+
+  return EFI_SUCCESS;
+}
+
+/**
+  This function returns if all capsule images are processed.
+
+  @retval TRUE   All capsule images are processed.
+  @retval FALSE  Not all capsule images are processed.
+**/
+BOOLEAN
+BdsAreAllImagesProcessed (
+  VOID
+  )
+{
+  UINTN  Index;
+
+  for (Index = 0; Index < mCapsuleInfoCount; Index++) {
+    if (mCapsuleInfo[Index].Status == EFI_NOT_READY) {
+      return FALSE;
+    }
+  }
+
+  return TRUE;
+}
+
+/**
+  Do reset system.
+**/
+VOID
+BdsDoResetSystem (
+  VOID
+  )
+{
+  UINTN                         Index;
+
+  Print(L"Capsule Request Cold Reboot.\n");
+  DEBUG((DEBUG_INFO, "Capsule Request Cold Reboot."));
+
+  for (Index = 5; Index > 0; Index--) {
+    Print(L"\rResetting system in %d seconds ...", Index);
+    DEBUG((DEBUG_INFO, "\rResetting system in %d seconds ...", Index));
+    gBS->Stall(1000000);
+  }
+
+  gRT->ResetSystem(EfiResetCold, EFI_SUCCESS, 0, NULL);
+
+  CpuDeadLoop();
+}
+
+VOID
+CollectCapsuleOnDiskInfo (
+  VOID
+  )
+{
+  EFI_STATUS   Status;
+
+  DEBUG ((DEBUG_INFO, "CollectCapsuleOnDiskInfo\n"));
+
+  mCapsuleInfoCount = 0;
+  Status = GetCapsuleOnDisk (NULL, &mCapsuleInfoCount);
+  if (EFI_ERROR(Status) || mCapsuleInfoCount == 0) {
+    DEBUG ((DEBUG_ERROR, "GetCapsuleOnDisk - %r (Count - %d)\n", Status, mCapsuleInfoCount));
+    return ;
+  }
+
+  mCapsuleInfo = AllocateZeroPool (mCapsuleInfoCount * sizeof(CAPSULE_INFO));
+  if (mCapsuleInfo == NULL) {
+    return ;
+  }
+
+  Status = GetCapsuleOnDisk (mCapsuleInfo, &mCapsuleInfoCount);
+  DEBUG ((DEBUG_ERROR, "GetCapsuleOnDisk final - %r (Count - %d)\n", Status, mCapsuleInfoCount));
+}
+
+VOID
+ProcessCapsuleOnDisk (
+  IN BOOLEAN  IsEndOfDxe
+  )
+{
+  UINTN              Index;
+  BOOLEAN            DisplayCapsuleExist;
+
+  DEBUG ((DEBUG_INFO, "ProcessCapsuleOnDisk\n"));
+
+  if (!IsCapsuleOnDiskDelivered()) {
+    return ;
+  }
+
+  if (!IsEndOfDxe) {
+    ConnectTrustedConsole();
+    ConnectTrustedStorage(TRUE);
+
+    CollectCapsuleOnDiskInfo ();
+  }
+
+  DisplayCapsuleExist = FALSE;
+  for (Index = 0; Index < mCapsuleInfoCount; Index++) {
+    if (CompareGuid (&mCapsuleInfo[Index].CapsuleHeader->CapsuleGuid, &gWindowsUxCapsuleGuid)) {
+      DisplayCapsuleExist = TRUE;
+      mCapsuleInfo[Index].Status = ProcessCapsuleImage (mCapsuleInfo[Index].CapsuleHeader);
+      DEBUG ((DEBUG_INFO, "ProcessCapsuleImage(%d) - %r\n", Index, mCapsuleInfo[Index].Status));
+      break;
+    }
+  }
+  if (!DisplayCapsuleExist) {
+    //
+    // Display Capsule not found. Display the default string.
+    //
+    Print (L"Updating the firmware ......\r\n");
+  }
+
+  for (Index = 0; Index < mCapsuleInfoCount; Index++) {
+    if (mCapsuleInfo[Index].Status != EFI_NOT_READY) {
+      continue;
+    }
+    if (!CompareGuid (&mCapsuleInfo[Index].CapsuleHeader->CapsuleGuid, &gWindowsUxCapsuleGuid)) {
+      mCapsuleInfo[Index].Status = ProcessCapsuleImage (mCapsuleInfo[Index].CapsuleHeader);
+      DEBUG ((DEBUG_INFO, "ProcessCapsuleImage(%d) - %r\n", Index, mCapsuleInfo[Index].Status));
+      if ((mCapsuleInfo[Index].CapsuleHeader->Flags & PcdGet16(PcdSystemRebootAfterCapsuleProcessFlag)) != 0 ||
+          IsFmpCapsule(mCapsuleInfo[Index].CapsuleHeader)) {
+        mBdsNeedReset = TRUE;
+      }
+    }
+  }
+
+  if (!IsEndOfDxe) {
+    if (mBdsNeedReset && BdsAreAllImagesProcessed ()) {
+      ClearCapsuleOnDiskDelivered ();
+      BdsDoResetSystem ();
+    }
+  } else {
+    ClearCapsuleOnDiskDelivered ();
+    if (mBdsNeedReset) {
+      BdsDoResetSystem ();
+    }
   }
 }
 
@@ -1185,6 +1670,8 @@ PlatformBootManagerBeforeConsole (
     EsrtManagement->LockEsrtRepository();
   }
 
+  ProcessCapsuleOnDisk (FALSE);
+
   //
   // We should make all UEFI memory and GCD information populated before ExitPmAuth.
   // SMM may consume these information.
@@ -1320,6 +1807,8 @@ PlatformBootManagerAfterConsole (
 
     break;
   }
+
+  ProcessCapsuleOnDisk (TRUE);
 
   Print (L"Press F7 for BootMenu!\n");
 
