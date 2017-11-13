@@ -139,3 +139,4 @@
   !endif
 
     gMinPlatformModuleTokenSpaceGuid.PcdPerformanceEnable|FALSE
+    gMinPlatformModuleTokenSpaceGuid.PcdCapsuleUpdateEnable|TRUE
