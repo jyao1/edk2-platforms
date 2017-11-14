@@ -39,6 +39,18 @@ PchInitEntryPointCommon (
   mPchConfigHob = (PCH_CONFIG_HOB *) GET_GUID_HOB_DATA (HobPtr.Guid);
 
   //
+  // BUGBUG:
+  // For flash update, we need clear lock policy in FSP, because all lock action is done at PciEnumDone.
+  // We need set lock policy in LockDownConfig, because we still need lock action at EndOfDxe.
+  //
+  //
+  if (GetBootModeHob () == BOOT_ON_FLASH_UPDATE) {
+    DEBUG ((DEBUG_INFO, "LockDown Config override for flash update.\n"));
+    mPchConfigHob->LockDown.BiosLock      = 1;
+    mPchConfigHob->LockDown.BiosInterface = 1;
+  }
+
+  //
   // Get Silicon Config data HOB
   //
   HobPtr.Guid   = GetFirstGuidHob (&gSiConfigHobGuid);
@@ -107,6 +119,186 @@ LockXhciConfiguration (
     );
 
   DEBUG ((DEBUG_INFO, "LockXhciConfiguration () - End\n"));
+}
+
+/**
+  Process flash lock downs
+**/
+VOID
+ProcessFlashLocks (
+  VOID
+  )
+{
+  UINT8         Data8;
+  UINT32        Data32And;
+  UINT32        Data32Or;
+  UINTN         PciLpcRegBase;
+  UINTN         PciSpiRegBase;
+  
+  PciLpcRegBase   = MmPciBase (
+                      DEFAULT_PCI_BUS_NUMBER_PCH,
+                      PCI_DEVICE_NUMBER_PCH_LPC,
+                      PCI_FUNCTION_NUMBER_PCH_LPC
+                      );
+  PciSpiRegBase   = MmPciBase (
+                      DEFAULT_PCI_BUS_NUMBER_PCH,
+                      PCI_DEVICE_NUMBER_PCH_SPI,
+                      PCI_FUNCTION_NUMBER_PCH_SPI
+                      );
+
+  DEBUG ((DEBUG_INFO, "ProcessFlashLocks ...\n"));
+  DEBUG ((DEBUG_INFO, " LockDown.BiosLock - %x\n", mPchConfigHob->LockDown.BiosLock));
+  DEBUG ((DEBUG_INFO, " LockDown.BiosInterface - %x\n", mPchConfigHob->LockDown.BiosInterface));
+  DEBUG ((DEBUG_INFO, " LPC - BIOS Control - 0x%02x\n", MmioRead8 (PciLpcRegBase + R_PCH_LPC_BC)));
+  DEBUG ((DEBUG_INFO, " SPI - BIOS Control - 0x%02x\n", MmioRead8 (PciSpiRegBase + R_PCH_SPI_BC)));
+
+  ///
+  /// PCH BIOS Spec Section 3.6 Flash Security Recommendation
+  /// BIOS needs to enable the "Enable in SMM.STS" (EISS) feature of the PCH by setting
+  /// SPI PCI offset DCh[5] = 1b for SPI or setting eSPI PCI offset DCh[5] = 1b for eSPI.
+  /// When this bit is set, the BIOS region is not writable until SMM sets the InSMM.STS bit,
+  /// to ensure BIOS can only be modified from SMM. Please refer to CPU BWG for more details
+  /// on InSMM.STS bit.
+  /// Intel requires that BIOS enables the Lock Enable (LE) feature of the PCH to ensure
+  /// SMM protection of flash.
+  /// SPI PCI offset DCh[1] = 1b for SPI or setting eSPI PCI offset DCh[1] = 1b for eSPI.
+  /// When this bit is set, EISS is locked down.
+  ///
+  if (mPchConfigHob->LockDown.BiosLock == TRUE) { // BUGBUG: No SpiEiss field in LockDown hob.
+    //
+    // Set SPI EISS (SPI PCI offset DCh[5]) and LE (SPI PCI offset DCh[1])
+    // Set LPC/eSPI EISS (LPC/eSPI PCI offset DCh[5]) and LE (LPC/eSPI PCI offset DCh[1])
+    //
+    MmioOr8 (PciSpiRegBase + R_PCH_SPI_BC, B_PCH_SPI_BC_EISS);
+    MmioOr8 (PciLpcRegBase + R_PCH_LPC_BC, B_PCH_LPC_BC_EISS);
+  } else {
+    //
+    // Clear SMM_EISS (SPI PCI offset DCh[5])
+    // Clear LPC/eSPI EISS (LPC/eSPI PCI offset DCh[5])
+    // Since the HW default is 1, need to clear it when disabled in policy
+    //
+    MmioAnd8 (PciSpiRegBase + R_PCH_SPI_BC, (UINT8) ~B_PCH_SPI_BC_EISS);
+    MmioAnd8 (PciLpcRegBase + R_PCH_LPC_BC, (UINT8) ~B_PCH_LPC_BC_EISS);
+  }
+
+  ///
+  /// PCH BIOS Spec Section 3.6 Flash Security Recommendation
+  /// BIOS needs to enable the BIOS Lock Enable (BLE) feature of the PCH by setting
+  /// SPI/eSPI/LPC PCI offset DCh[1] = 1b.
+  /// When this bit is set, attempts to write the BIOS Write Enable (BIOSWE) bit
+  /// in PCH will cause a SMI which will allow the BIOS to verify that the write is
+  /// from a valid source.
+  /// Remember that BIOS needs to set SPI/LPC/eSPI PCI Offset DC [0] = 0b to enable
+  /// BIOS region protection before exiting the SMI handler.
+  /// Also, TCO_EN bit needs to be set (SMI_EN Register, ABASE + 30h[13] = 1b) to keep
+  /// BLE feature enabled after booting to the OS.
+  /// Intel requires that BIOS enables the Lock Enable (LE) feature of the PCH to
+  /// ensure SMM protection of flash.
+  /// Left to platform code to register a callback function to handle BiosWp SMI
+  ///
+  if (mPchConfigHob->LockDown.BiosLock) {
+    //
+    // eSPI/LPC
+    //
+    if (! (MmioRead8 (PciLpcRegBase + R_PCH_LPC_BC) & B_PCH_LPC_BC_LE)) {
+      DEBUG ((DEBUG_INFO, "Set LPC bios lock\n"));
+      MmioOr8 ((UINTN) (PciLpcRegBase + R_PCH_LPC_BC), B_PCH_LPC_BC_LE);
+      S3BootScriptSaveMemWrite (
+        S3BootScriptWidthUint8,
+        (UINTN) (PciLpcRegBase + R_PCH_LPC_BC),
+        1,
+        (VOID *) (UINTN) (PciLpcRegBase + R_PCH_LPC_BC)
+        );
+    }
+    //
+    // SPI
+    //
+    if (! (MmioRead8 (PciSpiRegBase + R_PCH_SPI_BC) & B_PCH_SPI_BC_LE)) {
+      DEBUG ((DEBUG_INFO, "Set SPI bios lock\n"));
+      MmioOr8 ((UINTN) (PciSpiRegBase + R_PCH_SPI_BC), (UINT8) B_PCH_SPI_BC_LE);
+      S3BootScriptSaveMemWrite (
+        S3BootScriptWidthUint8,
+        (UINTN) (PciSpiRegBase + R_PCH_SPI_BC),
+        1,
+        (VOID *) (UINTN) (PciSpiRegBase + R_PCH_SPI_BC)
+        );
+    }
+  }
+
+  ///
+  /// PCH BIOS Spec Section 3.6 Flash Security Recommendation
+  /// BIOS also needs to set the BIOS Interface Lock Down bit in multiple locations
+  /// (PCR[DMI] + 274Ch[0], LPC/eSPI PCI offset DCh[7] and SPI PCI offset DCh[7]).
+  /// Setting these bits will prevent writes to the Top Swap bit (under their respective locations)
+  /// and the Boot BIOS Straps. Enabling this bit will mitigate malicious software
+  /// attempts to replace the system BIOS option ROM with its own code.
+  ///
+  if (mPchConfigHob->LockDown.BiosInterface) {
+    ///
+    /// LPC
+    ///
+    MmioOr8 ((UINTN) (PciLpcRegBase + R_PCH_LPC_BC), (UINT32) B_PCH_LPC_BC_BILD);
+    S3BootScriptSaveMemWrite (
+      S3BootScriptWidthUint8,
+      (UINTN) (PciLpcRegBase + R_PCH_LPC_BC),
+      1,
+      (VOID *) (UINTN) (PciLpcRegBase + R_PCH_LPC_BC)
+      );
+
+    ///
+    /// Reads back for posted write to take effect
+    ///
+    Data8 = MmioRead8 ((UINTN) (PciLpcRegBase + R_PCH_LPC_BC));
+    S3BootScriptSaveMemPoll  (
+      S3BootScriptWidthUint8,
+      (UINTN) (PciLpcRegBase + R_PCH_LPC_BC),
+      &Data8,  // BitMask
+      &Data8,  // BitValue
+      1,          // Duration
+      1           // LoopTimes
+      );
+
+    ///
+    /// SPI
+    ///
+    MmioOr8 ((UINTN) (PciSpiRegBase + R_PCH_SPI_BC), (UINT32) B_PCH_SPI_BC_BILD);
+    S3BootScriptSaveMemWrite (
+      S3BootScriptWidthUint8,
+      (UINTN) (PciSpiRegBase + R_PCH_SPI_BC),
+      1,
+      (VOID *) (UINTN) (PciSpiRegBase + R_PCH_SPI_BC)
+      );
+
+    ///
+    /// Reads back for posted write to take effect
+    ///
+    Data8 = MmioRead8 ((UINTN) (PciSpiRegBase + R_PCH_SPI_BC));
+    S3BootScriptSaveMemPoll  (
+      S3BootScriptWidthUint8,
+      (UINTN) (PciSpiRegBase + R_PCH_SPI_BC),
+      &Data8,     // BitMask
+      &Data8,     // BitValue
+      1,          // Duration
+      1           // LoopTimes
+      );
+
+    ///
+    /// Set PCR[DMI] + 274C[0] = 1b
+    ///
+    Data32And = 0xFFFFFFFF;
+    Data32Or = B_PCH_PCR_DMI_BILD;
+    PchPcrAndThenOr32 (PID_DMI, R_PCH_PCR_DMI_GCS, Data32And, Data32Or);
+    PCH_PCR_BOOT_SCRIPT_READ_WRITE (
+      S3BootScriptWidthUint32,
+      PID_DMI, R_PCH_PCR_DMI_GCS,
+      &Data32Or,
+      &Data32And
+      );
+  }
+
+  DEBUG ((DEBUG_INFO, "ProcessFlashLocks (done)\n"));
+  DEBUG ((DEBUG_INFO, "  LPC - BIOS Control - 0x%02x\n", MmioRead8 (PciLpcRegBase + R_PCH_LPC_BC)));
+  DEBUG ((DEBUG_INFO, "  SPI - BIOS Control - 0x%02x\n", MmioRead8 (PciSpiRegBase + R_PCH_SPI_BC)));
 }
 
 /**
@@ -501,4 +693,19 @@ PchOnPciEnumCompleteCommon (
   ConfigureP2sbSbiLock ((BOOLEAN) mPchConfigHob->P2sb.SbiUnlock);
 
   DEBUG ((DEBUG_INFO, "PchOnPciEnumCompleteCommon() End\n"));
+}
+
+/**
+  Common PCH initialization on EndOfDxe.
+**/
+VOID
+PchOnEndOfDxeCallbackCommon (
+  VOID
+  )
+{
+  DEBUG ((DEBUG_INFO, "PchOnEndOfDxeCallbackCommon() Start\n"));
+
+  ProcessFlashLocks ();
+
+  DEBUG ((DEBUG_INFO, "PchOnEndOfDxeCallbackCommon() End\n"));
 }

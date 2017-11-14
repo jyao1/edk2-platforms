@@ -338,6 +338,7 @@ InstallPchSpiAsyncSmiHandler (
   );
 
 
+extern BOOLEAN                   mReadyToLock;
 
 
 

@@ -36,7 +36,9 @@ PchSpiBiosWpCallback (
   //
   // Disable BIOSWE bit to protect BIOS
   //
-  MmioAnd8 ((UINTN) (mSpiRegBase + R_PCH_SPI_BC), (UINT8) ~B_PCH_SPI_BC_WPD);
+  if (mReadyToLock) {
+    MmioAnd8 ((UINTN) (mSpiRegBase + R_PCH_SPI_BC), (UINT8) ~B_PCH_SPI_BC_WPD);
+  }
 }
 
 /**
@@ -54,7 +56,9 @@ PchLpcBiosWpCallback (
   //
   // Disable BIOSWE bit to protect BIOS
   //
-  MmioAnd8 ((UINTN) (mLpcRegBase + R_PCH_LPC_BC), (UINT8) ~B_PCH_LPC_BC_WPD);
+  if (mReadyToLock) {
+    MmioAnd8 ((UINTN) (mLpcRegBase + R_PCH_LPC_BC), (UINT8) ~B_PCH_LPC_BC_WPD);
+  }
 }
 
 /**

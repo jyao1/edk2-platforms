@@ -86,6 +86,7 @@ gPchTcoSmiDispatchProtocolGuid ## CONSUMES
 gPchSmiDispatchProtocolGuid ## CONSUMES
 gPchEspiSmiDispatchProtocolGuid ## CONSUMES
 gPchPcieIoTrapProtocolGuid ## PRODUCES
+gEfiSmmReadyToLockProtocolGuid ## CONSUMES
 
 
 [Guids]

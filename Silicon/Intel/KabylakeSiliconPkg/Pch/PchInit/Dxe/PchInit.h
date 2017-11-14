@@ -154,6 +154,14 @@ PchOnPciEnumCompleteCommon (
   );
 
 /**
+  Common PCH initialization on EndOfDxe.
+**/
+VOID
+PchOnEndOfDxeCallbackCommon (
+  VOID
+  );
+
+/**
   Configures Serial IO Controllers
 
 **/

@@ -237,6 +237,25 @@ PchOnPciEnumComplete (
 }
 
 /**
+  This is the callback function for EndOfDxe event.
+**/
+VOID
+EFIAPI
+PchOnEndOfDxeCallback (
+  IN EFI_EVENT    Event,
+  IN VOID         *Context
+  )
+{
+  //
+  // Always check flash lock policy (especially for BOOT_ON_FLASH_UPDATE)
+  //   UPD might be unlock for FSP at PciEnumDone,
+  //   while config hob is lock for FSP wrapper at EndOfDxe.
+  // We still need lock flash.
+  //
+  PchOnEndOfDxeCallbackCommon ();
+}
+
+/**
   Register callback functions for PCH DXE.
 **/
 VOID
@@ -249,6 +268,7 @@ PchRegisterNotifications (
   EFI_EVENT   LegacyBootEvent;
   EFI_EVENT   ExitBootServicesEvent;
   VOID        *Registration;
+  EFI_EVENT   EndOfDxeEvent;
 
   ///
   /// Create PCI Enumeration Completed callback for PCH
@@ -260,6 +280,19 @@ PchRegisterNotifications (
     NULL,
     &Registration
     );
+
+  ///
+  /// Register an end of DXE event for flash lock policy
+  ///
+  Status = gBS->CreateEventEx (
+                  EVT_NOTIFY_SIGNAL,
+                  TPL_CALLBACK,
+                  PchOnEndOfDxeCallback,
+                  NULL,
+                  &gEfiEndOfDxeEventGroupGuid,
+                  &EndOfDxeEvent
+                  );
+  ASSERT_EFI_ERROR (Status);
 
   //
   // Register a Ready to boot event to config PCIE power management setting after OPROM executed

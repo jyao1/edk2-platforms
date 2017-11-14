@@ -35,6 +35,8 @@ GLOBAL_REMOVE_IF_UNREFERENCED UINTN                                     mResvMmi
 //
 GLOBAL_REMOVE_IF_UNREFERENCED EFI_PHYSICAL_ADDRESS                      mXhciMmioBaseAddr;
 
+GLOBAL_REMOVE_IF_UNREFERENCED BOOLEAN                                   mReadyToLock;
+
 /**
   SMBUS Sx entry SMI handler.
 **/
@@ -202,6 +204,29 @@ AllocateReservedMmio (
 }
 
 /**
+  SMM ready to lock notification event handler.
+
+  @param  Protocol   Points to the protocol's unique identifier
+  @param  Interface  Points to the interface instance
+  @param  Handle     The handle on which the interface was installed
+
+  @retval EFI_SUCCESS   SmmReadyToLockCallback runs successfully
+
+**/
+EFI_STATUS
+EFIAPI
+SmmReadyToLockCallback (
+  IN CONST EFI_GUID                       *Protocol,
+  IN VOID                                 *Interface,
+  IN EFI_HANDLE                           Handle
+  )
+{
+  mReadyToLock = TRUE;
+
+  return EFI_SUCCESS;
+}
+
+/**
   Initializes the PCH SMM handler for for PCIE hot plug support
   <b>PchInit SMM Module Entry Point</b>\n
   - <b>Introduction</b>\n
@@ -253,6 +278,7 @@ PchInitSmmEntryPoint (
   EFI_STATUS                                Status;
   PCH_NVS_AREA_PROTOCOL                     *PchNvsAreaProtocol;
   EFI_PEI_HOB_POINTERS                      HobPtr;
+  VOID                                      *SmmReadyToLockRegistration;
 
   DEBUG ((DEBUG_INFO, "PchInitSmmEntryPoint()\n"));
 
@@ -303,6 +329,15 @@ PchInitSmmEntryPoint (
   Status = InstallPchSpiAsyncSmiHandler ();
   ASSERT_EFI_ERROR (Status);
 
+  //
+  // Register EFI_SMM_READY_TO_LOCK_PROTOCOL_GUID notify function.
+  //
+  Status = gSmst->SmmRegisterProtocolNotify (
+                    &gEfiSmmReadyToLockProtocolGuid,
+                    SmmReadyToLockCallback,
+                    &SmmReadyToLockRegistration
+                    );
+  ASSERT_EFI_ERROR (Status);
 
   return EFI_SUCCESS;
 }
