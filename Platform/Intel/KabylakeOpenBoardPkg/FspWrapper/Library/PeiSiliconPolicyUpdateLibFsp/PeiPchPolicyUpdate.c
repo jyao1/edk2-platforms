@@ -154,6 +154,17 @@ if ((PcdGet8 (PcdSerialIoUartDebugEnable) == 1) &&
   }
 DEBUG_CODE_END();
 
+  //
+  // For flash update, we need clear lock policy in FSP, because all lock action is done at PciEnumDone.
+  // We need set lock policy in LockDownConfig, because we still need lock action at EndOfDxe.
+  //
+  if (GetBootModeHob () == BOOT_ON_FLASH_UPDATE) {
+    DEBUG ((DEBUG_INFO, "LockDown UPD override for flash update.\n"));
+    FspsUpd->FspsTestConfig.PchLockDownBiosInterface = 0;
+    FspsUpd->FspsConfig.PchLockDownBiosLock          = 0;
+    FspsUpd->FspsConfig.PchLockDownSpiEiss           = 0;
+  }
+
   return EFI_SUCCESS;
 }
 
