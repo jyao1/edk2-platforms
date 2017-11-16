@@ -26,7 +26,8 @@
 
   $(PLATFORM_SI_PACKAGE)/Pch/Spi/Smm/PchSpiSmm.inf
   $(PLATFORM_SI_PACKAGE)/Pch/Spi/RuntimeDxe/PchSpiRuntime.inf
-
+  $(PLATFORM_SI_PACKAGE)/Pch/Spi/Dxe/PchSpiSmmDxe.inf
+  $(PLATFORM_SI_PACKAGE)/Pch/Spi/Dxe/PchSpiSmmStub.inf
 
   $(PLATFORM_SI_PACKAGE)/Pch/PchSmiDispatcher/Smm/PchSmiDispatcher.inf
   $(PLATFORM_SI_PACKAGE)/Pch/PchInit/Smm/PchInitSmm.inf
