@@ -1,0 +1,113 @@
+### @file
+#  Component information file for AcpiPlatform module
+#
+# Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+#
+# This program and the accompanying materials are licensed and made available under
+# the terms and conditions of the BSD License which accompanies this distribution.
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+###
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AcpiPlatform
+  FILE_GUID                      = FC90EB7A-3E0A-483C-A26C-484D36593FF4
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InstallAcpiPlatform
+
+[Sources.common]
+  AcpiPlatform.h
+  AcpiPlatform.c
+  Fadt/Fadt.c
+  Facs/Facs.c
+  Hpet/Hpet.c
+  Wsmt/Wsmt.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
+  PcAtChipsetPkg/PcAtChipsetPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseLib
+  DebugLib
+  IoLib
+  PcdLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  HobLib
+  PciSegmentInfoLib
+  AslUpdateLib
+  BoardAcpiTableLib
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorId
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorRevision
+
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicEnable
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicCount
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicIdBase
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicAddressBase
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicInterruptBase
+  gMinPlatformModulePkgTokenSpaceGuid.PcdMaxCpuThreadCount
+  gMinPlatformModulePkgTokenSpaceGuid.PcdMaxCpuCoreCount
+  gMinPlatformModulePkgTokenSpaceGuid.PcdMaxCpuSocketCount
+
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFadtPreferredPmProfile
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFadtIaPcBootArch
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFadtFlags
+
+  gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdHpetTimerBlockId
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPciExpressRegionLength
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiEnableSwSmi
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiDisableSwSmi
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm1AEventBlockAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm1BEventBlockAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm1AControlBlockAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm1BControlBlockAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm2ControlBlockAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPmTimerBlockAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiGpe0BlockAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiGpe1BlockAddress
+
+  gMinPlatformModulePkgTokenSpaceGuid.PcdLocalApicAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdIoApicAddress
+  gMinPlatformModulePkgTokenSpaceGuid.PcdIoApicId
+
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber
+  gMinPlatformModulePkgTokenSpaceGuid.PcdMaxCpuSocketCount
+
+  gMinPlatformModulePkgTokenSpaceGuid.PcdWsmtProtectionFlags
+
+[Protocols]
+  gEfiAcpiTableProtocolGuid                     ## CONSUMES
+  gEfiMpServiceProtocolGuid                     ## CONSUMES
+  gEfiPciIoProtocolGuid                         ## CONSUMES
+
+[Guids]
+  gEfiGlobalVariableGuid                        ## CONSUMES
+  gEfiHobListGuid                               ## CONSUMES
+  gEfiEndOfDxeEventGroupGuid                    ## CONSUMES
+
+[Depex]
+  gEfiAcpiTableProtocolGuid           AND
+  gEfiMpServiceProtocolGuid           AND
+  gEfiPciRootBridgeIoProtocolGuid     AND
+  gEfiVariableArchProtocolGuid        AND
+  gEfiVariableWriteArchProtocolGuid
+
+
