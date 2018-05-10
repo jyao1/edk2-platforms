@@ -15,12 +15,12 @@
 
 [Defines]
   INF_VERSION                    = 0x00010017
-  BASE_NAME                      = SmmKabylakeRvp3MultiBoardAcpiSupportLib
+  BASE_NAME                      = SmmKabylakeRvp3MultiBoardAcpiEnableSupportLib
   FILE_GUID                      = 8929A54E-7ED8-4AB3-BEBB-C0367BDBBFF5
   VERSION_STRING                 = 1.0
   MODULE_TYPE                    = BASE
   LIBRARY_CLASS                  = NULL
-  CONSTRUCTOR                    = SmmKabylakeRvp3MultiBoardAcpiSupportLibConstructor
+  CONSTRUCTOR                    = SmmKabylakeRvp3MultiBoardAcpiEnableSupportLibConstructor
 
 #
 # The following information is for reference only and not required by the build tools.
@@ -38,7 +38,8 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
+  OpenBoardSupportPkg/OpenBoardSupportPkg.dec
   KabylakeOpenBoardPkg/OpenBoardPkg.dec
   KabylakeSiliconPkg/SiPkg.dec
 
@@ -50,5 +51,5 @@
 [Sources]
   SmmKabylakeRvp3AcpiEnableLib.c
   SmmSiliconAcpiEnableLib.c
-  SmmMultiBoardAcpiSupportLib.c
+  SmmMultiBoardAcpiEnableSupportLib.c
 

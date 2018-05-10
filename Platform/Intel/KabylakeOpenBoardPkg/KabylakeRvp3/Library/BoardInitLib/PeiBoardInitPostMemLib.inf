@@ -31,11 +31,12 @@
   SiliconInitLib
 
 [Packages]
-  MinPlatformPkg/MinPlatformPkg.dec
-  KabylakeOpenBoardPkg/OpenBoardPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   KabylakeSiliconPkg/SiPkg.dec
+  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
+  KabylakeOpenBoardPkg/OpenBoardPkg.dec
 
 [Sources]
   PeiKabylakeRvp3InitPostMemLib.c

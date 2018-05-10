@@ -65,6 +65,8 @@
   KabylakeFspBinPkg/KabylakeFspBinPkg.dec
   KabylakeOpenBoardPkg/OpenBoardPkg.dec
   MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
+  OpenBoardSupportPkg/OpenBoardSupportPkg.dec
 
 [LibraryClasses.IA32]
   FspWrapperApiLib
