@@ -36,7 +36,7 @@
   PurleySktPkg/SocketPkg.dec
   MdeModulePkg/MdeModulePkg.dec  
   PurleyRcPkg/RcPkg.dec
-  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
   
 [LibraryClasses]
   UefiDriverEntryPoint
@@ -67,8 +67,8 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdAriSupport
   gEfiMdeModulePkgTokenSpaceGuid.PcdMrIovSupport
   gOemSkuTokenSpaceGuid.PcdSetupData
-  gMinPlatformPkgTokenSpaceGuid.PcdIoApicId
-  gMinPlatformPkgTokenSpaceGuid.PcdPcIoApicIdBase
+  gMinPlatformModulePkgTokenSpaceGuid.PcdIoApicId
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicIdBase
 
 [FixedPcd]
   gEfiCpRcPkgTokenSpaceGuid.PcdMaxNestedLevel

@@ -77,20 +77,20 @@
   #
   !include $(BOARD_PKG)/$(BOARD_NAME)/PlatformPkgConfig.dsc
 
-!include MinPlatformPkg/Include/Dsc/CoreCommonLib.dsc
+!include MinPlatformModulePkg/Include/Dsc/CoreCommonLib.dsc
 
 !include $(RC_PKG)/RcCommonLib.dsc
 !include $(SKT_PKG)/SktCommonLib.dsc
 !include $(PCH_PKG)/PchCommonLib.dsc
 
 [LibraryClasses.common]
-  PlatformBootManagerLib|MinPlatformPkg/Bds/Library/DxePlatformBootManagerLib/DxePlatformBootManagerLib.inf
-  TestPointCheckLib|MinPlatformPkg/Test/Library/TestPointCheckLibNull/TestPointCheckLibNull.inf
+  PlatformBootManagerLib|MinPlatformModulePkg/Bds/Library/DxePlatformBootManagerLib/DxePlatformBootManagerLib.inf
+  TestPointCheckLib|MinPlatformModulePkg/Test/Library/TestPointCheckLibNull/TestPointCheckLibNull.inf
 
-  CompressLib|MinPlatformPkg/Library/CompressLib/CompressLib.inf
+  CompressLib|OpenBoardSupportPkg/Library/CompressLib/CompressLib.inf
 
-  PciSegmentInfoLib|MinPlatformPkg/Pci/Library/PciSegmentInfoLibSimple/PciSegmentInfoLibSimple.inf
-  AslUpdateLib|MinPlatformPkg/Acpi/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
+  PciSegmentInfoLib|MinPlatformModulePkg/Pci/Library/PciSegmentInfoLibSimple/PciSegmentInfoLibSimple.inf
+  AslUpdateLib|MinPlatformModulePkg/Acpi/Library/DxeAslUpdateLib/DxeAslUpdateLib.inf
 
   #
   # Board
@@ -98,7 +98,7 @@
   SiliconPolicyInitLib|$(BOARD_PKG)/Policy/Library/SiliconPolicyInitLib/SiliconPolicyInitLib.inf
   SiliconPolicyUpdateLib|$(BOARD_PKG)/Policy/Library/SiliconPolicyUpdateLib/SiliconPolicyUpdateLib.inf
   PlatformHookLib|$(BOARD_PKG)/$(BOARD_NAME)/Library/BasePlatformHookLib/BasePlatformHookLib.inf
-  BoardInitLib|MinPlatformPkg/PlatformInit/Library/BoardInitLibNull/BoardInitLibNull.inf
+  BoardInitLib|MinPlatformModulePkg/PlatformInit/Library/BoardInitLibNull/BoardInitLibNull.inf
 
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiEnable == TRUE
@@ -111,18 +111,18 @@
 ## End of section, don't put library after CpPcCommonFeature.dsc
 ## --------------------------------------------------------------
 
-!include MinPlatformPkg/Include/Dsc/CorePeiLib.dsc
+!include MinPlatformModulePkg/Include/Dsc/CorePeiLib.dsc
 !include $(RC_PKG)/RcPeiLib.dsc
 !include $(SKT_PKG)/SktPeiLib.dsc
 !include $(PCH_PKG)/PchPeiLib.dsc
 
 [LibraryClasses.IA32]
 !if $(TARGET) == DEBUG
-  TestPointCheckLib|MinPlatformPkg/Test/Library/TestPointCheckLib/PeiTestPointCheckLib.inf
+  TestPointCheckLib|MinPlatformModulePkg/Test/Library/TestPointCheckLib/PeiTestPointCheckLib.inf
 !endif
-  TestPointLib|MinPlatformPkg/Test/Library/TestPointLib/PeiTestPointLib.inf
+  TestPointLib|MinPlatformModulePkg/Test/Library/TestPointLib/PeiTestPointLib.inf
 
-!include MinPlatformPkg/Include/Dsc/CoreDxeLib.dsc
+!include MinPlatformModulePkg/Include/Dsc/CoreDxeLib.dsc
 !include $(RC_PKG)/RcDxeLib.dsc
 !include $(SKT_PKG)/SktDxeLib.dsc
 !include $(PCH_PKG)/PchDxeLib.dsc
@@ -130,21 +130,21 @@
 [LibraryClasses.X64]
   BoardAcpiTableLib|$(BOARD_PKG)/$(BOARD_NAME)/Library/BoardAcpiLib/DxeBoardAcpiTableLib.inf
 !if $(TARGET) == DEBUG
-  TestPointCheckLib|MinPlatformPkg/Test/Library/TestPointCheckLib/DxeTestPointCheckLib.inf
+  TestPointCheckLib|MinPlatformModulePkg/Test/Library/TestPointCheckLib/DxeTestPointCheckLib.inf
 !endif
-  TestPointLib|MinPlatformPkg/Test/Library/TestPointLib/DxeTestPointLib.inf
+  TestPointLib|MinPlatformModulePkg/Test/Library/TestPointLib/DxeTestPointLib.inf
 
 [LibraryClasses.X64.DXE_SMM_DRIVER]
 !if $(TARGET) == DEBUG
-  TestPointCheckLib|MinPlatformPkg/Test/Library/TestPointCheckLib/SmmTestPointCheckLib.inf
+  TestPointCheckLib|MinPlatformModulePkg/Test/Library/TestPointCheckLib/SmmTestPointCheckLib.inf
 !endif
-  TestPointLib|MinPlatformPkg/Test/Library/TestPointLib/SmmTestPointLib.inf
+  TestPointLib|MinPlatformModulePkg/Test/Library/TestPointLib/SmmTestPointLib.inf
 
 !include $(BOARD_PKG)/$(BOARD_NAME)/PlatformPkgPcd.dsc
 
 [Components.IA32]
 
-!include MinPlatformPkg/Include/Dsc/CorePeiInclude.dsc
+!include MinPlatformModulePkg/Include/Dsc/CorePeiInclude.dsc
 !include AdvancedFeaturePkg/Include/Dsc/CoreAdvancedPeiInclude.dsc
 
   $(SILICON_BIN_PKG)/FvTempMemorySilicon/$(TARGET)/FvTempMemorySilicon.inf
@@ -158,20 +158,21 @@
 
   $(BOARD_PKG)/Policy/SystemBoard/SystemBoardPei.inf
 
-  MinPlatformPkg/PlatformInit/PlatformInitPei/PlatformInitPreMem.inf {
+  MinPlatformModulePkg/PlatformInit/PlatformInitPei/PlatformInitPreMem.inf {
     <LibraryClasses>
       BoardInitLib|$(BOARD_PKG)/$(BOARD_NAME)/Library/BoardInitLib/PeiBoardInitPreMemLib.inf
   }
-  MinPlatformPkg/PlatformInit/PlatformInitPei/PlatformInitPostMem.inf {
+  OpenBoardSupportPkg/PlatformInit/ReportFv/ReportFv.inf
+  MinPlatformModulePkg/PlatformInit/PlatformInitPei/PlatformInitPostMem.inf {
     <LibraryClasses>
       BoardInitLib|$(BOARD_PKG)/$(BOARD_NAME)/Library/BoardInitLib/PeiBoardInitPostMemLib.inf
   }
-  MinPlatformPkg/PlatformInit/SiliconPolicyPei/SiliconPolicyPeiPreMem.inf
-  MinPlatformPkg/PlatformInit/SiliconPolicyPei/SiliconPolicyPeiPostMem.inf
+  MinPlatformModulePkg/PlatformInit/SiliconPolicyPei/SiliconPolicyPeiPreMem.inf
+  MinPlatformModulePkg/PlatformInit/SiliconPolicyPei/SiliconPolicyPeiPostMem.inf
 
 [Components.X64]
 
-!include MinPlatformPkg/Include/Dsc/CoreDxeInclude.dsc
+!include MinPlatformModulePkg/Include/Dsc/CoreDxeInclude.dsc
 !include AdvancedFeaturePkg/Include/Dsc/CoreAdvancedDxeInclude.dsc
 
   $(SILICON_BIN_PKG)/FvLateSilicon/$(TARGET)/FvLateSilicon.inf
@@ -204,15 +205,15 @@
         GCC:*_*_*_ASLCC_FLAGS  = -D PURLEY_FLAG -D PCH_SPT
   }
 
-  MinPlatformPkg/Flash/SpiFvbService/SpiFvbServiceSmm.inf
-  MinPlatformPkg/Acpi/AcpiTables/AcpiPlatform.inf
-  MinPlatformPkg/Acpi/AcpiSmm/AcpiSmm.inf {
+  MinPlatformModulePkg/Flash/SpiFvbService/SpiFvbServiceSmm.inf
+  MinPlatformModulePkg/Acpi/AcpiTables/AcpiPlatform.inf
+  MinPlatformModulePkg/Acpi/AcpiSmm/AcpiSmm.inf {
     <LibraryClasses>
       BoardAcpiEnableLib|$(BOARD_PKG)/$(BOARD_NAME)/Library/BoardAcpiLib/SmmBoardAcpiEnableLib.inf
   }
 
-  MinPlatformPkg/PlatformInit/PlatformInitDxe/PlatformInitDxe.inf
-  MinPlatformPkg/PlatformInit/PlatformInitSmm/PlatformInitSmm.inf
+  MinPlatformModulePkg/PlatformInit/PlatformInitDxe/PlatformInitDxe.inf
+  MinPlatformModulePkg/PlatformInit/PlatformInitSmm/PlatformInitSmm.inf
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdSmbiosEnable == TRUE
   AdvancedFeaturePkg/Smbios/SmbiosBasicDxe/SmbiosBasicDxe.inf

@@ -64,7 +64,7 @@
 !include $(BOARD_PKG)/$(BOARD_NAME)/StructureConfig.dsc
 
 [PcdsFixedAtBuild.X64]
-  gMinPlatformPkgTokenSpaceGuid.PcdTrustedConsoleOutputDevicePath|{0x02, 0x01, 0x0C, 0x00, 0xd0, 0x41, 0x03, 0x0A, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01, 0x06, 0x00,  0x00, 0x01, 0x01, 0x01, 0x06, 0x00,  0x00, 0x01, 0x7F, 0xFF, 0x04, 0x00}
+  gMinPlatformModulePkgTokenSpaceGuid.PcdTrustedConsoleOutputDevicePath|{0x02, 0x01, 0x0C, 0x00, 0xd0, 0x41, 0x03, 0x0A, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01, 0x06, 0x00,  0x00, 0x01, 0x01, 0x01, 0x06, 0x00,  0x00, 0x01, 0x7F, 0xFF, 0x04, 0x00}
 
 [PcdsFixedAtBuild.IA32]
   gCpuUncoreTokenSpaceGuid.PcdFlashSecCacheRegionBase|0x00FFA00000
@@ -114,7 +114,7 @@
   # @Prompt Configure max supported number of Logical Processorss
   gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber|512
   gUefiCpuPkgTokenSpaceGuid.PcdCpuApStackSize|0x1000
-!if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
   gEfiMdePkgTokenSpaceGuid.PcdPerformanceLibraryPropertyMask|0x1
 !endif
 
@@ -174,16 +174,16 @@
   gEfiCpRcPkgTokenSpaceGuid.PcdMaxNestedLevel|0x00000010
 
   gEfiCpRcPkgTokenSpaceGuid.PcdMaxCpuSocketCount|$(MAX_SOCKET)
-  gMinPlatformPkgTokenSpaceGuid.PcdMaxCpuSocketCount|$(MAX_SOCKET)
-  gMinPlatformPkgTokenSpaceGuid.PcdMaxCpuCoreCount|28
+  gMinPlatformModulePkgTokenSpaceGuid.PcdMaxCpuSocketCount|$(MAX_SOCKET)
+  gMinPlatformModulePkgTokenSpaceGuid.PcdMaxCpuCoreCount|28
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdResetOnMemoryTypeInformationChange|FALSE
 
-  gMinPlatformPkgTokenSpaceGuid.PcdPlatformEfiAcpiReclaimMemorySize|0x70
-  gMinPlatformPkgTokenSpaceGuid.PcdPlatformEfiAcpiNvsMemorySize|0x80
-  gMinPlatformPkgTokenSpaceGuid.PcdPlatformEfiReservedMemorySize|0x1470
-  gMinPlatformPkgTokenSpaceGuid.PcdPlatformEfiRtDataMemorySize|0xA0
-  gMinPlatformPkgTokenSpaceGuid.PcdPlatformEfiRtCodeMemorySize|0x80
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPlatformEfiAcpiReclaimMemorySize|0x70
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPlatformEfiAcpiNvsMemorySize|0x80
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPlatformEfiReservedMemorySize|0x1470
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPlatformEfiRtDataMemorySize|0xA0
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPlatformEfiRtCodeMemorySize|0x80
 
   #
   # The PCDs are used to control the Windows SMM Security Mitigations Table - Protection Flags
@@ -194,7 +194,7 @@
   # BIT2: Firmware setting this bit is an indication that it will not allow reconfiguration of system resources via non-architectural mechanisms.
   # BIT3-31: Reserved
   #
-  gMinPlatformPkgTokenSpaceGuid.PcdWsmtProtectionFlags|0x07
+  gMinPlatformModulePkgTokenSpaceGuid.PcdWsmtProtectionFlags|0x07
 
 [PcdsFixedAtBuild.X64]
   gPcAtChipsetPkgTokenSpaceGuid.Pcd8259LegacyModeMask|0x0eB8
@@ -208,50 +208,50 @@
   gEfiCpuTokenSpaceGuid.PcdCpuSmmCodeAccessCheckEnable |TRUE
   gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmCodeAccessCheckEnable |TRUE
 
-  gMinPlatformPkgTokenSpaceGuid.PcdFadtPreferredPmProfile|0x04
-  gMinPlatformPkgTokenSpaceGuid.PcdFadtIaPcBootArch|0x0000
-  gMinPlatformPkgTokenSpaceGuid.PcdFadtFlags|0x000004A5
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFadtPreferredPmProfile|0x04
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFadtIaPcBootArch|0x0000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFadtFlags|0x000004A5
 
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiEnableSwSmi|0xA0
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiDisableSwSmi|0xA1
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiEnableSwSmi|0xA0
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiDisableSwSmi|0xA1
 
-  gMinPlatformPkgTokenSpaceGuid.PcdLocalApicAddress|0xFEE00000
-  gMinPlatformPkgTokenSpaceGuid.PcdIoApicAddress|0xFEC00000
-  gMinPlatformPkgTokenSpaceGuid.PcdIoApicId|0x08
+  gMinPlatformModulePkgTokenSpaceGuid.PcdLocalApicAddress|0xFEE00000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdIoApicAddress|0xFEC00000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdIoApicId|0x08
 
-  gMinPlatformPkgTokenSpaceGuid.PcdPcIoApicCount|32
-  gMinPlatformPkgTokenSpaceGuid.PcdPcIoApicIdBase|0x09
-  gMinPlatformPkgTokenSpaceGuid.PcdPcIoApicAddressBase|0xFEC01000
-  gMinPlatformPkgTokenSpaceGuid.PcdPcIoApicInterruptBase|24
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicCount|32
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicIdBase|0x09
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicAddressBase|0xFEC01000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicInterruptBase|24
 
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiPm1AEventBlockAddress|0x500
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiPm1BEventBlockAddress|0
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiPm1AControlBlockAddress|0x504
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiPm1BControlBlockAddress|0
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiPm2ControlBlockAddress|0x550
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiPmTimerBlockAddress|0x508
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiGpe0BlockAddress|0x580
-  gMinPlatformPkgTokenSpaceGuid.PcdAcpiGpe1BlockAddress|0
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm1AEventBlockAddress|0x500
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm1BEventBlockAddress|0
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm1AControlBlockAddress|0x504
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm1BControlBlockAddress|0
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPm2ControlBlockAddress|0x550
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiPmTimerBlockAddress|0x508
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiGpe0BlockAddress|0x580
+  gMinPlatformModulePkgTokenSpaceGuid.PcdAcpiGpe1BlockAddress|0
 
-  gMinPlatformPkgTokenSpaceGuid.PcdHpetTimerBlockId|0x8086A701
+  gMinPlatformModulePkgTokenSpaceGuid.PcdHpetTimerBlockId|0x8086A701
 
 [PcdsPatchableInModule.common]
   gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x80000042
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdSmiHandlerProfileEnable == TRUE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdSmiHandlerProfileEnable == TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdSmiHandlerProfilePropertyMask|0x1
 !endif
 
   gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress|0x80000000
-  gMinPlatformPkgTokenSpaceGuid.PcdPciExpressRegionLength|0x10000000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPciExpressRegionLength|0x10000000
   gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress|0xFED00000
 
-  gMinPlatformPkgTokenSpaceGuid.PcdPciReservedIobase           |0x1000
-  gMinPlatformPkgTokenSpaceGuid.PcdPciReservedIoLimit          |0xFFFF
-  gMinPlatformPkgTokenSpaceGuid.PcdPciReservedMemBase          |0x90000000
-  gMinPlatformPkgTokenSpaceGuid.PcdPciReservedMemLimit         |0xFBFFFFFF
-  gMinPlatformPkgTokenSpaceGuid.PcdPciReservedMemAbove4GBBase  |0x380000000000
-  gMinPlatformPkgTokenSpaceGuid.PcdPciReservedMemAbove4GBLimit |0x3803FFFFFFFF
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPciReservedIobase           |0x1000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPciReservedIoLimit          |0xFFFF
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPciReservedMemBase          |0x90000000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPciReservedMemLimit         |0xFBFFFFFF
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPciReservedMemAbove4GBBase  |0x380000000000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPciReservedMemAbove4GBLimit |0x3803FFFFFFFF
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution|800
   gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution|600
@@ -261,8 +261,8 @@
   gEfiCpuTokenSpaceGuid.PcdCpuSmmUseSmmEnableIndication|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdUse1GPageTable|TRUE
 
-  gMinPlatformPkgTokenSpaceGuid.PcdFlashAreaBaseAddress|0xFF800000
-  gMinPlatformPkgTokenSpaceGuid.PcdFlashAreaSize|0x01400000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashAreaBaseAddress|0xFF800000
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashAreaSize|0x01400000
 
 [PcdsDynamicExDefault.common.DEFAULT]
   gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureUserConfiguration|0x002CF6CF
@@ -322,7 +322,7 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId|{0x49, 0x4E, 0x54, 0x45, 0x4C, 0x20}
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId|0x2046573030363253
 
-  gMinPlatformPkgTokenSpaceGuid.PcdPcIoApicEnable|0x0
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicEnable|0x0
 
 [PcdsDynamicExDefault.X64]
 
