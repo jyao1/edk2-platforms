@@ -26,6 +26,7 @@
   
 [Packages]
   MdePkg/MdePkg.dec
+  IpmiPkg/IpmiPkg.dec
   AdvancedFeaturePkg/AdvancedFeaturePkg.dec
   LewisburgPkg/PchRcPkg.dec
 

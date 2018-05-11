@@ -507,8 +507,8 @@ FvNameGuid         = EBC45843-B180-44D3-A485-0031A75DB16D
 
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiEnable == TRUE
-INF  AdvancedFeaturePkg/Ipmi/IpmiInit/PeiIpmiInit.inf
-INF  AdvancedFeaturePkg/Ipmi/Frb/FrbPei.inf
+INF  IpmiPkg/IpmiInit/PeiIpmiInit.inf
+INF  IpmiPkg/Frb/FrbPei.inf
 !endif
 
 [FV.FvAdvancedPostMem]
@@ -554,18 +554,18 @@ FvNameGuid         = 7397B828-4645-4B20-A13F-17890736932A
 !include AdvancedFeaturePkg/Include/Fdf/CoreAdvancedLateInclude.fdf
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdSmbiosEnable == TRUE
-INF  AdvancedFeaturePkg/Smbios/SmbiosBasicDxe/SmbiosBasicDxe.inf
+INF  SmbiosPkg/SmbiosBasicDxe/SmbiosBasicDxe.inf
 !endif
 
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiEnable == TRUE
-INF  AdvancedFeaturePkg/Ipmi/IpmiInit/DxeIpmiInit.inf
-INF  AdvancedFeaturePkg/Ipmi/Frb/FrbDxe.inf
-INF  AdvancedFeaturePkg/Ipmi/OsWdt/OsWdt.inf
-INF  AdvancedFeaturePkg/Ipmi/SolStatus/SolStatus.inf
-INF  AdvancedFeaturePkg/Ipmi/IpmiFru/IpmiFru.inf
-INF  AdvancedFeaturePkg/Ipmi/BmcElog/BmcElog.inf
-INF  RuleOverride = DRIVER_ACPITABLE AdvancedFeaturePkg/Ipmi/BmcAcpi/BmcAcpi.inf
+INF  IpmiPkg/IpmiInit/DxeIpmiInit.inf
+INF  IpmiPkg/Frb/FrbDxe.inf
+INF  IpmiPkg/OsWdt/OsWdt.inf
+INF  IpmiPkg/SolStatus/SolStatus.inf
+INF  IpmiPkg/IpmiFru/IpmiFru.inf
+INF  IpmiPkg/BmcElog/BmcElog.inf
+INF  RuleOverride = DRIVER_ACPITABLE IpmiPkg/BmcAcpi/BmcAcpi.inf
 !endif
 
 [FV.FvAdvanced]

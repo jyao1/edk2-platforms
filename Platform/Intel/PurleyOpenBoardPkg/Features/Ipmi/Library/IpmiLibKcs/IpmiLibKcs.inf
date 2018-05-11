@@ -28,7 +28,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  AdvancedFeaturePkg/AdvancedFeaturePkg.dec
+  IpmiPkg/IpmiPkg.dec
   PurleyOpenBoardPkg/PlatPkg.dec
 
 [LibraryClasses]
@@ -41,6 +41,6 @@
   IpmiPlatformHookLib
 
 [Pcd]
-  gEfiIpmiPkgTokenSpaceGuid.PcdIpmiKcsTimeoutPeriod
-  gEfiIpmiPkgTokenSpaceGuid.PcdIpmiBmcSlaveAddress
-  gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiIoBaseAddress
+  gPlatformIpmiTokenSpaceGuid.PcdIpmiKcsTimeoutPeriod
+  gPlatformIpmiTokenSpaceGuid.PcdIpmiBmcSlaveAddress
+  gIpmiPkgTokenSpaceGuid.PcdIpmiIoBaseAddress

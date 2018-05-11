@@ -103,7 +103,7 @@
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiEnable == TRUE
   IpmiLib|$(BOARD_PKG)/Features/Ipmi/Library/IpmiLibKcs/IpmiLibKcs.inf
-  IpmiCommandLib|AdvancedFeaturePkg/Ipmi/Library/IpmiCommandLib/IpmiCommandLib.inf
+  IpmiCommandLib|IpmiPkg/Library/IpmiCommandLib/IpmiCommandLib.inf
   IpmiPlatformHookLib|$(BOARD_PKG)/Features/Ipmi/Library/IpmiPlatformHookLib/IpmiPlatformHookLib.inf
 !endif
 
@@ -152,8 +152,8 @@
   $(SILICON_BIN_PKG)/FvPostMemorySilicon/$(TARGET)/FvPostMemorySilicon.inf
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiEnable == TRUE
-  AdvancedFeaturePkg/Ipmi/IpmiInit/PeiIpmiInit.inf
-  AdvancedFeaturePkg/Ipmi/Frb/FrbPei.inf
+  IpmiPkg/IpmiInit/PeiIpmiInit.inf
+  IpmiPkg/Frb/FrbPei.inf
 !endif
 
   $(BOARD_PKG)/Policy/SystemBoard/SystemBoardPei.inf
@@ -178,13 +178,13 @@
   $(SILICON_BIN_PKG)/FvLateSilicon/$(TARGET)/FvLateSilicon.inf
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiEnable == TRUE
-  AdvancedFeaturePkg/Ipmi/IpmiInit/DxeIpmiInit.inf
-  AdvancedFeaturePkg/Ipmi/Frb/FrbDxe.inf
-  AdvancedFeaturePkg/Ipmi/OsWdt/OsWdt.inf
-  AdvancedFeaturePkg/Ipmi/SolStatus/SolStatus.inf
-  AdvancedFeaturePkg/Ipmi/IpmiFru/IpmiFru.inf
-  AdvancedFeaturePkg/Ipmi/BmcElog/BmcElog.inf
-  AdvancedFeaturePkg/Ipmi/BmcAcpi/BmcAcpi.inf
+  IpmiPkg/IpmiInit/DxeIpmiInit.inf
+  IpmiPkg/Frb/FrbDxe.inf
+  IpmiPkg/OsWdt/OsWdt.inf
+  IpmiPkg/SolStatus/SolStatus.inf
+  IpmiPkg/IpmiFru/IpmiFru.inf
+  IpmiPkg/BmcElog/BmcElog.inf
+  IpmiPkg/BmcAcpi/BmcAcpi.inf
 !endif
 
   $(SILICON_BIN_PKG)/Microcode/Microcode.inf
@@ -216,7 +216,7 @@
   MinPlatformModulePkg/PlatformInit/PlatformInitSmm/PlatformInitSmm.inf
 
 !if gAdvancedFeaturePkgTokenSpaceGuid.PcdSmbiosEnable == TRUE
-  AdvancedFeaturePkg/Smbios/SmbiosBasicDxe/SmbiosBasicDxe.inf
+  SmbiosPkg/SmbiosBasicDxe/SmbiosBasicDxe.inf
 !endif
 
   PurleyOpenBoardPkg/Policy/S3NvramSave/S3NvramSave.inf
