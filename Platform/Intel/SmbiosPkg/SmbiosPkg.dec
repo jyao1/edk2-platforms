@@ -1,0 +1,144 @@
+## @file
+# This package provides the modules that build for a full feature platform.
+# This SmbiosPkg should only depend on EDKII Core packages and MinPlatformPkg.
+#
+# The DEC files are used by the utilities that parse DSC and
+# INF files to generate AutoGen.c and AutoGen.h files
+# for the build infrastructure.
+#
+# Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+#
+# This program and the accompanying materials are licensed and made available under
+# the terms and conditions of the BSD License which accompanies this distribution.
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+
+[Defines]
+DEC_SPECIFICATION = 0x00010017
+PACKAGE_NAME      = SmbiosPkg
+PACKAGE_VERSION   = 0.1
+PACKAGE_GUID      = E178EF55-E4F4-402F-A9D6-F49E6873A968
+
+
+[Includes]
+
+[Guids]
+gSmbiosPkgTokenSpaceGuid         =  {0x84c962c8, 0xf378, 0x4ffa, {0xb7, 0x9, 0x20, 0x9a, 0x59, 0x10, 0xd0, 0xa3}}
+
+[PcdsDynamic, PcdsDynamicEx]
+
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation|{0x0}|SMBIOS_TABLE_TYPE0|0x80010000 {
+    <HeaderFiles>
+      IndustryStandard/SmBios.h
+    <Packages>
+      MdePkg/MdePkg.dec
+      SmbiosPkg/SmbiosPkg.dec
+  }
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.Vendor|0x1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosVersion|0x2
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosSegment|0xF000
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosReleaseDate|0x3
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosSize|0xFF
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.PciIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.PlugAndPlayIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.BiosIsUpgradable|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.BiosShadowingAllowed|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.BootFromCdIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.SelectableBootIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.EDDSpecificationIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.Floppy525_12IsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.Floppy35_720IsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.Floppy35_288IsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.PrintScreenIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.Keyboard8042IsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.SerialIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.PrinterIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BiosCharacteristics.CgaMonoIsSupported|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BIOSCharacteristicsExtensionBytes[0]|0x33
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation.BIOSCharacteristicsExtensionBytes[1]|0x0F
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0StringVendor|"Intel Corporation"|VOID*|0x80010001
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0StringBiosVersion|"PURLEY CV/CRB BIOS Internal"|VOID*|0x80010002
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0StringBiosReleaseDate|"2008-12-23"|VOID*|0x80010003
+
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation|{0x0}|SMBIOS_TABLE_TYPE1|0x80010100 {
+    <HeaderFiles>
+      IndustryStandard/SmBios.h
+    <Packages>
+      MdePkg/MdePkg.dec
+      SmbiosPkg/SmbiosPkg.dec
+  }
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation.Manufacturer|0x1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation.ProductName|0x2
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation.Version|0x3
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation.SerialNumber|0x4
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation.Uuid|{GUID("88888888-8887-8888-8888-878888888888")}
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation.WakeUpType|SystemWakeupTypePowerSwitch
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation.SKUNumber|0x5
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation.Family|0x6
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringManufacturer|"Intel Corporation"|VOID*|0x80010101
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringProductName|"PURLEY"|VOID*|0x80010102
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringVersion|"1.0"|VOID*|0x80010103
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringSerialNumber|"UNKNOWN"|VOID*|0x80010104
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringSKUNumber|"SKU Number"|VOID*|0x80010105
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringFamily|"Family"|VOID*|0x80010106
+
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation|{0x0}|SMBIOS_TABLE_TYPE2|0x80010200 {
+    <HeaderFiles>
+      IndustryStandard/SmBios.h
+    <Packages>
+      MdePkg/MdePkg.dec
+      SmbiosPkg/SmbiosPkg.dec
+  }
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.Manufacturer|0x1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.ProductName|0x2
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.Version|0x3
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.SerialNumber|0x4
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.AssetTag|0x5
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.FeatureFlag.Motherboard|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.FeatureFlag.Replaceable|1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.LocationInChassis|0x6
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation.BoardType|BaseBoardTypeMotherBoard
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringManufacturer|"Intel Corporation"|VOID*|0x80010201
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringProductName|"PURLEY"|VOID*|0x80010202
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringVersion|"E63448-400"|VOID*|0x80010203
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringSerialNumber|"SPRO03200016"|VOID*|0x80010204
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringAssetTag|"Base Board Asset Tag"|VOID*|0x80010205
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringLocationInChassis|"Part Component"|VOID*|0x80010206
+
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis|{0x0}|SMBIOS_TABLE_TYPE3|0x80010300 {
+    <HeaderFiles>
+      IndustryStandard/SmBios.h
+    <Packages>
+      MdePkg/MdePkg.dec
+      SmbiosPkg/SmbiosPkg.dec
+  }
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.Manufacturer|0x1
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.Type|MiscChassisTypeRackMountChassis
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.Version|0x2
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.SerialNumber|0x3
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.AssetTag|0x4
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.BootupState|ChassisStateSafe
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.PowerSupplyState|ChassisStateSafe
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.ThermalState|ChassisStateSafe
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis.SecurityStatus|ChassisSecurityStatusNone
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringManufacturer|"Intel Corporation"|VOID*|0x80010301
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringVersion|"0.1"|VOID*|0x80010302
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringSerialNumber|"UNKNOWN"|VOID*|0x80010303
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringAssetTag|"Chassis Asset Tag"|VOID*|0x80010304
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringSKUNumber|"SKU Number"|VOID*|0x80010305
+
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType32SystemBootInformation|{0x0}|SMBIOS_TABLE_TYPE32|0x80012000 {
+    <HeaderFiles>
+      IndustryStandard/SmBios.h
+    <Packages>
+      MdePkg/MdePkg.dec
+      SmbiosPkg/SmbiosPkg.dec
+  }
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType32SystemBootInformation.BootStatus|BootInformationStatusNoError
+

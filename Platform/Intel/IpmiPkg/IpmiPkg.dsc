@@ -19,11 +19,11 @@
 #
 ################################################################################
 [Defines]
-  PLATFORM_NAME                       = AdvancedFeaturePkg
-  PLATFORM_GUID                       = 5E4C05BC-C5F0-4843-BAE1-3AAFE269DB8F
+  PLATFORM_NAME                       = IpmiPkg
+  PLATFORM_GUID                       = C65E904E-681B-4729-B114-8D454B3C69A5
   PLATFORM_VERSION                    = 0.1
   DSC_SPECIFICATION                   = 0x00010005
-  OUTPUT_DIRECTORY                    = Build/AdvancedFeaturePkg
+  OUTPUT_DIRECTORY                    = Build/IpmiPkg
   SUPPORTED_ARCHITECTURES             = IA32|X64
   BUILD_TARGETS                       = DEBUG|RELEASE
   SKUID_IDENTIFIER                    = DEFAULT
@@ -105,6 +105,10 @@
 
   TimerLib|MdePkg/Library/BaseTimerLibNullTemplate/BaseTimerLibNullTemplate.inf
 
+  IpmiPlatformHookLib|IpmiPkg/Library/IpmiPlatformHookLibNull/IpmiPlatformHookLibNull.inf
+  IpmiLib|IpmiPkg/Library/IpmiLibNull/IpmiLibNull.inf
+  IpmiCommandLib|IpmiPkg/Library/IpmiCommandLib/IpmiCommandLib.inf
+
 [LibraryClasses.common.SEC,LibraryClasses.common.PEI_CORE,LibraryClasses.common.PEIM]
   PcdLib|MdePkg/Library/PeiPcdLib/PeiPcdLib.inf
   HobLib|MdePkg/Library/PeiHobLib/PeiHobLib.inf
@@ -138,3 +142,14 @@
 ###################################################################################################
 
 [Components]
+
+  IpmiPkg/IpmiInit/PeiIpmiInit.inf
+  IpmiPkg/IpmiInit/DxeIpmiInit.inf
+  IpmiPkg/Frb/FrbPei.inf
+  IpmiPkg/Frb/FrbDxe.inf
+  IpmiPkg/OsWdt/OsWdt.inf
+  IpmiPkg/SolStatus/SolStatus.inf
+  IpmiPkg/IpmiFru/IpmiFru.inf
+  IpmiPkg/BmcElog/BmcElog.inf
+  IpmiPkg/BmcAcpi/BmcAcpi.inf
+

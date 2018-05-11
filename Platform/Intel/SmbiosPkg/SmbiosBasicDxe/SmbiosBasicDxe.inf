@@ -1,0 +1,88 @@
+### @file
+# Component description file for Smbios Misc module.
+#
+# Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
+#
+# This program and the accompanying materials are licensed and made available under
+# the terms and conditions of the BSD License which accompanies this distribution.
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+###
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmbiosBasic
+  FILE_GUID                      = 03ADF4A1-A27A-45E3-B211-3177C6C2E7ED
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SmbiosBasicEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  SmbiosBasicEntryPoint.c
+  Type0BiosVendorFunction.c
+  Type1SystemManufacturerFunction.c
+  Type2BaseBoardManufacturerFunction.c
+  Type3ChassisManufacturerFunction.c
+  Type32BootInformationFunction.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  SmbiosPkg/SmbiosPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  MemoryAllocationLib
+  DevicePathLib
+  BaseMemoryLib
+  BaseLib
+  DebugLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiLib
+  HobLib
+
+[Protocols]
+  gEfiSmbiosProtocolGuid                       # PROTOCOL ALWAYS_CONSUMED
+  gEfiVariableArchProtocolGuid
+  
+[Pcd]
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0BiosInformation
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0StringVendor
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0StringBiosVersion
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType0StringBiosReleaseDate
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1SystemInformation
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringManufacturer
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringProductName
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringVersion
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringSerialNumber
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringSKUNumber
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType1StringFamily
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2BaseBoardInformation
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringManufacturer
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringProductName
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringVersion
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringSerialNumber
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringAssetTag
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType2StringLocationInChassis
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3SystemEnclosureChassis
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringManufacturer
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringVersion
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringSerialNumber
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringAssetTag
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType3StringSKUNumber
+  gSmbiosPkgTokenSpaceGuid.PcdSmbiosType32SystemBootInformation
+
+[Depex]
+  gEfiSmbiosProtocolGuid            AND
+  gEfiVariableArchProtocolGuid

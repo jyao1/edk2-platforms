@@ -19,11 +19,11 @@
 #
 ################################################################################
 [Defines]
-  PLATFORM_NAME                       = AdvancedFeaturePkg
-  PLATFORM_GUID                       = 5E4C05BC-C5F0-4843-BAE1-3AAFE269DB8F
+  PLATFORM_NAME                       = SmbiosPkg
+  PLATFORM_GUID                       = 06948331-83D4-47E4-8935-34B3D2B0C0D4
   PLATFORM_VERSION                    = 0.1
   DSC_SPECIFICATION                   = 0x00010005
-  OUTPUT_DIRECTORY                    = Build/AdvancedFeaturePkg
+  OUTPUT_DIRECTORY                    = Build/SmbiosPkg
   SUPPORTED_ARCHITECTURES             = IA32|X64
   BUILD_TARGETS                       = DEBUG|RELEASE
   SKUID_IDENTIFIER                    = DEFAULT
@@ -138,3 +138,6 @@
 ###################################################################################################
 
 [Components]
+
+  SmbiosPkg/SmbiosBasicDxe/SmbiosBasicDxe.inf
+

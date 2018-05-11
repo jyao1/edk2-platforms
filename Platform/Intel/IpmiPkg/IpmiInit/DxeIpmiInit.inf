@@ -1,5 +1,5 @@
 ### @file
-# Component description file for IPMI Serial Over LAN driver.
+# Component description file for IPMI initialization.
 #
 # Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
 #
@@ -14,31 +14,27 @@
 ###
 
 [Defines]
-  INF_VERSION              = 0x00010005
-  BASE_NAME                = SolStatus
-  FILE_GUID                = F9887B5E-2D46-4213-8794-14F1FD39F6B8
-  MODULE_TYPE              = DXE_DRIVER
-  PI_SPECIFICATION_VERSION = 0x0001000A
-  VERSION_STRING           = 1.0
-  ENTRY_POINT              = SolStatusEntryPoint
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DxeIpmiInit
+  FILE_GUID                      = 07A01ACF-46D5-48de-A63D-74FA92AA8450
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = IpmiInterfaceInit
 
 [Sources]
-  SolStatus.c
+  DxeIpmiInit.c
 
 [Packages]
   MdePkg/MdePkg.dec
-  AdvancedFeaturePkg/AdvancedFeaturePkg.dec
-  
-[Pcd]
-  gAdvancedFeaturePkgTokenSpaceGuid.PcdMaxSOLChannels
-  
+  MdeModulePkg/MdeModulePkg.dec
+  IpmiPkg/IpmiPkg.dec
+
 [LibraryClasses]
-  UefiDriverEntryPoint
-  DebugLib
   UefiBootServicesTableLib
+  DebugLib
+  UefiDriverEntryPoint
   IpmiCommandLib
-  PcdLib
+  TimerLib
 
 [Depex]
   TRUE
-

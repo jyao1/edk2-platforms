@@ -1,5 +1,5 @@
 ### @file
-# Component description file for IPMI platform Library.
+# Component description file for IPMI Command Library.
 #
 # Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
 #
@@ -15,21 +15,24 @@
 
 [Defines]
   INF_VERSION                    = 0x00010005
-  BASE_NAME                      = IpmiPlatformHookLibNull
-  FILE_GUID                      = C31A5B17-81DB-4D86-B376-17711BB6E0A5
-  MODULE_TYPE                    = BASE
+  BASE_NAME                      = IpmiCommandLib
+  FILE_GUID                      = E599C9C7-5913-40A0-8669-67282E2BEC53
+  MODULE_TYPE                    = UEFI_DRIVER
   VERSION_STRING                 = 1.0
-  LIBRARY_CLASS                  = IpmiPlatformHookLib
+  LIBRARY_CLASS                  = IpmiCommandLib
 
 [sources]
-  IpmiPlatformHookLibNull.c
+  IpmiCommandLibNetFnApp.c
+  IpmiCommandLibNetFnTransport.c
+  IpmiCommandLibNetFnChassis.c
+  IpmiCommandLibNetFnStorage.c
   
 [Packages]
   MdePkg/MdePkg.dec
-  AdvancedFeaturePkg/AdvancedFeaturePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IpmiPkg/IpmiPkg.dec
 
 [LibraryClasses]
+  BaseMemoryLib
   DebugLib
- 
-[Protocols]
-  gEfiIpmiTransportProtocolGuid
+  IpmiLib

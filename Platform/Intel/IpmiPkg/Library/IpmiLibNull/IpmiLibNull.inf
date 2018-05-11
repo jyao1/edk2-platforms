@@ -1,5 +1,5 @@
 ### @file
-# Component description file for IPMI initialization in PEI.
+# Component description file for IPMI NULL Library.
 #
 # Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
 #
@@ -15,24 +15,20 @@
 
 [Defines]
   INF_VERSION                    = 0x00010005
-  BASE_NAME                      = PeiIpmiInit
-  FILE_GUID                      = D8F57F4E-D67D-4f2c-8351-C7092986542F
-  MODULE_TYPE                    = PEIM
+  BASE_NAME                      = IpmiLibNull
+  FILE_GUID                      = DDF0E1D9-F53F-429A-BD9C-5D12A321E625
+  MODULE_TYPE                    = UEFI_DRIVER
   VERSION_STRING                 = 1.0
-  ENTRY_POINT                    = PeimIpmiInterfaceInit
+  LIBRARY_CLASS                  = IpmiLib
 
-[Sources]
-  PeiIpmiInit.c
-
+[sources]
+  IpmiLibNull.c
+  
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  AdvancedFeaturePkg/AdvancedFeaturePkg.dec
+  IpmiPkg/IpmiPkg.dec
 
 [LibraryClasses]
-  PeimEntryPoint
-  DebugLib
-  IpmiCommandLib
 
-[Depex]
-  TRUE
+[Pcd]
