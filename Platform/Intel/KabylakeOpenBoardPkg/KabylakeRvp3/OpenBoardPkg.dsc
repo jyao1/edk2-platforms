@@ -109,8 +109,8 @@
 
 # Tbt
 !if gBoardModuleTokenSpaceGuid.PcdTbtEnable == TRUE
-  TbtCommonLib|$(PLATFORM_BOARD_PACKAGE)/Features/Tbt/Library/PeiDxeSmmTbtCommonLib/TbtCommonLib.inf
-  DxeTbtPolicyLib|$(PLATFORM_BOARD_PACKAGE)/Features/Tbt/Library/DxeTbtPolicyLib/DxeTbtPolicyLib.inf
+  TbtCommonLib|ThunderboltPkg/Library/PeiDxeSmmTbtCommonLib/TbtCommonLib.inf
+  DxeTbtPolicyLib|ThunderboltPkg/Library/DxeTbtPolicyLib/DxeTbtPolicyLib.inf
 !endif
 #
 # Silicon Init Package
@@ -131,8 +131,8 @@
 
 # Tbt
 !if gBoardModuleTokenSpaceGuid.PcdTbtEnable == TRUE
-  PeiTbtPolicyLib|$(PLATFORM_BOARD_PACKAGE)/Features/Tbt/Library/PeiTbtPolicyLib/PeiTbtPolicyLib.inf
-  PeiDTbtInitLib|$(PLATFORM_BOARD_PACKAGE)/Features/Tbt/Library/Private/PeiDTbtInitLib/PeiDTbtInitLib.inf
+  PeiTbtPolicyLib|ThunderboltPkg/Library/PeiTbtPolicyLib/PeiTbtPolicyLib.inf
+  PeiDTbtInitLib|ThunderboltPkg/Library/Private/PeiDTbtInitLib/PeiDTbtInitLib.inf
 !endif
 #
 # Silicon Init Package
@@ -244,7 +244,7 @@
 
 # Tbt
 !if gBoardModuleTokenSpaceGuid.PcdTbtEnable == TRUE
-  $(PLATFORM_BOARD_PACKAGE)/Features/Tbt/TbtInit/Pei/PeiTbtInit.inf
+  ThunderboltPkg/TbtInit/Pei/PeiTbtInit.inf
 !endif
 
 [Components.X64]
@@ -271,8 +271,8 @@
 
 # Tbt
 !if gBoardModuleTokenSpaceGuid.PcdTbtEnable == TRUE
-  $(PLATFORM_BOARD_PACKAGE)/Features/Tbt/TbtInit/Smm/TbtSmm.inf
-  $(PLATFORM_BOARD_PACKAGE)/Features/Tbt/TbtInit/Dxe/TbtDxe.inf
+  ThunderboltPkg/TbtInit/Smm/TbtSmm.inf
+  ThunderboltPkg/TbtInit/Dxe/TbtDxe.inf
   $(PLATFORM_BOARD_PACKAGE)/Features/PciHotPlug/PciHotPlug.inf
 !endif
 
