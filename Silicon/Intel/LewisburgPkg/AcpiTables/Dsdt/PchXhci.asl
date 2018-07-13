@@ -17,8 +17,6 @@ External(\_SB.PC00.XHCI.RHUB.PS0X, MethodObj)
 External(\_SB.PC00.XHCI.RHUB.PS2X, MethodObj)
 External(\_SB.PC00.XHCI.RHUB.PS3X, MethodObj)
 External(\_SB.PC00.XHCI.RHUB.INIR, MethodObj)
-External(\_SB.PC00.XHCI.XHCS, MethodObj)
-
 
 Scope(\_SB_.PC00.XHCI) {
 
@@ -311,6 +309,7 @@ Scope(\_SB_.PC00.XHCI) {
     //  None
     // Changes 8090 Bit 10 before S3. 
     // 
+
     Method(XHCS,0, Serialized) {
       Store(^MEMB,Local2)         // Save MBAR
       Store(^PDBM,Local1)         // Save CMD
