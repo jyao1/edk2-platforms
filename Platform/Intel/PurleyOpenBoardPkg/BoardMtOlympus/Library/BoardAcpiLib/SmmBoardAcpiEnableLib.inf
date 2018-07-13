@@ -36,7 +36,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
   PurleyOpenBoardPkg/PlatPkg.dec
   LewisburgPkg/PchRcPkg.dec
 

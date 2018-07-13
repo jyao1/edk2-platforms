@@ -28,7 +28,7 @@
   PurleyOpenBoardPkg/PlatPkg.dec
   PurleySktPkg/SocketPkg.dec
   PurleyRcPkg/RcPkg.dec
-  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
 
 [BuildOptions]  
   # add -vr and -so to generate offset.h

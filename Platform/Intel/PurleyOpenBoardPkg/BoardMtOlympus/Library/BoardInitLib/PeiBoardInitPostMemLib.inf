@@ -28,11 +28,12 @@
   PcdLib
 
 [Packages]
-  MinPlatformPkg/MinPlatformPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   PurleyRcPkg/RcPkg.dec
   PurleySktPkg/SocketPkg.dec
+  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
 
 [Sources]
   PeiMtOlympusInitPostMemLib.c

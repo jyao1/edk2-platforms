@@ -34,7 +34,7 @@
   MdeModulePkg/MdeModulePkg.dec
   LewisburgPkg/PchRcPkg.dec
   UefiCpuPkg/UefiCpuPkg.dec
-  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
 
 [LibraryClasses]
   UefiBootServicesTableLib
@@ -66,7 +66,7 @@
   gOemSkuTokenSpaceGuid.PcdSocketPowerManagementConfigData
   gOemSkuTokenSpaceGuid.PcdSocketProcessorCoreConfigData
   gOemSkuTokenSpaceGuid.PcdAcpiGnvsAddress
-  gMinPlatformPkgTokenSpaceGuid.PcdPcIoApicEnable
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicEnable
 
 [Depex]
   gEfiAcpiTableProtocolGuid AND

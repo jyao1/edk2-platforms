@@ -29,13 +29,14 @@
   GpioLib
 
 [Packages]
-  MinPlatformPkg/MinPlatformPkg.dec
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
   PurleyRcPkg/RcPkg.dec
   PurleySktPkg/SocketPkg.dec
   LewisburgPkg/PchRcPkg.dec
   PurleyOpenBoardPkg/PlatPkg.dec
+  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
 
 [Sources]
   PeiMtOlympusDetect.c
@@ -49,7 +50,7 @@
 [Pcd]
   gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
   gEfiCpRcPkgTokenSpaceGuid.PcdMaxCpuSocketCount
-  gMinPlatformPkgTokenSpaceGuid.PcdPcIoApicEnable
+  gMinPlatformModulePkgTokenSpaceGuid.PcdPcIoApicEnable
   gOemSkuTokenSpaceGuid.PcdMemTsegSize
   gOemSkuTokenSpaceGuid.PcdMemIedSize
 
