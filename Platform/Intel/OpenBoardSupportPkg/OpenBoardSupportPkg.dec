@@ -1,0 +1,93 @@
+## @file
+# This package provides the modules that build for a minimal platform.
+# This OpenBoardSupportPkg should only depend on EDKII Core packages and MinPlatformPkg/MinPlatformModulePkg.
+#
+# The DEC files are used by the utilities that parse DSC and
+# INF files to generate AutoGen.c and AutoGen.h files
+# for the build infrastructure.
+#
+# Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+#
+# This program and the accompanying materials are licensed and made available under
+# the terms and conditions of the BSD License which accompanies this distribution.
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+
+[Defines]
+DEC_SPECIFICATION = 0x00010017
+PACKAGE_NAME      = OpenBoardSupportPkg
+PACKAGE_VERSION   = 0.1
+PACKAGE_GUID      = AB701A02-0FA8-40AC-8183-424BDFCEE9FC
+
+[Includes]
+Include
+
+[Ppis]
+gEdkiiSiliconInitializedPpiGuid = {0x82a72dc8, 0x61ec, 0x403e, {0xb1, 0x5a, 0x8d, 0x7a, 0x3a, 0x71, 0x84, 0x98}}
+
+gPeiBaseMemoryTestPpiGuid       = { 0xb6ec423c, 0x21d2, 0x490d, { 0x85, 0xc6, 0xdd, 0x58, 0x64, 0xea, 0xa6, 0x74 } }
+gPeiPlatformMemorySizePpiGuid   = { 0x9a7ef41e, 0xc140, 0x4bd1, { 0xb8, 0x84, 0x1e, 0x11, 0x24, 0x0b, 0x4c, 0xe6 } }
+
+[Guids]
+gOpenBoardSupportPkgTokenSpaceGuid         =  {0xf377fe53, 0xd8c4, 0x401b, {0x8a, 0xb6, 0x5e, 0xd4, 0x48, 0xdf, 0x6e, 0xda}}
+
+
+gBoardDetectGuid           = {0x1792429d, 0x9d94, 0x4e08, {0xa0, 0x99, 0x73, 0xa2, 0x86, 0xae, 0xb4, 0x35}}
+gBoardPreMemInitGuid       = {0x191dcfcf, 0xe16e, 0x43bb, {0x9b, 0xc3, 0x6e, 0xee, 0x6f, 0xab, 0x3a, 0x27}}
+gBoardPostMemInitGuid      = {0xa0e933ea, 0xa69, 0x47fb,  {0xb2, 0xab, 0xa1, 0x6f, 0x71, 0x2d, 0x6f, 0x58}}
+gBoardNotificationInitGuid = {0x78dbcabf, 0xc544, 0x4e6f, {0xaf, 0x3a, 0x71, 0x17, 0xd9, 0x42, 0x4e, 0xd1}}
+
+gBoardAcpiTableGuid        = {0xd70e9f57, 0x69f, 0x4bef,  {0x96, 0xc0, 0x84, 0x74, 0xf4, 0xa2, 0x5f, 0x3a}}
+gBoardAcpiEnableGuid       = {0x9727b610, 0xf645, 0x4429, {0x89, 0x21, 0x2c, 0x2b, 0x58, 0xdc, 0xbb, 0xa}}
+
+gDefaultDataFileGuid                        = { 0x1ae42876, 0x008f, 0x4161, { 0xb2, 0xb7, 0x1c, 0x0d, 0x15, 0xc5, 0xef, 0x43 }}
+gDefaultDataOptSizeFileGuid                 = { 0x003e7b41, 0x98a2, 0x4be2, { 0xb2, 0x7a, 0x6c, 0x30, 0xc7, 0x65, 0x52, 0x25 }}
+
+[LibraryClasses]
+
+CompressLib|Include/Library/CompressLib.h
+HobVariableLib|Include/Library/HobVariableLib.h
+PeiLib|Include/Library/PeiLib.h
+
+BoardAcpiTableLib|Include/Library/BoardAcpiTableLib.h
+
+MultiBoardInitSupportLib|Include/Library/MultiBoardInitSupportLib.h
+MultiBoardAcpiEnableSupportLib|Include/Library/MultiBoardAcpiEnableSupportLib.h
+MultiBoardAcpiTableSupportLib|Include/Library/MultiBoardAcpiTableSupportLib.h
+
+[PcdsFixedAtBuild, PcdsPatchableInModule]
+
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFspCpuPeiApWakeupBufferAddr|0x9f000|UINT32|0x30000008
+
+[PcdsFixedAtBuild, PcdsPatchableInModule]
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvPreMemoryBase|0x00000000|UINT32|0x20000004
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvPreMemorySize|0x00000000|UINT32|0x20000005
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvPreMemoryOffset|0x00000000|UINT32|0x20000006
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvPostMemoryBase|0x00000000|UINT32|0x20000007
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvPostMemorySize|0x00000000|UINT32|0x20000008
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvPostMemoryOffset|0x00000000|UINT32|0x20000009
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvUefiBootBase|0x00000000|UINT32|0x2000000A
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvUefiBootSize|0x00000000|UINT32|0x2000000B
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvUefiBootOffset|0x00000000|UINT32|0x2000000C
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvOsBootBase|0x00000000|UINT32|0x2000000D
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvOsBootSize|0x00000000|UINT32|0x2000000E
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvOsBootOffset|0x00000000|UINT32|0x2000000F
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvSecurityBase|0x00000000|UINT32|0x20000010
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvSecuritySize|0x00000000|UINT32|0x20000011
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvSecurityOffset|0x00000000|UINT32|0x20000012
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvAdvancedBase|0x00000000|UINT32|0x20000013
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvAdvancedSize|0x00000000|UINT32|0x20000014
+gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvAdvancedOffset|0x00000000|UINT32|0x20000015
+
+[PcdsDynamic, PcdsDynamicEx]
+
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+
+[PcdsFeatureFlag]
+

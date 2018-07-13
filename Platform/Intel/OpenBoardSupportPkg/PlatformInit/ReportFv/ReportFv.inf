@@ -1,0 +1,69 @@
+### @file
+# Component information file for the Platform Init Pre-Memory PEI module.
+#
+# Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+#
+# This program and the accompanying materials are licensed and made available under
+# the terms and conditions of the BSD License which accompanies this distribution.
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+###
+
+[Defines]
+  INF_VERSION                    = 0x00010017
+  BASE_NAME                      = ReportFv
+  FILE_GUID                      = 3FECFD95-7CB2-4A6E-8FAC-DEFD9947E35E
+  VERSION_STRING                 = 1.0
+  MODULE_TYPE                    = PEIM
+  ENTRY_POINT                    = ReportFvEntryPoint
+
+[LibraryClasses]
+  PeimEntryPoint
+  DebugLib
+  IoLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  HobLib
+  PeiServicesLib
+  TestPointCheckLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
+  OpenBoardSupportPkg/OpenBoardSupportPkg.dec
+
+[Pcd]
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFspWrapperBootMode
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashAreaBaseAddress        ## CONSUMES
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashAreaSize               ## CONSUMES
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashFvFspMBase          ## CONSUMES
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashFvFspMSize          ## CONSUMES
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashFvFspSBase          ## CONSUMES
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashFvFspSSize          ## CONSUMES
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashFvFspUBase          ## CONSUMES
+  gMinPlatformModulePkgTokenSpaceGuid.PcdFlashFvFspUSize          ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvPostMemoryBase          ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvPostMemorySize          ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvUefiBootBase         ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvUefiBootSize         ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvOsBootBase           ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvOsBootSize           ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvSecurityBase           ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvSecuritySize           ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvAdvancedBase           ## CONSUMES
+  gOpenBoardSupportPkgTokenSpaceGuid.PcdFlashFvAdvancedSize           ## CONSUMES
+
+[Sources]
+  ReportFv.c
+
+[Ppis]
+  gEfiPeiMemoryDiscoveredPpiGuid
+
+[Depex]
+  TRUE
