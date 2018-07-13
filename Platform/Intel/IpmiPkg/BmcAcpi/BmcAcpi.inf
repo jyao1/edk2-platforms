@@ -28,7 +28,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  AdvancedFeaturePkg/AdvancedFeaturePkg.dec
+  IpmiPkg/IpmiPkg.dec
 
 [LibraryClasses]
   UefiBootServicesTableLib
@@ -42,7 +42,7 @@
   gEfiAcpiTableProtocolGuid
 
 [Pcd]
-  gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiIoBaseAddress
+  gIpmiPkgTokenSpaceGuid.PcdIpmiIoBaseAddress
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId
 

@@ -1,5 +1,5 @@
 ### @file
-# Component description file for IPMI OS watch dog timer driver.
+# Component description file for IPMI FRB.
 #
 # Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
 #
@@ -13,28 +13,31 @@
 #
 ###
 
-[Defines]
-  INF_VERSION                    = 0x00010005
-  BASE_NAME                      = OsWdt
-  FILE_GUID                      = BE9B694A-B5D9-48e0-A527-6E1A49EB7028
-  MODULE_TYPE                    = DXE_DRIVER
-  VERSION_STRING                 = 1.0
-  ENTRY_POINT                    = DriverInit
+[defines]
+  INF_VERSION          = 0x00010005
+  BASE_NAME            = FrbDxe
+  FILE_GUID            = F6C7812D-81BF-4e6d-A87D-E75AF17BD511
+  MODULE_TYPE          = DXE_DRIVER
+  VERSION_STRING       = 1.0
+  ENTRY_POINT          = FrbDxeEntryPoint
 
 [Sources]
-  OsWdt.c
-
-[Packages]
+  FrbDxe.c
+ 
+[Packages]  
   MdePkg/MdePkg.dec
-  AdvancedFeaturePkg/AdvancedFeaturePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IpmiPkg/IpmiPkg.dec
 
 [LibraryClasses]
-  UefiDriverEntryPoint
-  DebugLib
   UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  UefiLib
+  DebugLib
   BaseMemoryLib
   IpmiCommandLib
+  PcdLib
   
 [Depex]
   TRUE
-

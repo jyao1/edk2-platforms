@@ -1,6 +1,6 @@
 ## @file
 # This package provides the modules that build for a full feature platform.
-# This AdvancedFeaturePkg should only depend on EDKII Core packages and MinPlatformPkg.
+# This IpmiPkg should only depend on EDKII Core packages and MinPlatformPkg.
 #
 # The DEC files are used by the utilities that parse DSC and
 # INF files to generate AutoGen.c and AutoGen.h files
@@ -21,18 +21,22 @@
 
 [Defines]
 DEC_SPECIFICATION = 0x00010017
-PACKAGE_NAME      = AdvancedFeaturePkg
+PACKAGE_NAME      = IpmiPkg
 PACKAGE_VERSION   = 0.1
-PACKAGE_GUID      = 290127D9-ABED-4DD8-A35D-73DCB4261BCB
+PACKAGE_GUID      = C51B1074-BB0A-4A14-BB89-A2879ACA00C4
 
 
 [Includes]
 Include
 
 [Guids]
-gAdvancedFeaturePkgTokenSpaceGuid         =  {0xa8514688, 0x6693, 0x4ab5, {0xaa, 0xc8, 0xcc, 0xa9, 0x8d, 0xde, 0x90, 0xe1}}
+gIpmiPkgTokenSpaceGuid         =  {0x1beea3d, 0xe654, 0x44cd, {0xae, 0x42, 0xae, 0x23, 0xc, 0x50, 0xcc, 0x78}}
 
-[PcdsFeatureFlag]
-  gAdvancedFeaturePkgTokenSpaceGuid.PcdNetworkEnable          |FALSE|BOOLEAN|0xF00000A1
-  gAdvancedFeaturePkgTokenSpaceGuid.PcdSmbiosEnable           |FALSE|BOOLEAN|0xF00000A2
-  gAdvancedFeaturePkgTokenSpaceGuid.PcdIpmiEnable             |FALSE|BOOLEAN|0xF00000A3
+[PcdsFixedAtBuild]
+  gIpmiPkgTokenSpaceGuid.PcdMaxSOLChannels|0x3|UINT8|0x40000009
+
+[PcdsDynamic, PcdsDynamicEx]
+  gIpmiPkgTokenSpaceGuid.PcdIpmiIoBaseAddress|0xCA2|UINT16|0x90000022
+  gIpmiPkgTokenSpaceGuid.PcdFRB2EnabledFlag|TRUE|BOOLEAN|0x10000030
+  gIpmiPkgTokenSpaceGuid.PcdFRBTimeoutValue|360|UINT16|0x10000040
+
