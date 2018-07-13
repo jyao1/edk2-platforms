@@ -1,4 +1,5 @@
 ### @file
+# Component information file for the TBT Init PEI module.
 #
 # Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
 #
@@ -14,41 +15,36 @@
 
 [Defines]
   INF_VERSION                    = 0x00010017
-  BASE_NAME                      = TbtDxe
-  FILE_GUID                      = 19C9762C-3A88-41B0-906F-8C4C2895A887
+  BASE_NAME                      = PeiTbtInit
+  FILE_GUID                      = 90BF2BFB-F998-4cbc-AD72-008D4D047A4B
   VERSION_STRING                 = 1.0
-  MODULE_TYPE                    = DXE_DRIVER
-  ENTRY_POINT                    = TbtDxeEntryPoint
+  MODULE_TYPE                    = PEIM
+  ENTRY_POINT                    = TbtInitEntryPoint
 
 [LibraryClasses]
+  PeimEntryPoint
   DebugLib
-  BaseMemoryLib
-  UefiBootServicesTableLib
-  UefiRuntimeServicesTableLib
-  UefiDriverEntryPoint
   HobLib
-  UefiLib
-  TbtCommonLib
-  DxeTbtPolicyLib
-  AslUpdateLib
+  PeiServicesLib
+  PeiTbtPolicyLib
+  PeiDTbtInitLib
 
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
   KabylakeOpenBoardPkg/OpenBoardPkg.dec
   KabylakeSiliconPkg/SiPkg.dec
 
 [Sources]
-  TbtDxe.c
-
-[Protocols]
-  gTbtNvsAreaProtocolGuid                       ## CONSUMES
-  gDxeTbtPolicyProtocolGuid
+  PeiTbtInit.c
 
 [Guids]
   gTbtInfoHobGuid                               ## CONSUMES
 
+[Ppis]
+  gEfiEndOfPeiSignalPpiGuid                     ## CONSUMES
+  gPeiTbtPolicyBoardInitDonePpiGuid             ## CONSUMES
+
 [Depex]
-  gEfiVariableWriteArchProtocolGuid   AND
-  gEfiVariableArchProtocolGuid
+  gEfiPeiMemoryDiscoveredPpiGuid

@@ -18,7 +18,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #include <Library/BaseLib.h>
 #include <Library/IoLib.h>
 #include <Library/BoardAcpiEnableLib.h>
-#include <Library/MultiBoardAcpiSupportLib.h>
+#include <Library/MultiBoardAcpiEnableSupportLib.h>
 #include <Library/PcdLib.h>
 #include <Library/DebugLib.h>
 
@@ -75,7 +75,7 @@ BOARD_ACPI_ENABLE_FUNC  mKabylakeRvp3BoardAcpiEnableFunc = {
 
 EFI_STATUS
 EFIAPI
-SmmKabylakeRvp3MultiBoardAcpiSupportLibConstructor (
+SmmKabylakeRvp3MultiBoardAcpiEnableSupportLibConstructor (
   VOID
   )
 {

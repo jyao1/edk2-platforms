@@ -18,7 +18,7 @@
   # PLATFORM_PACKAGE would be the same as PLATFORM_NAME as well as package build folder
   # DEFINE only takes effect at R9 DSC and FDF.
   #
-  DEFINE      PLATFORM_PACKAGE                = MinPlatformPkg
+  DEFINE      PLATFORM_PACKAGE                = MinPlatformModulePkg
   DEFINE      PLATFORM_SI_PACKAGE             = KabylakeSiliconPkg
   DEFINE      PLATFORM_SI_BIN_PACKAGE         = KabylakeSiliconBinPkg
   DEFINE      PLATFORM_FSP_BIN_PACKAGE        = KabylakeFspBinPkg
@@ -81,7 +81,7 @@
 
 [LibraryClasses.common]
 
-  PeiLib|$(PLATFORM_PACKAGE)/Library/PeiLib/PeiLib.inf
+  PeiLib|OpenBoardSupportPkg/Library/PeiLib/PeiLib.inf
 
   PciHostBridgeLib|$(PLATFORM_PACKAGE)/Pci/Library/PciHostBridgeLibSimple/PciHostBridgeLibSimple.inf
   PciSegmentInfoLib|$(PLATFORM_PACKAGE)/Pci/Library/PciSegmentInfoLibSimple/PciSegmentInfoLibSimple.inf
@@ -91,13 +91,13 @@
 
   PlatformHookLib|$(PROJECT)/Library/BasePlatformHookLib/BasePlatformHookLib.inf
 
-  FspWrapperHobProcessLib|$(PLATFORM_PACKAGE)/FspWrapper/Library/PeiFspWrapperHobProcessLib/PeiFspWrapperHobProcessLib.inf
-  PlatformSecLib|$(PLATFORM_PACKAGE)/FspWrapper/Library/SecFspWrapperPlatformSecLib/SecFspWrapperPlatformSecLib.inf
+  FspWrapperHobProcessLib|OpenBoardSupportPkg/FspWrapper/Library/PeiFspWrapperHobProcessLib/PeiFspWrapperHobProcessLib.inf
+  PlatformSecLib|OpenBoardSupportPkg/FspWrapper/Library/SecFspWrapperPlatformSecLib/SecFspWrapperPlatformSecLib.inf
   
   FspWrapperApiLib|IntelFsp2WrapperPkg/Library/BaseFspWrapperApiLib/BaseFspWrapperApiLib.inf
   FspWrapperApiTestLib|IntelFsp2WrapperPkg/Library/PeiFspWrapperApiTestLib/PeiFspWrapperApiTestLib.inf
 
-  FspWrapperPlatformLib|$(PLATFORM_PACKAGE)/FspWrapper/Library/PeiFspWrapperPlatformLib/PeiFspWrapperPlatformLib.inf
+  FspWrapperPlatformLib|OpenBoardSupportPkg/FspWrapper/Library/PeiFspWrapperPlatformLib/PeiFspWrapperPlatformLib.inf
   SiliconPolicyInitLib|$(PLATFORM_SI_PACKAGE)/Library/PeiSiliconPolicyInitLibFsp/PeiSiliconPolicyInitLibFsp.inf
   SiliconPolicyUpdateLib|$(PLATFORM_BOARD_PACKAGE)/FspWrapper/Library/PeiSiliconPolicyUpdateLibFsp/PeiSiliconPolicyUpdateLibFsp.inf
 
@@ -109,8 +109,8 @@
 
 # Tbt
 !if gBoardModuleTokenSpaceGuid.PcdTbtEnable == TRUE
-  TbtCommonLib|$(PLATFORM_BOARD_PACKAGE)/Features/Tbt/Library/PeiDxeSmmTbtCommonLib/TbtCommonLib.inf
-  DxeTbtPolicyLib|$(PLATFORM_BOARD_PACKAGE)/Features/Tbt/Library/DxeTbtPolicyLib/DxeTbtPolicyLib.inf
+  TbtCommonLib|ThunderboltPkg/Library/PeiDxeSmmTbtCommonLib/TbtCommonLib.inf
+  DxeTbtPolicyLib|ThunderboltPkg/Library/DxeTbtPolicyLib/DxeTbtPolicyLib.inf
 !endif
 #
 # Silicon Init Package
@@ -121,18 +121,18 @@
   #
   # PEI phase common
   #
-  FspWrapperPlatformLib|$(PLATFORM_PACKAGE)/FspWrapper/Library/PeiFspWrapperPlatformLib/PeiFspWrapperPlatformLib.inf
+  FspWrapperPlatformLib|OpenBoardSupportPkg/FspWrapper/Library/PeiFspWrapperPlatformLib/PeiFspWrapperPlatformLib.inf
 !if $(TARGET) == DEBUG
   TestPointCheckLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointCheckLib/PeiTestPointCheckLib.inf
 !endif
   TestPointLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointLib/PeiTestPointLib.inf
-  MultiBoardInitSupportLib|$(PLATFORM_PACKAGE)/PlatformInit/Library/MultiBoardInitSupportLib/PeiMultiBoardInitSupportLib.inf
-  BoardInitLib|$(PLATFORM_PACKAGE)/PlatformInit/Library/MultiBoardInitSupportLib/PeiMultiBoardInitSupportLib.inf
+  MultiBoardInitSupportLib|OpenBoardSupportPkg/PlatformInit/Library/MultiBoardInitSupportLib/PeiMultiBoardInitSupportLib.inf
+  BoardInitLib|OpenBoardSupportPkg/PlatformInit/Library/MultiBoardInitSupportLib/PeiMultiBoardInitSupportLib.inf
 
 # Tbt
 !if gBoardModuleTokenSpaceGuid.PcdTbtEnable == TRUE
-  PeiTbtPolicyLib|$(PLATFORM_BOARD_PACKAGE)/Features/Tbt/Library/PeiTbtPolicyLib/PeiTbtPolicyLib.inf
-  PeiDTbtInitLib|$(PLATFORM_BOARD_PACKAGE)/Features/Tbt/Library/Private/PeiDTbtInitLib/PeiDTbtInitLib.inf
+  PeiTbtPolicyLib|ThunderboltPkg/Library/PeiTbtPolicyLib/PeiTbtPolicyLib.inf
+  PeiDTbtInitLib|ThunderboltPkg/Library/Private/PeiDTbtInitLib/PeiDTbtInitLib.inf
 !endif
 #
 # Silicon Init Package
@@ -141,21 +141,20 @@
 
 [LibraryClasses.IA32.SEC]
   TestPointCheckLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointCheckLib/SecTestPointCheckLib.inf
-  SecBoardInitLib|$(PLATFORM_PACKAGE)/PlatformInit/Library/SecBoardInitLibNull/SecBoardInitLibNull.inf
 
 [LibraryClasses.X64]
   #
   # DXE phase common
   #
-  FspWrapperPlatformLib|$(PLATFORM_PACKAGE)/FspWrapper/Library/DxeFspWrapperPlatformLib/DxeFspWrapperPlatformLib.inf
+  FspWrapperPlatformLib|OpenBoardSupportPkg/FspWrapper/Library/DxeFspWrapperPlatformLib/DxeFspWrapperPlatformLib.inf
 !if $(TARGET) == DEBUG
   TestPointCheckLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointCheckLib/DxeTestPointCheckLib.inf
 !endif
   TestPointLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointLib/DxeTestPointLib.inf
-  MultiBoardInitSupportLib|$(PLATFORM_PACKAGE)/PlatformInit/Library/MultiBoardInitSupportLib/DxeMultiBoardInitSupportLib.inf
-  BoardInitLib|$(PLATFORM_PACKAGE)/PlatformInit/Library/MultiBoardInitSupportLib/DxeMultiBoardInitSupportLib.inf
-  MultiBoardAcpiSupportLib|$(PLATFORM_PACKAGE)/Acpi/Library/MultiBoardAcpiSupportLib/DxeMultiBoardAcpiSupportLib.inf
-  BoardAcpiTableLib|$(PLATFORM_PACKAGE)/Acpi/Library/MultiBoardAcpiSupportLib/DxeMultiBoardAcpiSupportLib.inf
+  MultiBoardInitSupportLib|OpenBoardSupportPkg/PlatformInit/Library/MultiBoardInitSupportLib/DxeMultiBoardInitSupportLib.inf
+  BoardInitLib|OpenBoardSupportPkg/PlatformInit/Library/MultiBoardInitSupportLib/DxeMultiBoardInitSupportLib.inf
+  MultiBoardAcpiTableSupportLib|OpenBoardSupportPkg/Acpi/Library/MultiBoardAcpiTableSupportLib/DxeMultiBoardAcpiTableSupportLib.inf
+  BoardAcpiTableLib|OpenBoardSupportPkg/Acpi/Library/MultiBoardAcpiTableSupportLib/DxeMultiBoardAcpiTableSupportLib.inf
 
   SiliconPolicyInitLib|$(PLATFORM_SI_PACKAGE)/Library/DxeSiliconPolicyInitLib/DxeSiliconPolicyInitLib.inf
   SiliconPolicyUpdateLib|$(PLATFORM_BOARD_PACKAGE)/Policy/Library/DxeSiliconPolicyUpdateLib/DxeSiliconPolicyUpdateLib.inf
@@ -171,8 +170,8 @@
   TestPointCheckLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointCheckLib/SmmTestPointCheckLib.inf
 !endif
   TestPointLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointLib/SmmTestPointLib.inf
-  MultiBoardAcpiSupportLib|$(PLATFORM_PACKAGE)/Acpi/Library/MultiBoardAcpiSupportLib/SmmMultiBoardAcpiSupportLib.inf
-  BoardAcpiEnableLib|$(PLATFORM_PACKAGE)/Acpi/Library/MultiBoardAcpiSupportLib/SmmMultiBoardAcpiSupportLib.inf
+  MultiBoardAcpiEnableSupportLib|OpenBoardSupportPkg/Acpi/Library/MultiBoardAcpiEnableSupportLib/SmmMultiBoardAcpiEnableSupportLib.inf
+  BoardAcpiEnableLib|OpenBoardSupportPkg/Acpi/Library/MultiBoardAcpiEnableSupportLib/SmmMultiBoardAcpiEnableSupportLib.inf
 
 [LibraryClasses.X64.DXE_RUNTIME_DRIVER]
   ResetSystemLib|$(PLATFORM_SI_PACKAGE)/Pch/Library/DxeRuntimeResetSystemLib/DxeRuntimeResetSystemLib.inf
@@ -211,6 +210,7 @@
       NULL|$(PROJECT)/Library/BoardInitLib/PeiMultiBoardInitPreMemLib.inf
 !endif
   }
+  OpenBoardSupportPkg/PlatformInit/ReportFv/ReportFv.inf
   IntelFsp2WrapperPkg/FspmWrapperPeim/FspmWrapperPeim.inf {
     <LibraryClasses>
       SiliconPolicyInitLib|$(PLATFORM_SI_PACKAGE)/Library/PeiSiliconPolicyInitLibDependency/PeiPreMemSiliconPolicyInitLibDependency.inf
@@ -235,7 +235,7 @@
 # Security
 #
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable == TRUE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdTpm2Enable == TRUE
   $(PLATFORM_PACKAGE)/Tcg/Tcg2PlatformPei/Tcg2PlatformPei.inf
 !endif
 
@@ -244,7 +244,7 @@
 
 # Tbt
 !if gBoardModuleTokenSpaceGuid.PcdTbtEnable == TRUE
-  $(PLATFORM_BOARD_PACKAGE)/Features/Tbt/TbtInit/Pei/PeiTbtInit.inf
+  ThunderboltPkg/TbtInit/Pei/PeiTbtInit.inf
 !endif
 
 [Components.X64]
@@ -271,8 +271,8 @@
 
 # Tbt
 !if gBoardModuleTokenSpaceGuid.PcdTbtEnable == TRUE
-  $(PLATFORM_BOARD_PACKAGE)/Features/Tbt/TbtInit/Smm/TbtSmm.inf
-  $(PLATFORM_BOARD_PACKAGE)/Features/Tbt/TbtInit/Dxe/TbtDxe.inf
+  ThunderboltPkg/TbtInit/Smm/TbtSmm.inf
+  ThunderboltPkg/TbtInit/Dxe/TbtDxe.inf
   $(PLATFORM_BOARD_PACKAGE)/Features/PciHotPlug/PciHotPlug.inf
 !endif
 
@@ -283,7 +283,7 @@
   $(PLATFORM_PACKAGE)/PlatformInit/PlatformInitDxe/PlatformInitDxe.inf
   IntelFsp2WrapperPkg/FspWrapperNotifyDxe/FspWrapperNotifyDxe.inf
 
-  $(PLATFORM_PACKAGE)/FspWrapper/SaveMemoryConfig/SaveMemoryConfig.inf
+  OpenBoardSupportPkg/FspWrapper/SaveMemoryConfig/SaveMemoryConfig.inf
   
   $(PLATFORM_PACKAGE)/Test/TestPointStubDxe/TestPointStubDxe.inf
   $(PLATFORM_PACKAGE)/Test/TestPointDumpApp/TestPointDumpApp.inf
@@ -291,21 +291,14 @@
 #
 # OS Boot
 #
-!if gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly == FALSE
-  $(PLATFORM_PACKAGE)/Acpi/AcpiTables/AcpiPlatform.inf {
-    <LibraryClasses>
-!if gBoardModuleTokenSpaceGuid.PcdMultiBoardSupport == FALSE
-      BoardAcpiTableLib|$(PROJECT)/Library/BoardAcpiLib/DxeBoardAcpiTableLib.inf
-!else
-      NULL|$(PROJECT)/Library/BoardAcpiLib/DxeMultiBoardAcpiSupportLib.inf
-!endif
-  }
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdBootToShellOnly == FALSE
+  $(PLATFORM_PACKAGE)/Acpi/AcpiTables/AcpiPlatform.inf
   $(PLATFORM_BOARD_PACKAGE)/Acpi/BoardAcpiDxe/BoardAcpiDxe.inf {
     <LibraryClasses>
 !if gBoardModuleTokenSpaceGuid.PcdMultiBoardSupport == FALSE
       BoardAcpiTableLib|$(PROJECT)/Library/BoardAcpiLib/DxeBoardAcpiTableLib.inf
 !else
-      NULL|$(PROJECT)/Library/BoardAcpiLib/DxeMultiBoardAcpiSupportLib.inf
+      NULL|$(PROJECT)/Library/BoardAcpiLib/DxeMultiBoardAcpiTableSupportLib.inf
 !endif
   }
   $(PLATFORM_PACKAGE)/Acpi/AcpiSmm/AcpiSmm.inf {
@@ -313,7 +306,7 @@
 !if gBoardModuleTokenSpaceGuid.PcdMultiBoardSupport == FALSE
       BoardAcpiEnableLib|$(PROJECT)/Library/BoardAcpiLib/SmmBoardAcpiEnableLib.inf
 !else
-      NULL|$(PROJECT)/Library/BoardAcpiLib/SmmMultiBoardAcpiSupportLib.inf
+      NULL|$(PROJECT)/Library/BoardAcpiLib/SmmMultiBoardAcpiEnableSupportLib.inf
 !endif
   }
 
@@ -336,7 +329,7 @@
 #
   $(PLATFORM_PACKAGE)/Hsti/HstiIbvPlatformDxe/HstiIbvPlatformDxe.inf
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable == TRUE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdTpm2Enable == TRUE
   $(PLATFORM_PACKAGE)/Tcg/Tcg2PlatformDxe/Tcg2PlatformDxe.inf
 !endif
 

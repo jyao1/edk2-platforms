@@ -1,5 +1,5 @@
 ### @file
-# Component information file for the TBT Init PEI module.
+# Component description file for PEI DTBT Init library.
 #
 # Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
 #
@@ -15,36 +15,34 @@
 
 [Defines]
   INF_VERSION                    = 0x00010017
-  BASE_NAME                      = PeiTbtInit
-  FILE_GUID                      = 90BF2BFB-F998-4cbc-AD72-008D4D047A4B
+  BASE_NAME                      = PeiDTbtInitLib
+  FILE_GUID                      = 06768A8D-8152-403f-83C1-59584FD2B438
   VERSION_STRING                 = 1.0
   MODULE_TYPE                    = PEIM
-  ENTRY_POINT                    = TbtInitEntryPoint
+  LIBRARY_CLASS                  = PeiDTbtInitLib
 
 [LibraryClasses]
-  PeimEntryPoint
-  DebugLib
-  HobLib
   PeiServicesLib
+  DebugLib
+  PcdLib
+  TbtCommonLib
+  PciSegmentLib
   PeiTbtPolicyLib
-  PeiDTbtInitLib
+  PchPmcLib
 
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
   KabylakeOpenBoardPkg/OpenBoardPkg.dec
   KabylakeSiliconPkg/SiPkg.dec
 
-[Sources]
-  PeiTbtInit.c
-
-[Guids]
-  gTbtInfoHobGuid                               ## CONSUMES
-
 [Ppis]
-  gEfiEndOfPeiSignalPpiGuid                     ## CONSUMES
-  gPeiTbtPolicyBoardInitDonePpiGuid             ## CONSUMES
+  gPeiTbtPolicyPpiGuid                          ## CONSUMES
 
-[Depex]
-  gEfiPeiMemoryDiscoveredPpiGuid
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress  ## CONSUMES
+  #gClientCommonModuleTokenSpaceGuid.PcdTbtSupport    ## PRODUCES
+
+[Sources]
+  PeiDTbtInitLib.c

@@ -1,5 +1,4 @@
 ### @file
-# Component description file for PEI DTBT Init library.
 #
 # Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
 #
@@ -15,34 +14,41 @@
 
 [Defines]
   INF_VERSION                    = 0x00010017
-  BASE_NAME                      = PeiDTbtInitLib
-  FILE_GUID                      = 06768A8D-8152-403f-83C1-59584FD2B438
+  BASE_NAME                      = TbtDxe
+  FILE_GUID                      = 19C9762C-3A88-41B0-906F-8C4C2895A887
   VERSION_STRING                 = 1.0
-  MODULE_TYPE                    = PEIM
-  LIBRARY_CLASS                  = PeiDTbtInitLib
+  MODULE_TYPE                    = DXE_DRIVER
+  ENTRY_POINT                    = TbtDxeEntryPoint
 
 [LibraryClasses]
-  PeiServicesLib
   DebugLib
-  PcdLib
+  BaseMemoryLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiDriverEntryPoint
+  HobLib
+  UefiLib
   TbtCommonLib
-  PciSegmentLib
-  PeiTbtPolicyLib
-  PchPmcLib
+  DxeTbtPolicyLib
+  AslUpdateLib
 
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  MinPlatformPkg/MinPlatformPkg.dec
+  MinPlatformModulePkg/MinPlatformModulePkg.dec
   KabylakeOpenBoardPkg/OpenBoardPkg.dec
   KabylakeSiliconPkg/SiPkg.dec
 
-[Ppis]
-  gPeiTbtPolicyPpiGuid                          ## CONSUMES
-
-[Pcd]
-  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress  ## CONSUMES
-  #gClientCommonModuleTokenSpaceGuid.PcdTbtSupport    ## PRODUCES
-
 [Sources]
-  PeiDTbtInitLib.c
+  TbtDxe.c
+
+[Protocols]
+  gTbtNvsAreaProtocolGuid                       ## CONSUMES
+  gDxeTbtPolicyProtocolGuid
+
+[Guids]
+  gTbtInfoHobGuid                               ## CONSUMES
+
+[Depex]
+  gEfiVariableWriteArchProtocolGuid   AND
+  gEfiVariableArchProtocolGuid

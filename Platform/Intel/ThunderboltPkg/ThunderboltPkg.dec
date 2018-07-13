@@ -1,0 +1,31 @@
+## @file
+# This package provides the modules that build for a full feature platform.
+# This IpmiPkg should only depend on EDKII Core packages and MinPlatformPkg.
+#
+# The DEC files are used by the utilities that parse DSC and
+# INF files to generate AutoGen.c and AutoGen.h files
+# for the build infrastructure.
+#
+# Copyright (c) 2017, Intel Corporation. All rights reserved.<BR>
+#
+# This program and the accompanying materials are licensed and made available under
+# the terms and conditions of the BSD License which accompanies this distribution.
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+
+[Defines]
+DEC_SPECIFICATION = 0x00010017
+PACKAGE_NAME      = ThunderboltPkg
+PACKAGE_VERSION   = 0.1
+PACKAGE_GUID      = BE50FEB1-5BB5-483C-85B6-90FCC638D21F
+
+
+[Includes]
+Include
+

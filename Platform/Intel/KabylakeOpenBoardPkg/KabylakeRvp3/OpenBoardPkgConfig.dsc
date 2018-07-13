@@ -21,35 +21,35 @@
   # Stage 4 - boot to OS
   # Stage 5 - boot to OS with security boot enabled
   #
-  gMinPlatformPkgTokenSpaceGuid.PcdBootStage|4
+  gMinPlatformModulePkgTokenSpaceGuid.PcdBootStage|4
   
-  gMinPlatformPkgTokenSpaceGuid.PcdStopAfterDebugInit|FALSE
-  gMinPlatformPkgTokenSpaceGuid.PcdStopAfterMemInit|FALSE
-  gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly|FALSE
-  gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable|FALSE
-  gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable|FALSE
+  gMinPlatformModulePkgTokenSpaceGuid.PcdStopAfterDebugInit|FALSE
+  gMinPlatformModulePkgTokenSpaceGuid.PcdStopAfterMemInit|FALSE
+  gMinPlatformModulePkgTokenSpaceGuid.PcdBootToShellOnly|FALSE
+  gMinPlatformModulePkgTokenSpaceGuid.PcdUefiSecureBootEnable|FALSE
+  gMinPlatformModulePkgTokenSpaceGuid.PcdTpm2Enable|FALSE
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdBootStage >= 1
-  gMinPlatformPkgTokenSpaceGuid.PcdStopAfterDebugInit|TRUE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdBootStage >= 1
+  gMinPlatformModulePkgTokenSpaceGuid.PcdStopAfterDebugInit|TRUE
 !endif
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdBootStage >= 2
-  gMinPlatformPkgTokenSpaceGuid.PcdStopAfterDebugInit|FALSE
-  gMinPlatformPkgTokenSpaceGuid.PcdStopAfterMemInit|TRUE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdBootStage >= 2
+  gMinPlatformModulePkgTokenSpaceGuid.PcdStopAfterDebugInit|FALSE
+  gMinPlatformModulePkgTokenSpaceGuid.PcdStopAfterMemInit|TRUE
 !endif
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdBootStage >= 3
-  gMinPlatformPkgTokenSpaceGuid.PcdStopAfterMemInit|FALSE
-  gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly|TRUE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdBootStage >= 3
+  gMinPlatformModulePkgTokenSpaceGuid.PcdStopAfterMemInit|FALSE
+  gMinPlatformModulePkgTokenSpaceGuid.PcdBootToShellOnly|TRUE
 !endif
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdBootStage >= 4
-  gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly|FALSE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdBootStage >= 4
+  gMinPlatformModulePkgTokenSpaceGuid.PcdBootToShellOnly|FALSE
 !endif
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdBootStage >= 5
-  gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable|TRUE
-  gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable|TRUE
+!if gMinPlatformModulePkgTokenSpaceGuid.PcdBootStage >= 5
+  gMinPlatformModulePkgTokenSpaceGuid.PcdUefiSecureBootEnable|TRUE
+  gMinPlatformModulePkgTokenSpaceGuid.PcdTpm2Enable|TRUE
 !endif
   
   gBoardModuleTokenSpaceGuid.PcdTbtEnable|FALSE
@@ -134,10 +134,10 @@
   !endif
 
   !if $(TARGET) == DEBUG
-    gMinPlatformPkgTokenSpaceGuid.PcdSmiHandlerProfileEnable|TRUE
+    gMinPlatformModulePkgTokenSpaceGuid.PcdSmiHandlerProfileEnable|TRUE
   !else
-    gMinPlatformPkgTokenSpaceGuid.PcdSmiHandlerProfileEnable|FALSE
+    gMinPlatformModulePkgTokenSpaceGuid.PcdSmiHandlerProfileEnable|FALSE
   !endif
 
-    gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable|FALSE
+    gMinPlatformModulePkgTokenSpaceGuid.PcdPerformanceEnable|FALSE
 

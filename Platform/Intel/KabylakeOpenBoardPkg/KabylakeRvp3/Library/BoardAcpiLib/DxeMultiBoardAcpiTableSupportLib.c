@@ -18,7 +18,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #include <Library/BaseLib.h>
 #include <Library/IoLib.h>
 #include <Library/BoardAcpiTableLib.h>
-#include <Library/MultiBoardAcpiSupportLib.h>
+#include <Library/MultiBoardAcpiTableSupportLib.h>
 #include <Library/PcdLib.h>
 #include <Library/DebugLib.h>
 
@@ -37,7 +37,7 @@ BOARD_ACPI_TABLE_FUNC  mKabylakeRvp3BoardAcpiTableFunc = {
 
 EFI_STATUS
 EFIAPI
-DxeKabylakeRvp3MultiBoardAcpiSupportLibConstructor (
+DxeKabylakeRvp3MultiBoardAcpiTableSupportLibConstructor (
   VOID
   )
 {
