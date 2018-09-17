@@ -235,6 +235,10 @@ FvNameGuid         = 862E26CA-FD42-4227-9E48-CC9454F4729C
 
 !include $(PLATFORM_PACKAGE)/Include/Fdf/CorePreMemoryInclude.fdf
 
+FILE FREEFORM = 3c7d193c-682c-4c14-a68f-552dea4f437e {
+  SECTION RAW = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/PEIPcdDataBase.raw
+}
+
 [FV.FvPreMemory]
 BlockSize          = $(FLASH_BLOCK_SIZE)
 FvAlignment        = 16
@@ -376,6 +380,10 @@ READ_LOCK_STATUS   = TRUE
 FvNameGuid         = 05986765-4911-48B8-9D0E-199C85D6E037
 
 !include $(PLATFORM_PACKAGE)/Include/Fdf/CoreUefiBootInclude.fdf
+
+FILE FREEFORM = 3c7d193c-682c-4c14-a68f-552dea4f437e {
+  SECTION RAW = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/DXEPcdDataBase.raw
+}
 
 [FV.FvUefiBootUncompact]
 BlockSize          = $(FLASH_BLOCK_SIZE)
