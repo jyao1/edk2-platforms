@@ -176,6 +176,18 @@
     RAW BIN               |.bmp
   }
 
+[Rule.Common.USER_DEFINED.FVIMAGE]
+  FILE FV_IMAGE = $(NAMED_GUID) {
+    FV_IMAGE FV               |.Fv
+  }
+
+[Rule.Common.USER_DEFINED.FVIMAGELZMA]
+  FILE FV_IMAGE = $(NAMED_GUID) {
+    GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF {
+      FV_IMAGE FV               |.Fv
+    }
+  }
+
 [Rule.Common.PEIM.LzmaCompress]
   FILE PEIM = $(NAMED_GUID) {
      PEI_DEPEX PEI_DEPEX Optional        $(INF_OUTPUT)/$(MODULE_NAME).depex
