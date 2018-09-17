@@ -271,6 +271,7 @@ READ_LOCK_CAP      = TRUE
 READ_LOCK_STATUS   = TRUE
 FvNameGuid         = FC8FE6B5-CD9B-411E-BD8F-31824D0CDE3D
 
+INF $(PLATFORM_PACKAGE)/PlatformInit/SerialPortPei/SerialPortPei.inf
 INF  UefiCpuPkg/SecCore/SecCore.inf
 INF  MdeModulePkg/Core/Pei/PeiMain.inf
 
