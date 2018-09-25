@@ -46,14 +46,20 @@
   gMinPlatformPkgTokenSpaceGuid.PcdFlashAreaSize               ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvFspMBase          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvFspMSize          ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemoryCoreBase          ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemoryCoreSize          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemoryBase          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemorySize          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvFspSBase          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvFspSSize          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvFspUBase          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvFspUSize          ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreBase         ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreSize         ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootBase         ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootSize         ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreBase           ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreSize           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootBase           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootSize           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvSecurityBase           ## CONSUMES

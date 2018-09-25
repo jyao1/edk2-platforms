@@ -575,6 +575,15 @@ ReportPostMemFv (
     /// Prepare the recovery service
     ///
   } else {
+    DEBUG ((DEBUG_INFO, "Install FlashFvPostMemoryCore - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvPostMemoryCoreBase), PcdGet32 (PcdFlashFvPostMemoryCoreSize)));
+    PeiServicesInstallFvInfo2Ppi (
+      &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvPostMemoryCoreBase))->FileSystemGuid),
+      (VOID *) (UINTN) PcdGet32 (PcdFlashFvPostMemoryCoreBase),
+      PcdGet32 (PcdFlashFvPostMemoryCoreSize),
+      NULL,
+      NULL,
+      0
+      );
     DEBUG ((DEBUG_INFO, "Install FlashFvPostMemory - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvPostMemoryBase), PcdGet32 (PcdFlashFvPostMemorySize)));
     PeiServicesInstallFvInfo2Ppi (
       &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvPostMemoryBase))->FileSystemGuid),
@@ -604,11 +613,29 @@ ReportPostMemFv (
         0
         );
     }
+    DEBUG ((DEBUG_INFO, "Install FlashFvUefiBootCore - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvUefiBootCoreBase), PcdGet32 (PcdFlashFvUefiBootCoreSize)));
+    PeiServicesInstallFvInfo2Ppi (
+      &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvUefiBootCoreBase))->FileSystemGuid),
+      (VOID *) (UINTN) PcdGet32 (PcdFlashFvUefiBootCoreBase),
+      PcdGet32 (PcdFlashFvUefiBootCoreSize),
+      NULL,
+      NULL,
+      0
+      );
     DEBUG ((DEBUG_INFO, "Install FlashFvUefiBoot - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvUefiBootBase), PcdGet32 (PcdFlashFvUefiBootSize)));
     PeiServicesInstallFvInfo2Ppi (
       &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvUefiBootBase))->FileSystemGuid),
       (VOID *) (UINTN) PcdGet32 (PcdFlashFvUefiBootBase),
       PcdGet32 (PcdFlashFvUefiBootSize),
+      NULL,
+      NULL,
+      0
+      );
+    DEBUG ((DEBUG_INFO, "Install FlashFvOsBootCore - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvOsBootCoreBase), PcdGet32 (PcdFlashFvOsBootCoreSize)));
+    PeiServicesInstallFvInfo2Ppi (
+      &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvOsBootCoreBase))->FileSystemGuid),
+      (VOID *) (UINTN) PcdGet32 (PcdFlashFvOsBootCoreBase),
+      PcdGet32 (PcdFlashFvOsBootCoreSize),
       NULL,
       NULL,
       0

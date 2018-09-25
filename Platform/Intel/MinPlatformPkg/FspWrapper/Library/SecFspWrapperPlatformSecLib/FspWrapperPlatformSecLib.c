@@ -17,6 +17,7 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #include <Ppi/SecPlatformInformation.h>
 #include <Ppi/SecPerformance.h>
 #include <Ppi/FirmwareVolumeInfo.h>
+#include <Ppi/FirmwareVolumeInfo2.h>
 #include <Ppi/TopOfTemporaryRam.h>
 #include <Guid/FirmwareFileSystem2.h>
 
@@ -71,11 +72,25 @@ PEI_SEC_PERFORMANCE_PPI  mSecPerformancePpi = {
   SecGetPerformance
 };
 
+EFI_PEI_FIRMWARE_VOLUME_INFO2_PPI mFvInfoPpi = {
+  EFI_FIRMWARE_FILE_SYSTEM2_GUID,
+  (VOID *) (UINTN) FixedPcdGet32 (PcdFlashFvPreMemoryCoreBase),
+  FixedPcdGet32 (PcdFlashFvPreMemoryCoreSize),
+  NULL,
+  NULL,
+  0
+};
+
 EFI_PEI_PPI_DESCRIPTOR  mPeiSecPlatformPpi[] = {
   {
     EFI_PEI_PPI_DESCRIPTOR_PPI,
     &gTopOfTemporaryRamPpiGuid,
     NULL // To be patched later.
+  },
+  {
+    EFI_PEI_PPI_DESCRIPTOR_PPI,
+    &gEfiPeiFirmwareVolumeInfo2PpiGuid,
+    &mFvInfoPpi
   },
   {
     EFI_PEI_PPI_DESCRIPTOR_PPI | EFI_PEI_PPI_DESCRIPTOR_TERMINATE_LIST,
