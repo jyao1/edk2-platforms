@@ -464,6 +464,8 @@ FILE FREEFORM = 3c7d193c-682c-4c14-a68f-552dea4f437e {
   SECTION RAW = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/DXEPcdDataBase.raw
 }
 
+INF  MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
+INF  MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
 INF  UefiCpuPkg/CpuDxe/CpuDxe.inf
 INF  MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
 

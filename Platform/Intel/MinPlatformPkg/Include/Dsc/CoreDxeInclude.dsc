@@ -49,7 +49,7 @@
 
   MdeModulePkg/Universal/MonotonicCounterRuntimeDxe/MonotonicCounterRuntimeDxe.inf
 
-  MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
+  #MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   MdeModulePkg/Universal/DriverHealthManagerDxe/DriverHealthManagerDxe.inf
   MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf {
     <LibraryClasses>
@@ -65,7 +65,7 @@
 
   #UefiCpuPkg/CpuDxe/CpuDxe.inf
 
-  MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
+  #MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
   PcAtChipsetPkg/HpetTimerDxe/HpetTimerDxe.inf
 
   #MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
