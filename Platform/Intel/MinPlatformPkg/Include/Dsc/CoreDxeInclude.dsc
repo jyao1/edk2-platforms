@@ -147,6 +147,7 @@
   }
   SecurityPkg/Tcg/Tcg2Smm/Tcg2Smm.inf
   SecurityPkg/Tcg/Tcg2Config/Tcg2ConfigDxe.inf
+  SecurityPkg/Tcg/Tcg2PhysicalPresence/DxeTcg2PhysicalPresence.inf
 !endif
 
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE

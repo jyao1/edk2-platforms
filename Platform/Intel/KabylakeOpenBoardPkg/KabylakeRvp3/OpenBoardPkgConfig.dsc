@@ -29,7 +29,7 @@
   gMinPlatformPkgTokenSpaceGuid.PcdStopAfterMemInit|FALSE
   gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly|FALSE
   gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable|FALSE
-  gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable|FALSE
+  gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable|TRUE
 
 !if gMinPlatformPkgTokenSpaceGuid.PcdBootStage >= 1
   gMinPlatformPkgTokenSpaceGuid.PcdStopAfterDebugInit|TRUE
