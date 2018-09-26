@@ -57,6 +57,8 @@
 # Library Class section - list of all Library Classes needed by this Platform.
 #
 ################################################################################
+[PcdsFixedAtBuild]
+  gMinPlatformPkgTokenSpaceGuid.PcdBootStage|5
 
 [PcdsFeatureFlag]
   gMinPlatformPkgTokenSpaceGuid.PcdSmiHandlerProfileEnable|FALSE
@@ -65,6 +67,10 @@
   gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable|FALSE
   gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly|FALSE
   gAdvancedFeaturePkgTokenSpaceGuid.PcdNetworkEnable|TRUE
+!if gMinPlatformPkgTokenSpaceGuid.PcdBootStage >= 5
+  gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable|TRUE
+  gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable|TRUE
+!endif
 
 !include $(PLATFORM_PACKAGE)/MinCorePcd.dsc
 !include $(PLATFORM_PACKAGE)/Include/Dsc/CoreCommonLib.dsc
