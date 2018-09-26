@@ -649,6 +649,15 @@ ReportPostMemFv (
       NULL,
       0
       );
+    DEBUG ((DEBUG_INFO, "Install FlashFvUefiNetwork - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvUefiNetworkBase), PcdGet32 (PcdFlashFvUefiNetworkSize)));
+    PeiServicesInstallFvInfo2Ppi (
+      &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvUefiNetworkBase))->FileSystemGuid),
+      (VOID *) (UINTN) PcdGet32 (PcdFlashFvUefiNetworkBase),
+      PcdGet32 (PcdFlashFvUefiNetworkSize),
+      NULL,
+      NULL,
+      0
+      );
   }
 
   //

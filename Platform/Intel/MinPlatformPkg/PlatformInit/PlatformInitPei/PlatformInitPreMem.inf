@@ -62,6 +62,8 @@
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreSize           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootBase           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootSize           ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkBase           ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkSize           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvSecurityBase           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvSecuritySize           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvAdvancedBase           ## CONSUMES
