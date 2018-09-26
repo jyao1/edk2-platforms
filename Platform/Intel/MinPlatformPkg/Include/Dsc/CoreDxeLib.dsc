@@ -17,7 +17,7 @@
   #
   # Generic EDKII Lib
   #
-  
+
   #
   # DXE phase common
   #
@@ -29,19 +29,14 @@
   ExtractGuidedSectionLib|MdePkg/Library/DxeExtractGuidedSectionLib/DxeExtractGuidedSectionLib.inf
 
   HstiLib|MdePkg/Library/DxeHstiLib/DxeHstiLib.inf
-  
+
   LockBoxLib|MdeModulePkg/Library/SmmLockBoxLib/SmmLockBoxDxeLib.inf
 
   CpuExceptionHandlerLib|UefiCpuPkg/Library/CpuExceptionHandlerLib/DxeCpuExceptionHandlerLib.inf
 
   MpInitLib|UefiCpuPkg/Library/MpInitLib/DxeMpInitLib.inf
   FrameBufferBltLib|MdeModulePkg/Library/FrameBufferBltLib/FrameBufferBltLib.inf
-  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
 
-!if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
-  PerformanceLib|MdeModulePkg/Library/DxePerformanceLib/DxePerformanceLib.inf
-!endif
-  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
   TpmMeasurementLib|SecurityPkg/Library/DxeTpmMeasurementLib/DxeTpmMeasurementLib.inf
 
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
@@ -57,6 +52,7 @@
   MemoryAllocationLib|MdeModulePkg/Library/DxeCoreMemoryAllocationLib/DxeCoreMemoryAllocationLib.inf
   PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
 
+  TimerLib|MdeModulePkg/Library/DxeTimerLibStall2Timestamp/DxeTimerLibStall2Timestamp.inf
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
   PerformanceLib|MdeModulePkg/Library/DxeCorePerformanceLib/DxeCorePerformanceLib.inf
   TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
@@ -69,10 +65,20 @@
 [LibraryClasses.common.DXE_DRIVER]
   Tpm2DeviceLib|SecurityPkg/Library/Tpm2DeviceLibTcg2/Tpm2DeviceLibTcg2.inf
   PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
+  TimerLib|MdeModulePkg/Library/DxeTimerLibStall2Timestamp/DxeTimerLibStall2Timestamp.inf
+!if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
+  PerformanceLib|MdeModulePkg/Library/DxeCorePerformanceLib/DxeCorePerformanceLib.inf
+  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
+!endif
 
 [LibraryClasses.common.UEFI_DRIVER]
   PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
 #  PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
+  TimerLib|MdeModulePkg/Library/DxeTimerLibStall2Timestamp/DxeTimerLibStall2Timestamp.inf
+!if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
+  PerformanceLib|MdeModulePkg/Library/DxeCorePerformanceLib/DxeCorePerformanceLib.inf
+  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
+!endif
 
 [LibraryClasses.common.DXE_SMM_DRIVER]
   PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
@@ -83,6 +89,7 @@
   SmmMemLib|MdePkg/Library/SmmMemLib/SmmMemLib.inf
   SmmPeriodicSmiLib|MdePkg/Library/SmmPeriodicSmiLib/SmmPeriodicSmiLib.inf
 
+  TimerLib|MdeModulePkg/Library/SmmTimerLibStall2Timestamp/SmmTimerLibStall2Timestamp.inf
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
   PerformanceLib|MdeModulePkg/Library/SmmPerformanceLib/SmmPerformanceLib.inf
   TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
@@ -103,6 +110,7 @@
   ReportStatusCodeLib|MdeModulePkg/Library/SmmReportStatusCodeLib/SmmReportStatusCodeLib.inf
   SmmMemLib|MdePkg/Library/SmmMemLib/SmmMemLib.inf
 
+  TimerLib|MdeModulePkg/Library/SmmTimerLibStall2Timestamp/SmmTimerLibStall2Timestamp.inf
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
   PerformanceLib|MdeModulePkg/Library/SmmCorePerformanceLib/SmmCorePerformanceLib.inf
   TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
@@ -115,6 +123,7 @@
 [LibraryClasses.common.DXE_RUNTIME_DRIVER]
   PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
   ReportStatusCodeLib|MdeModulePkg/Library/RuntimeDxeReportStatusCodeLib/RuntimeDxeReportStatusCodeLib.inf
+  TimerLib|MdeModulePkg/Library/DxeTimerLibStall2Timestamp/DxeTimerLibStall2Timestamp.inf
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
   PerformanceLib|MdeModulePkg/Library/DxePerformanceLib/DxePerformanceLib.inf
   TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
@@ -131,6 +140,7 @@
   FileHandleLib|MdePkg/Library/UefiFileHandleLib/UefiFileHandleLib.inf
   SortLib|MdeModulePkg/Library/UefiSortLib/UefiSortLib.inf
 
+  TimerLib|MdeModulePkg/Library/DxeTimerLibStall2Timestamp/DxeTimerLibStall2Timestamp.inf
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
   PerformanceLib|MdeModulePkg/Library/DxePerformanceLib/DxePerformanceLib.inf
   TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf

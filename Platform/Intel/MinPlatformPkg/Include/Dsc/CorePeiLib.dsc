@@ -16,11 +16,11 @@
   #
   # Generic EDKII Lib
   #
-  
+
   #
   # PEI phase common
   #
-  
+
 [LibraryClasses.common.SEC,LibraryClasses.common.PEI_CORE,LibraryClasses.common.PEIM]
   S3BootScriptLib|MdePkg/Library/BaseS3BootScriptLibNull/BaseS3BootScriptLibNull.inf
   PcdLib|MdePkg/Library/PeiPcdLib/PeiPcdLib.inf
@@ -36,8 +36,6 @@
   PerformanceLib|MdeModulePkg/Library/PeiPerformanceLib/PeiPerformanceLib.inf
 !endif
 
-  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/BaseAcpiTimerLib.inf
-
 [LibraryClasses.common.SEC]
   ReportStatusCodeLib|MdePkg/Library/BaseReportStatusCodeLibNull/BaseReportStatusCodeLibNull.inf
   CpuExceptionHandlerLib|UefiCpuPkg/Library/CpuExceptionHandlerLib/SecPeiCpuExceptionHandlerLib.inf
@@ -45,21 +43,22 @@
   DebugLib|MdePkg/Library/BaseDebugLibSerialPort/BaseDebugLibSerialPort.inf
 !endif
   PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
+  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/BaseAcpiTimerLib.inf
 
 [LibraryClasses.common.PEI_CORE]
-  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/PeiAcpiTimerLib.inf
   CpuExceptionHandlerLib|UefiCpuPkg/Library/CpuExceptionHandlerLib/SecPeiCpuExceptionHandlerLib.inf
 !if $(TARGET) == DEBUG
   DebugLib|MdePkg/Library/BaseDebugLibSerialPort/BaseDebugLibSerialPort.inf
 !endif
 
+  TimerLib|MdeModulePkg/Library/PeiTimerLibStall2Timestamp/PeiTimerLibStall2Timestamp.inf
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
   PerformanceLib|MdeModulePkg/Library/PeiPerformanceLib/PeiPerformanceLib.inf
+  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/PeiAcpiTimerLib.inf
 !endif
-  
+
 [LibraryClasses.common.PEIM]
   CpuExceptionHandlerLib|UefiCpuPkg/Library/CpuExceptionHandlerLib/SecPeiCpuExceptionHandlerLib.inf
-  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/PeiAcpiTimerLib.inf
 
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/PeiCryptLib.inf
 
@@ -67,6 +66,8 @@
   HashLib|SecurityPkg/Library/HashLibBaseCryptoRouter/HashLibBaseCryptoRouterPei.inf
   Tcg2PhysicalPresenceLib|SecurityPkg/Library/PeiTcg2PhysicalPresenceLib/PeiTcg2PhysicalPresenceLib.inf
 
+  TimerLib|MdeModulePkg/Library/PeiTimerLibStall2Timestamp/PeiTimerLibStall2Timestamp.inf
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE
   PerformanceLib|MdeModulePkg/Library/PeiPerformanceLib/PeiPerformanceLib.inf
+  TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/PeiAcpiTimerLib.inf
 !endif

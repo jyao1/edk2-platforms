@@ -191,7 +191,12 @@
       #PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
       PcdLib|MdePkg/Library/PeiPcdLib/PeiPcdLib.inf
   }
-  
+
+  MdeModulePkg/Universal/TimestampPei/TimestampPei.inf {
+    <LibraryClasses>
+      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/PeiAcpiTimerLib.inf
+  }
+
 #
 # Silicon
 #
@@ -256,7 +261,16 @@
 # Common
 #
 !include $(PLATFORM_PACKAGE)/Include/Dsc/CoreDxeInclude.dsc
-  
+
+  MdeModulePkg/Universal/TimestampDxe/TimestampDxe.inf {
+    <LibraryClasses>
+      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
+  }
+  MdeModulePkg/Universal/TimestampSmm/TimestampSmm.inf {
+    <LibraryClasses>
+      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
+  }
+
   MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
   UefiCpuPkg/CpuDxe/CpuDxe.inf
