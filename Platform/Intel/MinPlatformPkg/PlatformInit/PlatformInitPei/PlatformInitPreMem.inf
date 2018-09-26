@@ -39,6 +39,7 @@
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
   UefiCpuPkg/UefiCpuPkg.dec
+  AdvancedFeaturePkg/AdvancedFeaturePkg.dec
 
 [Pcd]
   gMinPlatformPkgTokenSpaceGuid.PcdFspWrapperBootMode
