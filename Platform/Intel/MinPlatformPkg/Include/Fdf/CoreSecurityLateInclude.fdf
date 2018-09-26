@@ -15,6 +15,7 @@
 
 !if gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable == TRUE
 INF  SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
+INF SecurityPkg/SecurityArchServices/DxeImageVerification/DxeImageVerification.inf
 !endif
 
 !if gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable == TRUE
@@ -23,4 +24,5 @@ INF  SecurityPkg/Tcg/Tcg2Dxe/Tcg2Dxe.inf
 INF  SecurityPkg/Tcg/Tcg2Smm/Tcg2Smm.inf
 INF  SecurityPkg/Tcg/Tcg2Config/Tcg2ConfigDxe.inf
 INF  SecurityPkg/Tcg/Tcg2PhysicalPresence/DxeTcg2PhysicalPresence.inf
+INF  SecurityPkg/SecurityArchServices/DxeTpm2MeasureBoot/DxeTpm2MeasureBoot.inf
 !endif

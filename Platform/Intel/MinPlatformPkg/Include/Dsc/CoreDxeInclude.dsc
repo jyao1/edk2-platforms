@@ -51,15 +51,18 @@
 
   #MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   MdeModulePkg/Universal/DriverHealthManagerDxe/DriverHealthManagerDxe.inf
-  MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf {
-    <LibraryClasses>
+  
 !if gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable == TRUE
-      NULL|SecurityPkg/Library/DxeImageVerificationLib/DxeImageVerificationLib.inf
+  SecurityPkg/SecurityArchServices/DxeImageVerification/DxeImageVerification.inf
 !endif
+
 !if gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable == TRUE
-      NULL|SecurityPkg/Library/DxeTpm2MeasureBootLib/DxeTpm2MeasureBootLib.inf
+  SecurityPkg/SecurityArchServices/DxeTpm2MeasureBoot/DxeTpm2MeasureBoot.inf
 !endif
-  }
+  SecurityPkg/SecurityArchServices/DxeDeferImageLoad/DxeDeferImageLoad.inf
+  SecurityPkg/SecurityArchServices/DxeImageAuthenticationStatus/DxeImageAuthenticationStatus.inf
+
+  MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
 
   MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
 
