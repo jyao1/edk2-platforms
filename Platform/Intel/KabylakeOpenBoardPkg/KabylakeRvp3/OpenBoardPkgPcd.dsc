@@ -192,6 +192,21 @@ gSiPkgTokenSpaceGuid.PcdTsegSize|0x800000
   gMinPlatformPkgTokenSpaceGuid.PcdTestPointIbvPlatformFeature|{0x03, 0x0F, 0x07, 0x1F, 0x1F, 0x0F, 0x0F, 0x07, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 !endif
 
+  #
+  # Explicitly declare these PCDs to FixedAtBuild for them used to initiate
+  # other PCDs.
+  # BaseTools should set value to these PCDs from OpenBaordPkg.fdf and use
+  # the value to initiate other PCDs, but BaseTools has bug for this.
+  # So we need set value to these PCDs to match with FlashMapInclude.fdf by
+  # ourselves.
+  #
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableBase|0xFF800000
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableSize|0x0001E000
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase|0xFF820000
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize|0x00020000
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase|0xFF81E000
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize|0x00002000
+
 [PcdsFixedAtBuild.IA32]
   gEfiMdeModulePkgTokenSpaceGuid.PcdVpdBaseAddress|0x0
   gIntelFsp2PkgTokenSpaceGuid.PcdGlobalDataPointerAddress|0xFED00148
@@ -281,3 +296,10 @@ gBoardModuleTokenSpaceGuid.PcdDTbtPciePMemRsvd | 100
 gBoardModuleTokenSpaceGuid.PcdDTbtPciePMemAddrRngMax | 28
 gBoardModuleTokenSpaceGuid.PcdPchPcieRootPortHpe| 0x00000001
 
+[PcdsDynamicExDefault]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableBase
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableSize|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableSize
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize

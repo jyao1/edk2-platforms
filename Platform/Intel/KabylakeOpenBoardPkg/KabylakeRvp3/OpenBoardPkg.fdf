@@ -77,8 +77,8 @@ SET gMinPlatformPkgTokenSpaceGuid.PcdFlashAreaSize           = gSiPkgTokenSpaceG
 # Fv Size can be adjusted
 #
 ################################################################################
-gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableOffset|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableSize
-gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageVariableSize
 #NV_VARIABLE_STORE
 DATA = {
   ## This is the EFI_FIRMWARE_VOLUME_HEADER
@@ -118,8 +118,8 @@ DATA = {
   0x5A, 0xFE, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 }
 
-gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingOffset|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize
-gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize
 #NV_FTW_WORKING
 DATA = {
   # EFI_FAULT_TOLERANT_WORKING_BLOCK_HEADER->Signature = gEdkiiWorkingBlockSignatureGuid         =
@@ -132,8 +132,8 @@ DATA = {
   0xE0, 0x1F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 }
 
-gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareOffset|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize
-gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase|gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize
 #NV_FTW_SPARE
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvAdvancedOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvAdvancedSize
