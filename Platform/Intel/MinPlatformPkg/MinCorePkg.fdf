@@ -103,4 +103,29 @@ FvNameGuid         = 252BFC3B-A9AB-42FC-84C6-2DB0720B22F2
 
 !include $(PLATFORM_PACKAGE)/Include/Fdf/CoreOsBootInclude.fdf
 
+[FV.FvUefiNetworkUncompact]
+BlockSize          = $(FLASH_BLOCK_SIZE)
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+FvNameGuid         = 299DAD7D-40E6-4B9C-A967-EFBE66256238
+
+!include $(PLATFORM_PACKAGE)/Include/Fdf/CoreFeatureNetworkInclude.fdf
+
+
+
+# Build Rule
 !include $(PLATFORM_PACKAGE)/Include/Fdf/RuleInclude.fdf

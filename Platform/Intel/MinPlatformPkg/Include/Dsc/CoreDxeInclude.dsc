@@ -26,7 +26,10 @@
       PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
   }
 
-  MdeModulePkg/Universal/TimestampDxe/TimestampDxe.inf
+  MdeModulePkg/Universal/TimestampDxe/TimestampDxe.inf {
+    <LibraryClasses>
+      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
+  }
   MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf
   MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
 
@@ -126,7 +129,10 @@
 
   MdeModulePkg/Universal/ReportStatusCodeRouter/Smm/ReportStatusCodeRouterSmm.inf
   MdeModulePkg/Universal/StatusCodeHandler/Smm/StatusCodeHandlerSmm.inf
-  MdeModulePkg/Universal/TimestampSmm/TimestampSmm.inf
+  MdeModulePkg/Universal/TimestampSmm/TimestampSmm.inf  {
+    <LibraryClasses>
+      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
+  }
   UefiCpuPkg/PiSmmCpuDxeSmm/PiSmmCpuDxeSmm.inf {
     <LibraryClasses>
       TimerLib|MdeModulePkg/Library/SmmTimerLibStall2Timestamp/SmmTimerLibStall2Timestamp.inf
@@ -166,3 +172,35 @@
   ShellPkg/DynamicCommand/DpDynamicCommand/DpDynamicCommand.inf
 !endif
 
+
+  #
+  # UEFI network modules
+  #
+!if gAdvancedFeaturePkgTokenSpaceGuid.PcdNetworkEnable == TRUE
+  MdeModulePkg/Universal/Network/DpcDxe/DpcDxe.inf
+  MdeModulePkg/Universal/Network/SnpDxe/SnpDxe.inf
+  MdeModulePkg/Universal/Network/MnpDxe/MnpDxe.inf
+  MdeModulePkg/Universal/Network/VlanConfigDxe/VlanConfigDxe.inf
+  MdeModulePkg/Universal/Network/ArpDxe/ArpDxe.inf
+  MdeModulePkg/Universal/Network/Dhcp4Dxe/Dhcp4Dxe.inf
+  MdeModulePkg/Universal/Network/Ip4Dxe/Ip4Dxe.inf
+  MdeModulePkg/Universal/Network/Mtftp4Dxe/Mtftp4Dxe.inf
+  MdeModulePkg/Universal/Network/Tcp4Dxe/Tcp4Dxe.inf
+  MdeModulePkg/Universal/Network/Udp4Dxe/Udp4Dxe.inf
+  MdeModulePkg/Universal/Network/IScsiDxe/IScsiDxe.inf
+  #MdeModulePkg/Universal/Network/UefiPxeBcDxe/UefiPxeBcDxe.inf
+
+  NetworkPkg/Ip6Dxe/Ip6Dxe.inf
+  NetworkPkg/TcpDxe/TcpDxe.inf
+  NetworkPkg/Udp6Dxe/Udp6Dxe.inf
+  NetworkPkg/Dhcp6Dxe/Dhcp6Dxe.inf
+  NetworkPkg/Mtftp6Dxe/Mtftp6Dxe.inf
+
+  NetworkPkg/DnsDxe/DnsDxe.inf
+  NetworkPkg/HttpDxe/HttpDxe.inf
+  NetworkPkg/HttpUtilitiesDxe/HttpUtilitiesDxe.inf
+  NetworkPkg/HttpBootDxe/HttpBootDxe.inf
+
+  #NetworkPkg/IScsiDxe/IScsiDxe.inf
+  NetworkPkg/UefiPxeBcDxe/UefiPxeBcDxe.inf
+!endif

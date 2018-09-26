@@ -64,6 +64,7 @@
   gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable|FALSE
   gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable|FALSE
   gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly|FALSE
+  gAdvancedFeaturePkgTokenSpaceGuid.PcdNetworkEnable|TRUE
 
 !include $(PLATFORM_PACKAGE)/MinCorePcd.dsc
 !include $(PLATFORM_PACKAGE)/Include/Dsc/CoreCommonLib.dsc
