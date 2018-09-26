@@ -273,7 +273,6 @@
 
   MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
-  UefiCpuPkg/CpuDxe/CpuDxe.inf
   MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
 
   MdeModulePkg/Bus/Pci/SataControllerDxe/SataControllerDxe.inf
@@ -338,15 +337,8 @@
 
   $(PLATFORM_PACKAGE)/Flash/SpiFvbService/SpiFvbServiceSmm.inf
   $(PLATFORM_PACKAGE)/PlatformInit/PlatformInitSmm/PlatformInitSmm.inf
-
-  UefiCpuPkg/PiSmmCpuDxeSmm/PiSmmCpuDxeSmm.inf {
-    <PcdsPatchableInModule>
-      gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x80080046
-    <LibraryClasses>
-!if $(TARGET) == DEBUG
-      DebugLib|MdePkg/Library/BaseDebugLibSerialPort/BaseDebugLibSerialPort.inf
-!endif
-  }
+  UefiCpuPkg/CpuFeaturesSmm/CpuFeaturesSmm.inf
+  UefiCpuPkg/CpuPlatformHookSmm/CpuPlatformHookSmm.inf
 
 !endif
 

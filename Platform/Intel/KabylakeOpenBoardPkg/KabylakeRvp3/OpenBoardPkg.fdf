@@ -474,7 +474,6 @@ FILE FREEFORM = 3c7d193c-682c-4c14-a68f-552dea4f437e {
 
 INF  MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
 INF  MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
-INF  UefiCpuPkg/CpuDxe/CpuDxe.inf
 INF  MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
 
 INF  MdeModulePkg/Bus/Pci/SataControllerDxe/SataControllerDxe.inf
@@ -583,8 +582,6 @@ READ_LOCK_CAP      = TRUE
 READ_LOCK_STATUS   = TRUE
 FvNameGuid         = A0F04529-B715-44C6-BCA4-2DEBDD01EEEC
 
-INF  UefiCpuPkg/PiSmmCpuDxeSmm/PiSmmCpuDxeSmm.inf
-
 !if gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly == FALSE
 INF  $(PLATFORM_PACKAGE)/PlatformInit/SiliconPolicyDxe/SiliconPolicyDxe.inf
 INF  $(PLATFORM_PACKAGE)/PlatformInit/PlatformInitSmm/PlatformInitSmm.inf
@@ -596,6 +593,8 @@ INF  $(PLATFORM_PACKAGE)/Acpi/AcpiSmm/AcpiSmm.inf
 INF  RuleOverride = DRIVER_ACPITABLE $(PLATFORM_BOARD_PACKAGE)/Acpi/BoardAcpiDxe/BoardAcpiDxe.inf
 
 INF  $(PLATFORM_PACKAGE)/FspWrapper/SaveMemoryConfig/SaveMemoryConfig.inf
+INF  UefiCpuPkg/CpuFeaturesSmm/CpuFeaturesSmm.inf
+INF  UefiCpuPkg/CpuPlatformHookSmm/CpuPlatformHookSmm.inf
 
 !endif
 
