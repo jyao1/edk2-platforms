@@ -49,4 +49,27 @@ popd
 
 call build -p MinPlatformPkg\MinCorePkg.dsc -a IA32 -a X64 -t VS2015x86 -y Report.txt
 
+if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG (
+  mkdir %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG
+)
+
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVPREMEMORYCORE.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\ /Y
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVPREMEMORYCORE.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\FVPREMEMORYCORE.inf /Y
+
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVPOSTMEMORYCORE.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\ /Y
+
+
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVUEFIBOOTCORE.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\ /Y
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVUEFIBOOTCOREUNCOMPACT.inf %WORKSPACE%\edk2\CoreFvBin\Core\DEBUG\FVUEFIBOOTCORE.inf /Y
+
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVOSBOOTCORE.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\ /Y
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVOSBOOTCOREUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\FVOSBOOTCORE.inf /Y
+
+if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Network\DEBUG (
+  mkdir %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Network\DEBUG
+)
+
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVUEFINETWORK.Fv %WORKSPACE%\edk2\CoreFvBin\Network\DEBUG\ /Y
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVUEFINETWORKUNCOMPACT.inf %WORKSPACE%\edk2\CoreFvBin\Network\DEBUG\FVUEFINETWORK.inf /Y
+
 goto :EOF
