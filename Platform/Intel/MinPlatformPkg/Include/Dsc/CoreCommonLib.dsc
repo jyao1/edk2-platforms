@@ -136,7 +136,7 @@
 
   TpmMeasurementLib|MdeModulePkg/Library/TpmMeasurementLibNull/TpmMeasurementLibNull.inf
   VarCheckLib|MdeModulePkg/Library/VarCheckLib/VarCheckLib.inf
-  PlatformSecureLib|SecurityPkg/Library/PlatformSecureLibNull/PlatformSecureLibNull.inf
+  PlatformSecureLib|SecurityPkg/Library/PlatformSecureLib/PlatformSecureLib.inf
   AuthVariableLib|MdeModulePkg/Library/AuthVariableLibNull/AuthVariableLibNull.inf
   
 !if gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable == TRUE
