@@ -185,9 +185,9 @@
   MdeModulePkg/Universal/Network/Dhcp4Dxe/Dhcp4Dxe.inf
   MdeModulePkg/Universal/Network/Ip4Dxe/Ip4Dxe.inf
   MdeModulePkg/Universal/Network/Mtftp4Dxe/Mtftp4Dxe.inf
-  MdeModulePkg/Universal/Network/Tcp4Dxe/Tcp4Dxe.inf
+  #MdeModulePkg/Universal/Network/Tcp4Dxe/Tcp4Dxe.inf
   MdeModulePkg/Universal/Network/Udp4Dxe/Udp4Dxe.inf
-  MdeModulePkg/Universal/Network/IScsiDxe/IScsiDxe.inf
+  #MdeModulePkg/Universal/Network/IScsiDxe/IScsiDxe.inf
   #MdeModulePkg/Universal/Network/UefiPxeBcDxe/UefiPxeBcDxe.inf
 
   NetworkPkg/Ip6Dxe/Ip6Dxe.inf
@@ -201,6 +201,6 @@
   NetworkPkg/HttpUtilitiesDxe/HttpUtilitiesDxe.inf
   NetworkPkg/HttpBootDxe/HttpBootDxe.inf
 
-  #NetworkPkg/IScsiDxe/IScsiDxe.inf
+  NetworkPkg/IScsiDxe/IScsiDxe.inf
   NetworkPkg/UefiPxeBcDxe/UefiPxeBcDxe.inf
 !endif
