@@ -262,6 +262,15 @@
 #
 !include $(PLATFORM_PACKAGE)/Include/Dsc/CoreDxeInclude.dsc
 
+  MdeModulePkg/Universal/TimestampDxe/TimestampDxe.inf {
+    <LibraryClasses>
+      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
+  }
+  MdeModulePkg/Universal/TimestampSmm/TimestampSmm.inf {
+    <LibraryClasses>
+      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
+  }
+
   MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
   MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
   MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf

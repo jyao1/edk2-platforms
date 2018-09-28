@@ -35,7 +35,6 @@ INF  MdeModulePkg/Universal/MonotonicCounterRuntimeDxe/MonotonicCounterRuntimeDx
 INF  MdeModulePkg/Universal/DriverHealthManagerDxe/DriverHealthManagerDxe.inf
 INF  MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
 INF  MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
-INF  MdeModulePkg/Universal/TimestampDxe/TimestampDxe.inf
 
 INF  UefiCpuPkg/CpuDxe/CpuDxe.inf
 

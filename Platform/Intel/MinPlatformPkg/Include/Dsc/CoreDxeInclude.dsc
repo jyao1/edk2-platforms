@@ -26,10 +26,6 @@
       PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
   }
 
-  MdeModulePkg/Universal/TimestampDxe/TimestampDxe.inf {
-    <LibraryClasses>
-      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
-  }
   MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf
   MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf
 
@@ -129,10 +125,6 @@
 
   MdeModulePkg/Universal/ReportStatusCodeRouter/Smm/ReportStatusCodeRouterSmm.inf
   MdeModulePkg/Universal/StatusCodeHandler/Smm/StatusCodeHandlerSmm.inf
-  MdeModulePkg/Universal/TimestampSmm/TimestampSmm.inf  {
-    <LibraryClasses>
-      TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
-  }
   UefiCpuPkg/PiSmmCpuDxeSmm/PiSmmCpuDxeSmm.inf {
     <LibraryClasses>
       TimerLib|MdeModulePkg/Library/SmmTimerLibStall2Timestamp/SmmTimerLibStall2Timestamp.inf
