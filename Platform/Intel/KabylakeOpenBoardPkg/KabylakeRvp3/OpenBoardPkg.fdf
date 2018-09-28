@@ -146,11 +146,13 @@ FV = FvSecurity
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgSize
-FV = FvTcg
+#FV = FvTcg
+INF USE=IA32 CoreFvBin\Tcg\$(TARGET)\FVTCG.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootSize
-FV = FvUefiSecureBoot
+#FV = FvUefiSecureBoot
+INF USE=IA32 CoreFvBin\UefiSecureBoot\$(TARGET)\FVUEFISECUREBOOT.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootSize
@@ -158,7 +160,8 @@ FV = FvOsBoot
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreSize
-FV = FvOsBootCore
+#FV = FvOsBootCore
+INF USE=IA32 CoreFvBin\Core\$(TARGET)\FVOSBOOTCORE.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootSize
@@ -166,11 +169,13 @@ FV = FvUefiBoot
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreSize
-FV = FvUefiBootCore
+#FV = FvUefiBootCore
+INF USE=IA32 CoreFvBin\Core\$(TARGET)\FVUEFIBOOTCORE.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkSize
-FV = FvUefiNetwork
+#FV = FvUefiNetwork
+INF USE=IA32 CoreFvBin\Network\$(TARGET)\FVUEFINETWORK.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemoryOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemorySize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemoryBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemorySize
@@ -202,7 +207,8 @@ FILE = $(PLATFORM_FSP_BIN_PACKAGE)/Fsp_Rebased_T.fd
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreSize
-FV = FvPreMemoryCore
+#FV = FvPreMemoryCore
+INF USE=IA32 CoreFvBin\Core\$(TARGET)\FVPREMEMORYCORE.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemorySize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemorySize
@@ -240,28 +246,6 @@ READ_LOCK_STATUS   = TRUE
 FILE RAW = 197DB236-F856-4924-90F8-CDF12FB875F3 {
   $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/X64/MicrocodeUpdates.bin
 }
-
-[FV.FvPreMemoryCore]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 862E26CA-FD42-4227-9E48-CC9454F4729C
-
-!include $(PLATFORM_PACKAGE)/Include/Fdf/CorePreMemoryInclude.fdf
 
 [FV.FvPreMemory]
 BlockSize          = $(FLASH_BLOCK_SIZE)
@@ -356,54 +340,6 @@ FILE FV_IMAGE = 244FAAF4-FAE1-4892-8B7D-7EF84CBFA709 {
       }
 }
 
-[FV.FvUefiBootCoreUncompact]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 05986765-4911-48B8-9D0E-199C85D6E037
-
-!include $(PLATFORM_PACKAGE)/Include/Fdf/CoreUefiBootInclude.fdf
-
-[FV.FvUefiBootCore]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = B3D1F6F2-AC1B-4B76-BA3B-6678C6044D45
-
-FILE FV_IMAGE = 1A56268A-2EA4-42D8-8E58-999C5945CA0D {
-       SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
-         SECTION FV_IMAGE = FvUefiBootCoreUncompact
-       }
-     }
-
 [FV.FvUefiBootUncompact]
 BlockSize          = $(FLASH_BLOCK_SIZE)
 FvAlignment        = 16
@@ -470,54 +406,6 @@ FvNameGuid         = 0496D33D-EA79-495C-B65D-ABF607184E3B
 FILE FV_IMAGE = 9E21FD93-9C72-4c15-8C4B-E77F1DB2D792 {
        SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
          SECTION FV_IMAGE = FvUefiBootUncompact
-       }
-     }
-
-[FV.FvOsBootCoreUncompact]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 252BFC3B-A9AB-42FC-84C6-2DB0720B22F2
-
-!include $(PLATFORM_PACKAGE)/Include/Fdf/CoreOsBootInclude.fdf
-
-[FV.FvOsBootCore]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = F7543F65-14A9-4C94-84F0-E9641E0C7C3F
-
-FILE FV_IMAGE = 20E26E61-5DF2-4911-A3F2-539737ED0024 {
-       SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
-         SECTION FV_IMAGE = FvOsBootCoreUncompact
        }
      }
 
@@ -622,156 +510,6 @@ FILE FV_IMAGE = B9020753-84A8-4BB6-947C-CE7D41F5CE39 {
 FILE FV_IMAGE = D4632741-510C-44E3-BE21-C3D6D7881485 {
        SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
          SECTION FV_IMAGE = FvLateSilicon
-       }
-     }
-
-[FV.FvUefiSecureBootUncompact]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 3CD8254C-FB43-4468-8B0E-AB24459E958E
-
-!include $(PLATFORM_PACKAGE)/Include/Fdf/CoreFeatureSecureBootInclude.fdf
-
-[FV.FvUefiSecureBoot]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 86F4022D-0468-4501-BEDA-0D0CF3368A49
-
-FILE FV_IMAGE = EEA29E99-8A54-42a5-9702-459E00D2075B {
-       SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
-         SECTION FV_IMAGE = FvUefiSecureBootUncompact
-       }
-     }
-
-[FV.FvTcgPei]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 654A6DA5-4B15-40c6-BAE9-878C5F706D6B
-
-!include $(PLATFORM_PACKAGE)/Include/Fdf/CoreFeatureTcgPeiInclude.fdf
-
-[FV.FvTcgDxeUncompact]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 89E30CF6-B443-4d65-B133-CFEBE51F262B
-
-!include $(PLATFORM_PACKAGE)/Include/Fdf/CoreFeatureTcgDxeInclude.fdf
-
-[FV.FvTcgDxe]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 6825B18A-5E05-4d6a-8D35-4FB4F949324A
-
-FILE FV_IMAGE = EC8AC025-D57F-437d-93D7-E0F231001CAD {
-       SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
-         SECTION FV_IMAGE = FvTcgDxeUncompact
-       }
-     }
-
-[FV.FvTcg]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = DA81DDD2-78B6-443c-A76D-B12E1728B5A1
-
-FILE FV_IMAGE = 60262FEB-FF9F-49ca-9266-F2E310642795 {
-       SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
-         SECTION FV_IMAGE = FvTcgPei
-       }
-     }
-
-FILE FV_IMAGE = A100865C-776C-4ec4-B0FC-4CB256122F52 {
-       SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
-         SECTION FV_IMAGE = FvTcgDxe
        }
      }
 
@@ -997,30 +735,6 @@ FILE FV_IMAGE = 5248467B-B87B-4E74-AC02-398AF4BCB712 {
          SECTION FV_IMAGE = FvAdvancedLate
        }
      }
-
-[FV.FvUefiNetwork]
-BlockSize          = $(FLASH_BLOCK_SIZE)
-FvAlignment        = 16
-ERASE_POLARITY     = 1
-MEMORY_MAPPED      = TRUE
-STICKY_WRITE       = TRUE
-LOCK_CAP           = TRUE
-LOCK_STATUS        = TRUE
-WRITE_DISABLED_CAP = TRUE
-WRITE_ENABLED_CAP  = TRUE
-WRITE_STATUS       = TRUE
-WRITE_LOCK_CAP     = TRUE
-WRITE_LOCK_STATUS  = TRUE
-READ_DISABLED_CAP  = TRUE
-READ_ENABLED_CAP   = TRUE
-READ_STATUS        = TRUE
-READ_LOCK_CAP      = TRUE
-READ_LOCK_STATUS   = TRUE
-FvNameGuid         = 8b3c9aa1-1c5f-4f86-8a56-eb6b15d38f2e
-
-FILE RAW = 197DB236-F856-4924-90F8-CDF12FB875F3 {
-  CoreFvBin/Network/$(TARGET)/FVUEFINETWORK.Fv
-}
 
 ################################################################################
 #

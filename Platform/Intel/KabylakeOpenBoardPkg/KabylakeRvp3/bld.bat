@@ -27,6 +27,48 @@
 cd %WORKSPACE%
 
 @REM
+@REM Build CORE FV Binary
+@REM
+call build -p MinPlatformPkg\MinCorePkg.dsc
+
+set CORE_FV_DIR=%WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin
+set FV_BUILD_DIR=%WORKSPACE%\Build\MinCorePkg\%TARGET%_%TOOL_CHAIN_TAG%\FV
+
+if not exist %CORE_FV_DIR%\Core\DEBUG (
+  mkdir %CORE_FV_DIR%\Core\DEBUG
+)
+
+copy %FV_BUILD_DIR%\FVPREMEMORYCORE.Fv %CORE_FV_DIR%\Core\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVPREMEMORYCORE.inf %CORE_FV_DIR%\Core\DEBUG\FVPREMEMORYCORE.inf /Y
+
+copy %FV_BUILD_DIR%\FVUEFIBOOTCORE.Fv %CORE_FV_DIR%\Core\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVUEFIBOOTCORE.inf %CORE_FV_DIR%\Core\DEBUG\FVUEFIBOOTCORE.inf /Y
+
+copy %FV_BUILD_DIR%\FVOSBOOTCORE.Fv %CORE_FV_DIR%\Core\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVOSBOOTCORE.inf %CORE_FV_DIR%\Core\DEBUG\FVOSBOOTCORE.inf /Y
+
+if not exist %CORE_FV_DIR%\UefiSecureBoot\DEBUG (
+  mkdir %CORE_FV_DIR%\UefiSecureBoot\DEBUG
+)
+
+copy %FV_BUILD_DIR%\FVUEFISECUREBOOT.Fv %CORE_FV_DIR%\UefiSecureBoot\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVUEFISECUREBOOT.inf %CORE_FV_DIR%\UefiSecureBoot\DEBUG\FVUEFISECUREBOOT.inf /Y
+
+if not exist %CORE_FV_DIR%\Tcg\DEBUG (
+  mkdir %CORE_FV_DIR%\Tcg\DEBUG
+)
+
+copy %FV_BUILD_DIR%\FVTCG.Fv %CORE_FV_DIR%\Tcg\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVTCG.inf %CORE_FV_DIR%\Tcg\DEBUG\FVTCG.inf /Y
+
+if not exist %CORE_FV_DIR%\Network\DEBUG (
+  mkdir %CORE_FV_DIR%\Network\DEBUG
+)
+
+copy %FV_BUILD_DIR%\FVUEFINETWORK.Fv %CORE_FV_DIR%\Network\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVUEFINETWORK.inf %CORE_FV_DIR%\Network\DEBUG\FVUEFINETWORK.inf /Y
+
+@REM
 @REM Build FSP Binary
 @REM
 @if not defined FSP_BINARY_BUILD goto :SkipFspBinaryBuild

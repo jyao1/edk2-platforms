@@ -181,7 +181,7 @@
 #
 # Common
 #
-!include $(PLATFORM_PACKAGE)/Include/Dsc/CorePeiInclude.dsc
+#!include $(PLATFORM_PACKAGE)/Include/Dsc/CorePeiInclude.dsc
 
   #
   # FSP wrapper SEC Core
@@ -260,7 +260,7 @@
 #
 # Common
 #
-!include $(PLATFORM_PACKAGE)/Include/Dsc/CoreDxeInclude.dsc
+#!include $(PLATFORM_PACKAGE)/Include/Dsc/CoreDxeInclude.dsc
 
   MdeModulePkg/Universal/TimestampDxe/TimestampDxe.inf {
     <LibraryClasses>
