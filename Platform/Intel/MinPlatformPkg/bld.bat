@@ -49,38 +49,41 @@ popd
 
 call build -p MinPlatformPkg\MinCorePkg.dsc -a IA32 -a X64 -t VS2015x86 -y Report.txt
 
-if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG (
-  mkdir %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG
+set CORE_FV_DIR=%WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin
+set FV_BUILD_DIR=%WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV
+
+if not exist %CORE_FV_DIR%\Core\DEBUG (
+  mkdir %CORE_FV_DIR%\Core\DEBUG
 )
 
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVPREMEMORYCORE.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\ /Y
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVPREMEMORYCORE.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\FVPREMEMORYCORE.inf /Y
+copy %FV_BUILD_DIR%\FVPREMEMORYCORE.Fv %CORE_FV_DIR%\Core\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVPREMEMORYCORE.inf %CORE_FV_DIR%\Core\DEBUG\FVPREMEMORYCORE.inf /Y
 
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVUEFIBOOTCORE.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\ /Y
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVUEFIBOOTCOREUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\FVUEFIBOOTCORE.inf /Y
+copy %FV_BUILD_DIR%\FVUEFIBOOTCORE.Fv %CORE_FV_DIR%\Core\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVUEFIBOOTCORE.inf %CORE_FV_DIR%\Core\DEBUG\FVUEFIBOOTCORE.inf /Y
 
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVOSBOOTCORE.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\ /Y
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVOSBOOTCOREUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Core\DEBUG\FVOSBOOTCORE.inf /Y
+copy %FV_BUILD_DIR%\FVOSBOOTCORE.Fv %CORE_FV_DIR%\Core\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVOSBOOTCORE.inf %CORE_FV_DIR%\Core\DEBUG\FVOSBOOTCORE.inf /Y
 
-if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\UefiSecureBoot\DEBUG (
-  mkdir %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\UefiSecureBoot\DEBUG
+if not exist %CORE_FV_DIR%\UefiSecureBoot\DEBUG (
+  mkdir %CORE_FV_DIR%\UefiSecureBoot\DEBUG
 )
 
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVUEFISECUREBOOT.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\UefiSecureBoot\DEBUG\ /Y
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVUEFISECUREBOOTUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\UefiSecureBoot\DEBUG\FVUEFISECUREBOOT.inf /Y
+copy %FV_BUILD_DIR%\FVUEFISECUREBOOT.Fv %CORE_FV_DIR%\UefiSecureBoot\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVUEFISECUREBOOT.inf %CORE_FV_DIR%\UefiSecureBoot\DEBUG\FVUEFISECUREBOOT.inf /Y
 
-if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG (
-  mkdir %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG
+if not exist %CORE_FV_DIR%\Tcg\DEBUG (
+  mkdir %CORE_FV_DIR%\Tcg\DEBUG
 )
 
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVTCG.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG\ /Y
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVTCGPEI.inf + %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVTCGDXEUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG\FVTCG.inf /Y
+copy %FV_BUILD_DIR%\FVTCG.Fv %CORE_FV_DIR%\Tcg\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVTCG.inf %CORE_FV_DIR%\Tcg\DEBUG\FVTCG.inf /Y
 
-if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Network\DEBUG (
-  mkdir %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Network\DEBUG
+if not exist %CORE_FV_DIR%\Network\DEBUG (
+  mkdir %CORE_FV_DIR%\Network\DEBUG
 )
 
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVUEFINETWORK.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Network\DEBUG\ /Y
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVUEFINETWORKUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Network\DEBUG\FVUEFINETWORK.inf /Y
+copy %FV_BUILD_DIR%\FVUEFINETWORK.Fv %CORE_FV_DIR%\Network\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVUEFINETWORK.inf %CORE_FV_DIR%\Network\DEBUG\FVUEFINETWORK.inf /Y
 
 goto :EOF
