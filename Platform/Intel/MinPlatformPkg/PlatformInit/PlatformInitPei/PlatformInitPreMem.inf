@@ -67,6 +67,10 @@
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkSize           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvSecurityBase           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvSecuritySize           ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootBase     ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootSize     ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgBase                ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgSize                ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvAdvancedBase           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvAdvancedSize           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdStopAfterDebugInit
