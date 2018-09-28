@@ -67,14 +67,14 @@ if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\UefiSecureBoot\
 )
 
 copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVUEFISECUREBOOT.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\UefiSecureBoot\DEBUG\ /Y
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVUEFISECUREBOOTUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\UefiSecureBoot\DEBUG\AsBuildFVUEFISECUREBOOT.inf /Y
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVUEFISECUREBOOTUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\UefiSecureBoot\DEBUG\FVUEFISECUREBOOT.inf /Y
 
 if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG (
   mkdir %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG
 )
 
 copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\FVTCG.Fv %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG\ /Y
-copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVTCGPEI.inf + %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVTCGDXEUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG\AsBuildFVTCG.inf /Y
+copy %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVTCGPEI.inf + %WORKSPACE%\Build\MinCorePkg\DEBUG_VS2015x86\FV\AsBuildFVTCGDXEUNCOMPACT.inf %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Tcg\DEBUG\FVTCG.inf /Y
 
 if not exist %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Network\DEBUG (
   mkdir %WORKSPACE%\edk2-platforms\Platform\Intel\CoreFvBin\Network\DEBUG
