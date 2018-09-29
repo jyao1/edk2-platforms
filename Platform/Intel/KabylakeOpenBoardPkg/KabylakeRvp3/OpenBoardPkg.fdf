@@ -163,6 +163,11 @@ gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreBase|gMinPlatformPkgTokenSpace
 #FV = FvOsBootCore
 INF USE=IA32 CoreFvBin\Core\$(TARGET)\FVOSBOOTCORE.inf
 
+gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptSize
+#FV = FvOsBootCore
+INF USE=IA32 CoreFvBin\Crypt\$(TARGET)\FVCRYPT.inf
+
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootSize
 FV = FvUefiBoot

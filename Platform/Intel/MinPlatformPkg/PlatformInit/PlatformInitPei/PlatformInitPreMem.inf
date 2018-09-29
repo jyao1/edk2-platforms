@@ -73,6 +73,8 @@
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgSize                ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvAdvancedBase           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvAdvancedSize           ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptBase              ## CONSUMES
+  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptSize              ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdStopAfterDebugInit
   gMinPlatformPkgTokenSpaceGuid.PcdStopAfterMemInit
   

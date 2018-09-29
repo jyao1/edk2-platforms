@@ -536,20 +536,29 @@ ReportPreMemFv (
       0
       );
   }
+  DEBUG ((DEBUG_INFO, "Install FlashFvTcg - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvCryptBase), PcdGet32 (PcdFlashFvTcgSize)));
+  PeiServicesInstallFvInfo2Ppi (
+    &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvCryptBase))->FileSystemGuid),
+    (VOID *) (UINTN) PcdGet32 (PcdFlashFvCryptBase),
+    PcdGet32 (PcdFlashFvCryptSize),
+    NULL,
+    NULL,
+    0
+    );
+  DEBUG ((DEBUG_INFO, "Install FlashFvCrypt - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvSecurityBase), PcdGet32 (PcdFlashFvCryptSize)));
+  PeiServicesInstallFvInfo2Ppi (
+    &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvSecurityBase))->FileSystemGuid),
+    (VOID *) (UINTN) PcdGet32 (PcdFlashFvSecurityBase),
+    PcdGet32 (PcdFlashFvSecuritySize),
+    NULL,
+    NULL,
+    0
+    );
   DEBUG ((DEBUG_INFO, "Install FlashFvTcg - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvTcgBase), PcdGet32 (PcdFlashFvTcgSize)));
   PeiServicesInstallFvInfo2Ppi (
     &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvTcgBase))->FileSystemGuid),
     (VOID *) (UINTN) PcdGet32 (PcdFlashFvTcgBase),
     PcdGet32 (PcdFlashFvTcgSize),
-    NULL,
-    NULL,
-    0
-    );
-  DEBUG ((DEBUG_INFO, "Install FlashFvSecurity - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvSecurityBase), PcdGet32 (PcdFlashFvSecuritySize)));
-  PeiServicesInstallFvInfo2Ppi (
-    &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvSecurityBase))->FileSystemGuid),
-    (VOID *) (UINTN) PcdGet32 (PcdFlashFvSecurityBase),
-    PcdGet32 (PcdFlashFvSecuritySize),
     NULL,
     NULL,
     0
