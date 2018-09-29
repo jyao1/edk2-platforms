@@ -196,3 +196,15 @@
   NetworkPkg/IScsiDxe/IScsiDxe.inf
   NetworkPkg/UefiPxeBcDxe/UefiPxeBcDxe.inf
 !endif
+  CryptoPkg/CryptDxe/CryptDxe.inf {
+    <LibraryClasses>
+     BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
+  }
+  CryptoPkg/CryptSmm/CryptSmm.inf {
+    <LibraryClasses>
+     BaseCryptLib|CryptoPkg/Library/BaseCryptLib/SmmCryptLib.inf
+  }
+  CryptoPkg/CryptRuntimeDxe/CryptRuntimeDxe.inf {
+    <LibraryClasses>
+     BaseCryptLib|CryptoPkg/Library/BaseCryptLib/RuntimeCryptLib.inf
+  }

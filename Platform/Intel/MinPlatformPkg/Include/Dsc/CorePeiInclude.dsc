@@ -47,3 +47,8 @@
       NULL|SecurityPkg/Library/HashInstanceLibSha256/HashInstanceLibSha256.inf
   }
 !endif
+
+  CryptoPkg/CryptPei/CryptPei.inf {
+    <LibraryClasses>
+      BaseCryptLib|CryptoPkg/Library/BaseCryptLib/PeiCryptLib.inf
+  }

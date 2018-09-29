@@ -60,7 +60,7 @@
 [LibraryClasses.common.PEIM]
   CpuExceptionHandlerLib|UefiCpuPkg/Library/CpuExceptionHandlerLib/SecPeiCpuExceptionHandlerLib.inf
 
-  BaseCryptLib|CryptoPkg/Library/BaseCryptLib/PeiCryptLib.inf
+  BaseCryptLib|CryptoPkg\Library\PeiCryptLibCryptPpi\PeiCryptLibCryptPpi.inf
 
   Tpm2DeviceLib|SecurityPkg/Library/Tpm2DeviceLibRouter/Tpm2DeviceLibRouterPei.inf
   HashLib|SecurityPkg/Library/HashLibBaseCryptoRouter/HashLibBaseCryptoRouterPei.inf
