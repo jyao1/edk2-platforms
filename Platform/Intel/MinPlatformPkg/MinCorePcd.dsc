@@ -38,7 +38,7 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxVariableSize|0x5000
   gEfiMdeModulePkgTokenSpaceGuid.PcdHwErrStorageSize|0x00000800
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxHardwareErrorVariableSize|0x400
-  gEfiMdeModulePkgTokenSpaceGuid.PcdPeiCoreMaxFvSupported|30
+  gEfiMdeModulePkgTokenSpaceGuid.PcdPeiCoreMaxFvSupported|40
   gEfiMdeModulePkgTokenSpaceGuid.PcdPeiCoreMaxPeimPerFv|60
   gEfiMdeModulePkgTokenSpaceGuid.PcdSrIovSupport|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdAriSupport|FALSE
