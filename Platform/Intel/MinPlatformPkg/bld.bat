@@ -86,4 +86,11 @@ if not exist %CORE_FV_DIR%\Network\DEBUG (
 copy %FV_BUILD_DIR%\FVUEFINETWORK.Fv %CORE_FV_DIR%\Network\DEBUG\ /Y
 copy %FV_BUILD_DIR%\AsBuildFVUEFINETWORK.inf %CORE_FV_DIR%\Network\DEBUG\FVUEFINETWORK.inf /Y
 
+if not exist %CORE_FV_DIR%\Crypt\DEBUG (
+  mkdir %CORE_FV_DIR%\Crypt\DEBUG
+)
+
+copy %FV_BUILD_DIR%\FVCRYPT.Fv %CORE_FV_DIR%\Crypt\DEBUG\ /Y
+copy %FV_BUILD_DIR%\AsBuildFVCRYPT.inf %CORE_FV_DIR%\Crypt\DEBUG\FVCRYPT.inf /Y
+
 goto :EOF
