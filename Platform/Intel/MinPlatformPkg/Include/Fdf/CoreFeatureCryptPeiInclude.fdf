@@ -12,4 +12,4 @@
 # WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #
 ##
-INF  CryptoPkg\CryptPei\CryptPei.inf
+INF  CryptoPkg/CryptPei/CryptPei.inf

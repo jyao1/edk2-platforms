@@ -13,6 +13,6 @@
 #
 ##
 
-INF CryptoPkg\CryptDxe\CryptDxe.inf
-INF CryptoPkg\CryptRuntimeDxe\CryptRuntimeDxe.inf
-INF CryptoPkg\CryptSmm\CryptSmm.inf
+INF CryptoPkg/CryptDxe/CryptDxe.inf
+INF CryptoPkg/CryptRuntimeDxe/CryptRuntimeDxe.inf
+INF CryptoPkg/CryptSmm/CryptSmm.inf

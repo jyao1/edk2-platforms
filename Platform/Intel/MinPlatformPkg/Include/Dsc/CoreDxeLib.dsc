@@ -39,7 +39,7 @@
 
   TpmMeasurementLib|SecurityPkg/Library/DxeTpmMeasurementLib/DxeTpmMeasurementLib.inf
 
-  BaseCryptLib|CryptoPkg\Library\DxeCryptLibCryptProtocol\DxeCryptLibCryptProtocol.inf
+  BaseCryptLib|CryptoPkg/Library/DxeCryptLibCryptProtocol/DxeCryptLibCryptProtocol.inf
 
   HttpLib|MdeModulePkg/Library/DxeHttpLib/DxeHttpLib.inf
 
@@ -104,7 +104,7 @@
 
   CpuExceptionHandlerLib|UefiCpuPkg/Library/CpuExceptionHandlerLib/SmmCpuExceptionHandlerLib.inf
   Tcg2PhysicalPresenceLib|SecurityPkg/Library/SmmTcg2PhysicalPresenceLib/SmmTcg2PhysicalPresenceLib.inf
-  BaseCryptLib|CryptoPkg\Library\SmmCryptLibCryptProtocol\SmmCryptLibCryptProtocol.inf
+  BaseCryptLib|CryptoPkg/Library/SmmCryptLibCryptProtocol/SmmCryptLibCryptProtocol.inf
   Tpm2DeviceLib|SecurityPkg/Library/Tpm2DeviceLibTcg2/Tpm2DeviceLibTcg2.inf
 
 [LibraryClasses.common.SMM_CORE]
@@ -133,7 +133,7 @@
   PerformanceLib|MdeModulePkg/Library/DxePerformanceLib/DxePerformanceLib.inf
   TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/DxeAcpiTimerLib.inf
 !endif
-  BaseCryptLib|CryptoPkg\Library\RuntimeCryptLibCryptProtocol\RuntimeCryptLibCryptProtocol.inf
+  BaseCryptLib|CryptoPkg/Library/RuntimeCryptLibCryptProtocol/RuntimeCryptLibCryptProtocol.inf
   Tpm2DeviceLib|SecurityPkg/Library/Tpm2DeviceLibTcg2/Tpm2DeviceLibTcg2.inf
 
 [LibraryClasses.common.UEFI_DRIVER]
