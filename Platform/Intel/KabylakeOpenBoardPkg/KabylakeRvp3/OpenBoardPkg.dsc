@@ -339,8 +339,14 @@
 
   $(PLATFORM_PACKAGE)/Flash/SpiFvbService/SpiFvbServiceSmm.inf
   $(PLATFORM_PACKAGE)/PlatformInit/PlatformInitSmm/PlatformInitSmm.inf
-  UefiCpuPkg/CpuFeaturesSmm/CpuFeaturesSmm.inf
-  UefiCpuPkg/CpuPlatformHookSmm/CpuPlatformHookSmm.inf
+  UefiCpuPkg/CpuFeaturesSmm/CpuFeaturesSmm.inf {
+    <LibraryClasses>
+      SmmCpuFeaturesLib|UefiCpuPkg/Library/SmmCpuFeaturesLib/SmmCpuFeaturesLib.inf
+  }  
+  UefiCpuPkg/CpuPlatformHookSmm/CpuPlatformHookSmm.inf {
+    <LibraryClasses>
+      SmmCpuPlatformHookLib|UefiCpuPkg/Library/SmmCpuPlatformHookLibNull/SmmCpuPlatformHookLibNull.inf
+  }
 
 !endif
 
