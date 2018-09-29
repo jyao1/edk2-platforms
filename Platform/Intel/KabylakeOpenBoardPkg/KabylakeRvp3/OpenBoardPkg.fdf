@@ -275,6 +275,7 @@ FvNameGuid         = FC8FE6B5-CD9B-411E-BD8F-31824D0CDE3D
 INF $(PLATFORM_PACKAGE)/PlatformInit/SerialPortPei/SerialPortPei.inf
 INF  UefiCpuPkg/SecCore/SecCore.inf
 INF MdeModulePkg/Universal/TimestampPei/TimestampPei.inf
+INF MdeModulePkg/Universal/ResetSystemPei/ResetSystemPei.inf
 
 FILE FREEFORM = 3c7d193c-682c-4c14-a68f-552dea4f437e {
   SECTION RAW = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/PEIPcdDataBase.raw

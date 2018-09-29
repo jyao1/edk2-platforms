@@ -196,6 +196,8 @@
     <LibraryClasses>
       TimerLib|PcAtChipsetPkg/Library/AcpiTimerLib/PeiAcpiTimerLib.inf
   }
+  
+  MdeModulePkg/Universal/ResetSystemPei/ResetSystemPei.inf
 
 #
 # Silicon
