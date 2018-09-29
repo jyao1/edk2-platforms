@@ -230,7 +230,7 @@ gSiPkgTokenSpaceGuid.PcdTsegSize|0x800000
   gSiPkgTokenSpaceGuid.PcdSerialIoUartDebugEnable|1
 !endif
 
-[PcdsDynamicHii.X64.DEFAULT]
+[PcdsDynamicHii.common.DEFAULT]
   gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|L"Timeout"|gEfiGlobalVariableGuid|0x0|5 # Variable: L"Timeout"
   gEfiMdePkgTokenSpaceGuid.PcdHardwareErrorRecordLevel|L"HwErrRecSupport"|gEfiGlobalVariableGuid|0x0|1 # Variable: L"HwErrRecSupport"
 
