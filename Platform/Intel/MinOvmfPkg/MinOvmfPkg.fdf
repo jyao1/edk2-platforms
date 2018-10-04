@@ -1,0 +1,273 @@
+## @file
+#  Open Virtual Machine Firmware: FDF
+#
+#  Copyright (c) 2006 - 2017, Intel Corporation. All rights reserved.<BR>
+#  (C) Copyright 2016 Hewlett Packard Enterprise Development LP<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+################################################################################
+
+[Defines]
+!include MinOvmfPkg.fdf.inc
+
+#
+# Build the variable store and the firmware code as one unified flash device
+# image.
+#
+[FD.OVMF]
+BaseAddress   = $(FW_BASE_ADDRESS)
+Size          = $(FW_SIZE)
+ErasePolarity = 1
+BlockSize     = $(BLOCK_SIZE)
+NumBlocks     = $(FW_BLOCKS)
+
+!include VarStore.fdf.inc
+
+$(DXEFV_OFFSET)|$(DXEFV_SIZE)
+gMinOvmfPkgTokenSpaceGuid.PcdOvmfDxeFlashFvBase|gMinOvmfPkgTokenSpaceGuid.PcdOvmfDxeFlashFvSize
+FV = DXEFV
+
+gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreSize
+FV = FvUefiBootCore
+
+$(PEIFV_OFFSET)|$(PEIFV_SIZE)
+gMinOvmfPkgTokenSpaceGuid.PcdOvmfPeiFlashFvBase|gMinOvmfPkgTokenSpaceGuid.PcdOvmfPeiFlashFvSize
+FV = PEIFV
+
+gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreSize
+gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreSize
+FV = FvPreMemoryCore
+
+$(SECFV_OFFSET)|$(SECFV_SIZE)
+gMinOvmfPkgTokenSpaceGuid.PcdOvmfSecFlashFvBase|gMinOvmfPkgTokenSpaceGuid.PcdOvmfSecFlashFvSize
+FV = SECFV
+
+################################################################################
+
+[FV.SECFV]
+FvNameGuid         = 763BED0D-DE9F-48F5-81F1-3E90E1B1A015
+BlockSize          = 0x1000
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+#
+# SEC Phase modules
+#
+# The code in this FV handles the initial firmware startup, and
+# decompresses the PEI and DXE FVs which handles the rest of the boot sequence.
+#
+INF  MinOvmfPkg/Sec/SecMain.inf
+
+INF  RuleOverride=RESET_VECTOR MinOvmfPkg/ResetVector/ResetVector.inf
+
+################################################################################
+[FV.PEIFV]
+FvNameGuid         = 6938079B-B503-4E3D-9D24-B28337A25806
+BlockSize          = 0x10000
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+#
+#  PEI Phase modules
+#
+INF  MinOvmfPkg/PlatformPei/PlatformPei.inf
+
+FILE FREEFORM = 3c7d193c-682c-4c14-a68f-552dea4f437e {
+  SECTION RAW = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/PEIPcdDataBase.raw
+}
+
+[FV.FvPreMemoryCore]
+FvNameGuid         = ADCE4104-27ED-4592-9770-ECA646B3912D
+BlockSize          = 0x10000
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+!include MinPlatformPkg/Include/Fdf/CorePreMemoryInclude.fdf
+
+################################################################################
+
+[FV.DXEFVUNCOMPACT]
+FvForceRebase      = FALSE
+FvNameGuid         = 7CB8BDC9-F8EB-4F34-AAEA-3EE4AF6516A1
+BlockSize          = 0x10000
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+#
+# DXE Phase modules
+#
+
+INF  MdeModulePkg/Universal/TimestampDxe/TimestampDxe.inf
+
+FILE FREEFORM = 3c7d193c-682c-4c14-a68f-552dea4f437e {
+  SECTION RAW = $(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/FV/DXEPcdDataBase.raw
+}
+
+INF  PcAtChipsetPkg/8259InterruptControllerDxe/8259.inf
+INF  MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
+INF  MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
+
+INF  MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
+INF  MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
+
+INF  MdeModulePkg/Bus/Pci/SataControllerDxe/SataControllerDxe.inf
+INF  MdeModulePkg/Bus/Ata/AtaAtapiPassThru/AtaAtapiPassThru.inf
+INF  MdeModulePkg/Bus/Ata/AtaBusDxe/AtaBusDxe.inf
+
+INF  PcAtChipsetPkg/IsaAcpiDxe/IsaAcpi.inf
+INF  IntelFrameworkModulePkg/Bus/Isa/IsaBusDxe/IsaBusDxe.inf
+
+!ifndef $(SOURCE_DEBUG_ENABLE)
+INF  IntelFrameworkModulePkg/Bus/Isa/IsaSerialDxe/IsaSerialDxe.inf
+!endif
+
+INF  IntelFrameworkModulePkg/Bus/Isa/Ps2KeyboardDxe/Ps2keyboardDxe.inf
+
+INF  ShellPkg/Application/Shell/Shell.inf
+
+INF  MinOvmfPkg/QemuVideoDxe/QemuVideoDxe.inf
+
+[FV.FvUefiBootCoreUncompact]
+FvForceRebase      = FALSE
+FvNameGuid         = 2876F3C9-B4B9-47C3-B955-9F1C8488752D
+BlockSize          = 0x10000
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+!include MinPlatformPkg/Include/Fdf/CoreUefiBootInclude.fdf
+
+################################################################################
+
+[FV.DXEFV]
+FvNameGuid         = 48DB5E17-707C-472D-91CD-1613E7EF51B0
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+FILE FV_IMAGE = 9E21FD93-9C72-4c15-8C4B-E77F1DB2D792 {
+   SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
+     SECTION FV_IMAGE = DXEFVUNCOMPACT
+   }
+ }
+
+[FV.FvUefiBootCore]
+FvNameGuid         = ACA0848F-8D40-4243-802F-0FB2AAC97C8C
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+FILE FV_IMAGE = DD806E19-1052-4126-84F0-3ED25EE9D59A {
+   SECTION GUIDED EE4E5898-3914-4259-9D6E-DC7BD79403CF PROCESSING_REQUIRED = TRUE {
+     SECTION FV_IMAGE = FvUefiBootCoreUncompact
+   }
+ }
+
+################################################################################
+
+!include MinPlatformPkg/Include/Fdf/RuleInclude.fdf

@@ -1,0 +1,32 @@
+## @file
+#  EFI/Framework Open Virtual Machine Firmware (OVMF) platform
+#
+#  Copyright (c) 2006 - 2013, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = MinOvmfPkg
+  PACKAGE_GUID                   = D5CB4ACF-5C84-4707-BC2F-4FD25921981C
+  PACKAGE_VERSION                = 0.1
+
+[Guids]
+  gMinOvmfPkgTokenSpaceGuid          = {0x6fd9a656, 0xd59d, 0x43ad, {0x88, 0x56, 0x32, 0xe6, 0x66, 0x83, 0x2, 0xf2}}
+
+[PcdsFixedAtBuild]
+  gMinOvmfPkgTokenSpaceGuid.PcdOvmfSecFlashFvBase|0x0|UINT32|0
+  gMinOvmfPkgTokenSpaceGuid.PcdOvmfSecFlashFvSize|0x0|UINT32|1
+  gMinOvmfPkgTokenSpaceGuid.PcdOvmfPeiFlashFvBase|0x0|UINT32|2
+  gMinOvmfPkgTokenSpaceGuid.PcdOvmfPeiFlashFvSize|0x0|UINT32|3
+  gMinOvmfPkgTokenSpaceGuid.PcdOvmfDxeFlashFvBase|0x0|UINT32|4
+  gMinOvmfPkgTokenSpaceGuid.PcdOvmfDxeFlashFvSize|0x0|UINT32|5
+
