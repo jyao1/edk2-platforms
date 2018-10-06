@@ -377,5 +377,26 @@ FILE FV_IMAGE = 26376C86-34F0-457a-8429-E51B71D7EA2A {
        }
      }
 
+[FV.FvDummy]
+BlockSize          = $(FLASH_BLOCK_SIZE)
+FvAlignment        = 16
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = TRUE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = TRUE
+WRITE_LOCK_STATUS  = TRUE
+READ_DISABLED_CAP  = TRUE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = TRUE
+READ_LOCK_STATUS   = TRUE
+
+INF MinPlatformPkg/PlatformInit/PlatformInitPei/PlatformInitPreMem.inf
+
 # Build Rule
 !include $(PLATFORM_PACKAGE)/Include/Fdf/RuleInclude.fdf

@@ -82,11 +82,16 @@
 # Common
 #
 !include $(PLATFORM_PACKAGE)/Include/Dsc/CorePeiInclude.dsc
-$(PLATFORM_PACKAGE)/HelloWorld/HelloWorld.inf
+
+MinPlatformPkg/PlatformInit/PlatformInitPei/PlatformInitPreMem.inf {
+  <LibraryClasses>
+    BoardInitLib|MinPlatformPkg/PlatformInit/Library/BoardInitLibNull/BoardInitLibNull.inf
+    TestPointCheckLib|MinPlatformPkg/Test/Library/TestPointCheckLibNull/TestPointCheckLibNull.inf
+}
 
 [Components.X64]
 #
 # Common
 #
 !include $(PLATFORM_PACKAGE)/Include/Dsc/CoreDxeInclude.dsc
-$(PLATFORM_PACKAGE)/HelloWorld/HelloWorld.inf
+

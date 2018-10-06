@@ -50,7 +50,7 @@
 [LibraryClasses.common.DXE_CORE]
   HobLib|MdePkg/Library/DxeCoreHobLib/DxeCoreHobLib.inf
   MemoryAllocationLib|MdeModulePkg/Library/DxeCoreMemoryAllocationLib/DxeCoreMemoryAllocationLib.inf
-  PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
+  PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
 
   TimerLib|MdeModulePkg/Library/DxeTimerLibStall2Timestamp/DxeTimerLibStall2Timestamp.inf
 !if gMinPlatformPkgTokenSpaceGuid.PcdPerformanceEnable == TRUE

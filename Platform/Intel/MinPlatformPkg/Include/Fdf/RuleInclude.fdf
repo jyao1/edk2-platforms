@@ -18,7 +18,7 @@
     UI       STRING="$(MODULE_NAME)" Optional
     VERSION  STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
     PE32  PE32    Align = 16      $(INF_OUTPUT)/$(MODULE_NAME).efi
-    RAW BIN       Align = 16      |.bin
+    RAW BIN Optional Align = 16      |.bin
   }
 
 [Rule.Common.SEC.BINARY]
@@ -27,6 +27,11 @@
     VERSION  STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
     PE32  PE32    Align = 16      |.efi
     RAW BIN       Align = 16      |.bin
+  }
+
+[Rule.Common.SEC.RESET_VECTOR]
+  FILE RAW = $(NAMED_GUID) {
+    RAW BIN   Align = 16   |.bin
   }
 
 [Rule.Common.PEI_CORE]

@@ -41,26 +41,13 @@ INF  UefiCpuPkg/CpuDxe/CpuDxe.inf
 #INF  MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
 INF  PcAtChipsetPkg/HpetTimerDxe/HpetTimerDxe.inf
 
-#INF  MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
 INF  MdeModulePkg/Bus/Pci/PciBusDxe/PciBusDxe.inf
-
-#INF  MdeModulePkg/Bus/Pci/SataControllerDxe/SataControllerDxe.inf
-#INF  MdeModulePkg/Bus/Ata/AtaBusDxe/AtaBusDxe.inf
-#INF  MdeModulePkg/Bus/Ata/AtaAtapiPassThru/AtaAtapiPassThru.inf
-
-INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
-INF  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
-INF  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
-INF  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
-INF  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
-INF  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
 
 INF  MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
 INF  MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
 INF  MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
-INF  FatBinPkg/EnhancedFatDxe/Fat.inf
+INF  FatPkg/EnhancedFatDxe/Fat.inf
 
-#INF  MdeModulePkg/Universal/Console/GraphicsOutputDxe/GraphicsOutputDxe.inf
 INF  MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
 
 INF  MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf

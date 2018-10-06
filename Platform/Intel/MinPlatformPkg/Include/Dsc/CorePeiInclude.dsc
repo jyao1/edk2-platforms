@@ -28,7 +28,9 @@
 
   UefiCpuPkg/CpuIoPei/CpuIoPei.inf
 
+!if gMinPlatformPkgTokenSpaceGuid.PcdBootToShellOnly == FALSE
   MdeModulePkg/Universal/FaultTolerantWritePei/FaultTolerantWritePei.inf
+!endif
 
   MdeModulePkg/Universal/Variable/Pei/VariablePei.inf
 
@@ -48,7 +50,9 @@
   }
 !endif
 
+!if gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable == TRUE || gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable == TRUE
   CryptoPkg/CryptPei/CryptPei.inf {
     <LibraryClasses>
       BaseCryptLib|CryptoPkg/Library/BaseCryptLib/PeiCryptLib.inf
   }
+!endif

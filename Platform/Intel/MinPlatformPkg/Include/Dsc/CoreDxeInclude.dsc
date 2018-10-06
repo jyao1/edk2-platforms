@@ -74,23 +74,12 @@
   #MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
   PcAtChipsetPkg/HpetTimerDxe/HpetTimerDxe.inf
 
-  #MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
   MdeModulePkg/Bus/Pci/PciBusDxe/PciBusDxe.inf
-
-  #MdeModulePkg/Bus/Pci/SataControllerDxe/SataControllerDxe.inf
-  #MdeModulePkg/Bus/Ata/AtaBusDxe/AtaBusDxe.inf
-  #MdeModulePkg/Bus/Ata/AtaAtapiPassThru/AtaAtapiPassThru.inf
-  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
-  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
-  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
-  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
-  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
-  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
 
   MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
   MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
   MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
-  FatBinPkg/EnhancedFatDxe/Fat.inf
+  FatPkg/EnhancedFatDxe/Fat.inf
 
   #MdeModulePkg/Universal/Console/GraphicsOutputDxe/GraphicsOutputDxe.inf
   MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
@@ -190,6 +179,8 @@
   NetworkPkg/IScsiDxe/IScsiDxe.inf
   NetworkPkg/UefiPxeBcDxe/UefiPxeBcDxe.inf
 !endif
+
+!if gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable == TRUE || gMinPlatformPkgTokenSpaceGuid.PcdUefiSecureBootEnable == TRUE
   CryptoPkg/CryptDxe/CryptDxe.inf {
     <LibraryClasses>
      BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
@@ -202,3 +193,4 @@
     <LibraryClasses>
      BaseCryptLib|CryptoPkg/Library/BaseCryptLib/RuntimeCryptLib.inf
   }
+!endif
