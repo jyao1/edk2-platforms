@@ -147,12 +147,12 @@ FV = FvSecurity
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvTcgSize
 #FV = FvTcg
-INF USE=IA32 CoreFvBin\Tcg\$(TARGET)\FVTCG.inf
+INF USE=IA32 CoreFvBin/Tcg/$(TARGET)/FVTCG.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiSecureBootSize
 #FV = FvUefiSecureBoot
-INF USE=IA32 CoreFvBin\UefiSecureBoot\$(TARGET)\FVUEFISECUREBOOT.inf
+INF USE=IA32 CoreFvBin/UefiSecureBoot/$(TARGET)/FVUEFISECUREBOOT.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootSize
@@ -161,12 +161,12 @@ FV = FvOsBoot
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvOsBootCoreSize
 #FV = FvOsBootCore
-INF USE=IA32 CoreFvBin\Core\$(TARGET)\FVOSBOOTCORE.inf
+INF USE=IA32 CoreFvBin/Core/$(TARGET)/FVOSBOOTCORE.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvCryptSize
 #FV = FvOsBootCore
-INF USE=IA32 CoreFvBin\Crypt\$(TARGET)\FVCRYPT.inf
+INF USE=IA32 CoreFvBin/Crypt/$(TARGET)/FVCRYPT.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootSize
@@ -175,12 +175,12 @@ FV = FvUefiBoot
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootCoreSize
 #FV = FvUefiBootCore
-INF USE=IA32 CoreFvBin\Core\$(TARGET)\FVUEFIBOOTCORE.inf
+INF USE=IA32 CoreFvBin/Core/$(TARGET)/FVUEFIBOOTCORE.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiNetworkSize
 #FV = FvUefiNetwork
-INF USE=IA32 CoreFvBin\Network\$(TARGET)\FVUEFINETWORK.inf
+INF USE=IA32 CoreFvBin/Network/$(TARGET)/FVUEFINETWORK.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemoryOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemorySize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemoryBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemorySize
@@ -213,7 +213,7 @@ FILE = $(PLATFORM_FSP_BIN_PACKAGE)/Fsp_Rebased_T.fd
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreSize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryCoreSize
 #FV = FvPreMemoryCore
-INF USE=IA32 CoreFvBin\Core\$(TARGET)\FVPREMEMORYCORE.inf
+INF USE=IA32 CoreFvBin/Core/$(TARGET)/FVPREMEMORYCORE.inf
 
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryOffset|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemorySize
 gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemoryBase|gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPreMemorySize
@@ -381,6 +381,13 @@ INF  MdeModulePkg/Bus/Pci/SataControllerDxe/SataControllerDxe.inf
 INF  MdeModulePkg/Bus/Ata/AtaBusDxe/AtaBusDxe.inf
 INF  MdeModulePkg/Bus/Ata/AtaAtapiPassThru/AtaAtapiPassThru.inf
 INF  MdeModulePkg/Universal/Console/GraphicsOutputDxe/GraphicsOutputDxe.inf
+
+INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
+INF  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
+INF  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
+INF  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+INF  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+INF  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
 
 INF  ShellBinPkg/UefiShell/UefiShell.inf
 

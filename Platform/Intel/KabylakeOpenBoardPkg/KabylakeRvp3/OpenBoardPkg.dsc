@@ -282,6 +282,13 @@
   MdeModulePkg/Bus/Ata/AtaAtapiPassThru/AtaAtapiPassThru.inf
   MdeModulePkg/Universal/Console/GraphicsOutputDxe/GraphicsOutputDxe.inf
 
+  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
+  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
+  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
+  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
+  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
+
   ShellBinPkg/UefiShell/UefiShell.inf
 
 #
