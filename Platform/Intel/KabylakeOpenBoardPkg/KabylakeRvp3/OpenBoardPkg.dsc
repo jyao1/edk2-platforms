@@ -193,6 +193,10 @@
   SiliconPolicyUpdateLib|$(PROJECT)/Policy/Library/PeiSiliconPolicyUpdateLib/PeiSiliconPolicyUpdateLib.inf
 !endif
 
+  Tpm2CommandLib|SecurityPkg/Test/Tpm2CommandLibFake/Tpm2CommandLibFake.inf
+
+  Tpm2DeviceLib|SecurityPkg/Test/Tpm2DeviceLibFake/Tpm2DeviceLibFake.inf
+
 [LibraryClasses.IA32.SEC]
   #######################################
   # Platform Package
@@ -241,6 +245,8 @@
 !if $(TARGET) == DEBUG
   TestPointCheckLib|$(PLATFORM_PACKAGE)/Test/Library/TestPointCheckLib/DxeTestPointCheckLib.inf
 !endif
+  TpmPlatformHierarchyLib|MinPlatformPkg/Tcg/Library/TpmPlatformHierarchyLib/TpmPlatformHierarchyLib.inf
+
   #######################################
   # Board Package
   #######################################
@@ -376,6 +382,7 @@
 !if gMinPlatformPkgTokenSpaceGuid.PcdTpm2Enable == TRUE
   $(PLATFORM_PACKAGE)/Tcg/Tcg2PlatformPei/Tcg2PlatformPei.inf
 !endif
+  SecurityPkg/Test/Tcg2ConfigSimpleTpm2/Tcg2ConfigSimpleTpm2Pei.inf
 
   #######################################
   # Board Package

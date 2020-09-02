@@ -26,7 +26,7 @@
   # Stage 5 - boot to OS with security boot enabled
   # Stage 6 - boot with advanced features enabled
   #
-  gMinPlatformPkgTokenSpaceGuid.PcdBootStage|4
+  gMinPlatformPkgTokenSpaceGuid.PcdBootStage|5
 
   #
   # 0: FSP Wrapper is running in Dispatch mode.
@@ -101,6 +101,8 @@
   #
   gSiPkgTokenSpaceGuid.PcdPeiMinMemorySize|0x5500000
 !endif
+
+  gEfiMdeModulePkgTokenSpaceGuid.PcdTcgPfpMeasurementRevision|105
 
 [PcdsFeatureFlag.common]
   ######################################

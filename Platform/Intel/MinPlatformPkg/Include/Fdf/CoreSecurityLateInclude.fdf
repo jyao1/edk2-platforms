@@ -15,5 +15,5 @@ INF  SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.i
 INF  SecurityPkg/Tcg/MemoryOverwriteControl/TcgMor.inf
 INF  SecurityPkg/Tcg/Tcg2Dxe/Tcg2Dxe.inf
 INF  RuleOverride = DRIVER_ACPITABLE SecurityPkg/Tcg/Tcg2Smm/Tcg2Smm.inf
-INF  SecurityPkg/Tcg/Tcg2Config/Tcg2ConfigDxe.inf
+#INF  SecurityPkg/Tcg/Tcg2Config/Tcg2ConfigDxe.inf
 !endif

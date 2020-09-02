@@ -34,8 +34,6 @@
   gMinPlatformPkgTokenSpaceGuid.PcdFspWrapperBootMode             ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashAreaBaseAddress           ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashAreaSize                  ## CONSUMES
-  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvFspTBase                ## CONSUMES
-  gMinPlatformPkgTokenSpaceGuid.PcdFlashFvFspTSize                ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemoryBase          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvPostMemorySize          ## CONSUMES
   gMinPlatformPkgTokenSpaceGuid.PcdFlashFvUefiBootBase            ## CONSUMES

@@ -20,20 +20,6 @@ ReportPreMemFv (
   VOID
   )
 {
-  ///
-  /// Note : FSP FVs except FSP-T FV are installed in IntelFsp2WrapperPkg in Dispatch mode.
-  ///
-  if (PcdGetBool(PcdFspWrapperBootMode)) {
-    DEBUG ((DEBUG_INFO, "Install FlashFvFspT - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvFspTBase), PcdGet32 (PcdFlashFvFspTSize)));
-    PeiServicesInstallFvInfo2Ppi (
-      &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvFspTBase))->FileSystemGuid),
-      (VOID *) (UINTN) PcdGet32 (PcdFlashFvFspTBase),
-      PcdGet32 (PcdFlashFvFspTSize),
-      NULL,
-      NULL,
-      0
-      );
-  }
   DEBUG ((DEBUG_INFO, "Install FlashFvSecurity - 0x%x, 0x%x\n", PcdGet32 (PcdFlashFvSecurityBase), PcdGet32 (PcdFlashFvSecuritySize)));
   PeiServicesInstallFvInfo2Ppi (
     &(((EFI_FIRMWARE_VOLUME_HEADER *) (UINTN) PcdGet32 (PcdFlashFvSecurityBase))->FileSystemGuid),
@@ -71,10 +57,6 @@ ReportPostMemFv (
 
   Status = PeiServicesGetBootMode (&BootMode);
   ASSERT_EFI_ERROR (Status);
-
-  ///
-  /// Note : FSP FVs except FSP-T FV are installed in IntelFsp2WrapperPkg in Dispatch mode.
-  ///
 
   ///
   /// Build HOB for DXE

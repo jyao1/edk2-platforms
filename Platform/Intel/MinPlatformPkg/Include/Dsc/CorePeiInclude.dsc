@@ -11,7 +11,15 @@
   # Generic EDKII Driver
   #
 
-  MdeModulePkg/Core/Pei/PeiMain.inf
+  MdeModulePkg/Core/Pei/PeiMain.inf {
+    <PcdsPatchableInModule>
+      gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel|0x80000046
+    <LibraryClasses>
+      !if $(TARGET) == DEBUG
+        #DebugLib|MdePkg/Library/BaseDebugLibSerialPort/BaseDebugLibSerialPort.inf
+        DebugLib|MdeModulePkg/Library/PeiDxeDebugLibReportStatusCode/PeiDxeDebugLibReportStatusCode.inf
+      !endif
+  }
 
   MdeModulePkg/Universal/PCD/Pei/Pcd.inf {
     <LibraryClasses>
